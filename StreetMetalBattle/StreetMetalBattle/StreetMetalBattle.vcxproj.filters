@@ -1,15 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Core">
-      <UniqueIdentifier>{d22928f3-d5c0-491b-af59-d015fdd4787e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Core\Header Files">
-      <UniqueIdentifier>{436a04b1-bcf0-423f-a256-eff3b7208f97}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Core\Source Files">
-      <UniqueIdentifier>{ee5f1e50-ea2d-42e4-bc7d-d5d880a70db0}</UniqueIdentifier>
-    </Filter>
     <Filter Include="StreetMetalBattle">
       <UniqueIdentifier>{c9811e4b-443e-4dbc-8c83-59568373eeec}</UniqueIdentifier>
     </Filter>
@@ -45,36 +36,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Animation.cpp">
-      <Filter>Core\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Command.cpp">
-      <Filter>Core\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="CommandQueue.cpp">
-      <Filter>Core\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MusicPlayer.cpp">
-      <Filter>Core\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Core\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneNode.cpp">
-      <Filter>Core\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SoundPlayer.cpp">
-      <Filter>Core\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="State.cpp">
-      <Filter>Core\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="StateStack.cpp">
-      <Filter>Core\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Utility.cpp">
-      <Filter>Core\Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Game.cpp">
       <Filter>StreetMetalBattle\Source Files</Filter>
     </ClCompile>
@@ -87,39 +48,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Animation.h">
-      <Filter>Core\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Command.h">
-      <Filter>Core\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CommandQueue.h">
-      <Filter>Core\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MusicPlayer.h">
-      <Filter>Core\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Core\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ResourceHolder.h">
-      <Filter>Core\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneNode.h">
-      <Filter>Core\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SoundPlayer.h">
-      <Filter>Core\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="State.h">
-      <Filter>Core\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="StateStack.h">
-      <Filter>Core\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Utility.h">
-      <Filter>Core\Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Game.h">
       <Filter>StreetMetalBattle\Header Files</Filter>
     </ClInclude>

@@ -5,16 +5,30 @@ VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "StreetMetalBattle", "StreetMetalBattle\StreetMetalBattle.vcxproj", "{7350B417-86B9-4F40-A795-5DA67BDAFD7F}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Engine", "Engine\Engine.vcxproj", "{59411D53-C094-465D-9F92-7EF5DFB26397}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
 		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7350B417-86B9-4F40-A795-5DA67BDAFD7F}.Debug|x64.ActiveCfg = Debug|Win32
 		{7350B417-86B9-4F40-A795-5DA67BDAFD7F}.Debug|x86.ActiveCfg = Debug|Win32
 		{7350B417-86B9-4F40-A795-5DA67BDAFD7F}.Debug|x86.Build.0 = Debug|Win32
+		{7350B417-86B9-4F40-A795-5DA67BDAFD7F}.Release|x64.ActiveCfg = Release|Win32
 		{7350B417-86B9-4F40-A795-5DA67BDAFD7F}.Release|x86.ActiveCfg = Release|Win32
 		{7350B417-86B9-4F40-A795-5DA67BDAFD7F}.Release|x86.Build.0 = Release|Win32
+		{59411D53-C094-465D-9F92-7EF5DFB26397}.Debug|x64.ActiveCfg = Debug|x64
+		{59411D53-C094-465D-9F92-7EF5DFB26397}.Debug|x64.Build.0 = Debug|x64
+		{59411D53-C094-465D-9F92-7EF5DFB26397}.Debug|x86.ActiveCfg = Debug|Win32
+		{59411D53-C094-465D-9F92-7EF5DFB26397}.Debug|x86.Build.0 = Debug|Win32
+		{59411D53-C094-465D-9F92-7EF5DFB26397}.Release|x64.ActiveCfg = Release|x64
+		{59411D53-C094-465D-9F92-7EF5DFB26397}.Release|x64.Build.0 = Release|x64
+		{59411D53-C094-465D-9F92-7EF5DFB26397}.Release|x86.ActiveCfg = Release|Win32
+		{59411D53-C094-465D-9F92-7EF5DFB26397}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
