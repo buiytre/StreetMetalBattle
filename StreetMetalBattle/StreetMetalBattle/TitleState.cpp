@@ -7,26 +7,33 @@
 
 TitleState::TitleState(StateStack & stack, Context context)
 	: State(stack, context)
-	, mText()
+	, mTitle()
+	, mPressAnyKey()
 	, mShowText(true)
 	, mTextEffectTime(sf::Time::Zero)
 {
-	//mBackgroundSprite.setTexture(context.textures->get(Textures::TitleScreen));
+	mTitle.setFont(context.fonts->get(Fonts::TITLE));
+	mTitle.setString("STREET METAL BATTLE");
+	centerOrigin(mTitle);
+	mPressAnyKey.setScale(2.f, 2.f);
+	mTitle.setPosition(context.window->getView().getSize().x / 2.f, context.window->getView().getSize().x / 4.f);
 
-	mText.setFont(context.fonts->get(Fonts::TITLE));
-	mText.setString("Press any key to start");
-	centerOrigin(mText);
-	mText.setPosition(context.window->getView().getSize() / 2.f);
+	mPressAnyKey.setFont(context.fonts->get(Fonts::TITLE));
+	mPressAnyKey.setString("Press any key to continue");
+	centerOrigin(mPressAnyKey);
+	mPressAnyKey.setScale(0.5f, 0.5f);
+	mPressAnyKey.setPosition(context.window->getView().getSize() / 2.f);
 }
 
 void TitleState::draw()
 {
 	sf::RenderWindow& window = *getContext().window;
-	//window.draw(mBackgroundSprite);
+
+	window.draw(mTitle);
 
 	if (mShowText)
 	{
-		window.draw(mText);
+		window.draw(mPressAnyKey);
 	}
 }
 
