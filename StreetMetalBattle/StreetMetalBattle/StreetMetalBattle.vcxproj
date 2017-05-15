@@ -65,6 +65,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Fighter.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -75,7 +77,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Player.h" />
     <ClInclude Include="Category.h" />
+    <ClInclude Include="Fighter.h" />
     <ClInclude Include="Fonts.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameState.h" />
@@ -93,6 +97,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Image Include="Media\Sprites\catFighterSprite.png" />
     <Image Include="Media\Textures\FloorTest.png" />
     <Image Include="Media\Textures\SkyTest.png" />
   </ItemGroup>

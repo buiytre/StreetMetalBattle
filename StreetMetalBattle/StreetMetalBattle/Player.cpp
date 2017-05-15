@@ -4,6 +4,10 @@
 
 Player::Player()
 {
+	mKeyBinding[sf::Keyboard::Left] = MoveLeft;
+	mKeyBinding[sf::Keyboard::Right] = MoveRight;
+	mKeyBinding[sf::Keyboard::Up] = MoveUp;
+	mKeyBinding[sf::Keyboard::Down] = MoveDown;
 }
 
 void Player::handleEvent(const sf::Event & event, CommandQueue & commands)

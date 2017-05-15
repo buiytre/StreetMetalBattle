@@ -46,12 +46,14 @@
     <Filter Include="StreetMetalBattle\Resource Files\Media\Textures">
       <UniqueIdentifier>{a628350f-3f92-4fbc-a17f-1f08f2204916}</UniqueIdentifier>
     </Filter>
+    <Filter Include="StreetMetalBattle\Resource Files\Media\Sprites">
+      <UniqueIdentifier>{e88c69e8-b48a-4d46-9230-d4cab8b00324}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
       <Filter>StreetMetalBattle\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Main.cpp" />
     <ClCompile Include="TitleState.cpp">
       <Filter>StreetMetalBattle\States\Source Files</Filter>
     </ClCompile>
@@ -60,6 +62,15 @@
     </ClCompile>
     <ClCompile Include="TileMap.cpp">
       <Filter>StreetMetalBattle\World\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>StreetMetalBattle\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Fighter.cpp">
+      <Filter>StreetMetalBattle\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>StreetMetalBattle\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -90,6 +101,12 @@
     <ClInclude Include="Category.h">
       <Filter>StreetMetalBattle\Identifiers</Filter>
     </ClInclude>
+    <ClInclude Include="Fighter.h">
+      <Filter>StreetMetalBattle\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>StreetMetalBattle\Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Font Include="Media\Fonts\Capture_it.ttf">
@@ -102,6 +119,9 @@
     </Image>
     <Image Include="Media\Textures\SkyTest.png">
       <Filter>StreetMetalBattle\Resource Files\Media\Textures</Filter>
+    </Image>
+    <Image Include="Media\Sprites\catFighterSprite.png">
+      <Filter>StreetMetalBattle\Resource Files\Media\Sprites</Filter>
     </Image>
   </ItemGroup>
 </Project>

@@ -4,6 +4,7 @@
 #include "ResourceHolder.h"
 #include "SceneNode.h"
 #include "CommandQueue.h"
+#include "Fighter.h"
 
 class TileMap : private sf::NonCopyable
 {
@@ -19,6 +20,7 @@ class TileMap : private sf::NonCopyable
 		{
 			Background,
 			Floor,
+			ActionLayer,
 			LayerCount
 		};
 
@@ -27,6 +29,8 @@ class TileMap : private sf::NonCopyable
 		void loadTextures();
 
 	private:
+		Fighter* mPlayer;
+
 		sf::RenderWindow& mTarget;
 		sf::View mWorldView;
 		TextureHolder mTextures;
@@ -34,6 +38,8 @@ class TileMap : private sf::NonCopyable
 		SceneNode mSceneGraph;
 		std::array<SceneNode*, LayerCount> mSceneLayers;
 
+
 		sf::FloatRect mWorldBounds;
+		sf::Vector2f mSpawnPosition;
 		CommandQueue mCommandQueue;
 };

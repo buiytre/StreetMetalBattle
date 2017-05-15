@@ -15,7 +15,10 @@ TileMap::TileMap(sf::RenderWindow & window, FontHolder& fonts)
 		0.f, //top y position
 		mWorldView.getSize().x, //width
 		mWorldView.getSize().y) //height
-	,mCommandQueue()
+	, mCommandQueue()
+	, mSpawnPosition(
+		mWorldView.getSize().x / 2.f, // x
+		mWorldBounds.height - mWorldView.getSize().y / 2.f) //y
 {
 	mWorldView.setCenter(mWorldView.getSize()/2.f);
 	loadTextures();
@@ -61,9 +64,7 @@ void TileMap::buildScene()
 	std::unique_ptr<SpriteNode> backgroundSprite(new SpriteNode(texture, textureRect));
 	backgroundSprite->setPosition(mWorldBounds.left, mWorldBounds.top);
 	mSceneLayers[Background]->attachChild(std::move(backgroundSprite));
-
-
-
+	
 	sf::Texture& textureFloor = mTextures.get(Textures::TestFloor);
 	sf::IntRect textureRectFloor(0.f, 0.f, mWorldBounds.width, mWorldBounds.height/2.f);
 	textureFloor.setRepeated(true);
@@ -71,10 +72,16 @@ void TileMap::buildScene()
 	std::unique_ptr<SpriteNode> floorSprite(new SpriteNode(textureFloor, textureRectFloor));
 	floorSprite->setPosition(mWorldBounds.left, mWorldBounds.height/2.f);
 	mSceneLayers[Floor]->attachChild(std::move(floorSprite));
+
+	std::unique_ptr<Fighter> fighter(new Fighter(mTextures));
+	mPlayer = fighter.get();
+	mPlayer->setPosition(mSpawnPosition);
+	mSceneLayers[ActionLayer]->attachChild(std::move(fighter));
 }
 
 void TileMap::loadTextures()
 {
 	mTextures.load(Textures::TestSky, "Media/Textures/SkyTest.png");
 	mTextures.load(Textures::TestFloor, "Media/Textures/FloorTest.png");
+	mTextures.load(Textures::TestFighter, "Media/Sprites/catFighterSprite.png");
 }
