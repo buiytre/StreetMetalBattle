@@ -1,6 +1,7 @@
 #include "Game.h"
 #include "TitleState.h"
 #include "States.h"
+#include "GameState.h"
 
 const sf::Time  Game::TimePerFrame = sf::seconds(1.f / 60.f);
 
@@ -50,6 +51,7 @@ void Game::run()
 void Game::registerStates()
 {
 	mStateStack.registerState<TitleState>(States::TITLE);
+	mStateStack.registerState<GameState>(States::GAME);
 }
 
 void Game::processInput()

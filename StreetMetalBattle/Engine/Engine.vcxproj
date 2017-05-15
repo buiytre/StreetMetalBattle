@@ -142,6 +142,7 @@
     <ClInclude Include="ResourceHolder.h" />
     <ClInclude Include="SceneNode.h" />
     <ClInclude Include="SoundPlayer.h" />
+    <ClInclude Include="SpriteNode.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="StateStack.h" />
     <ClInclude Include="Utility.h" />
@@ -154,6 +155,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="SceneNode.cpp" />
     <ClCompile Include="SoundPlayer.cpp" />
+    <ClCompile Include="SpriteNode.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="StateStack.cpp" />
     <ClCompile Include="Utility.cpp" />

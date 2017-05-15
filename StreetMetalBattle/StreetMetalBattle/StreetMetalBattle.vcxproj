@@ -66,17 +66,23 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameState.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="TitleState.cpp" />
+    <ClCompile Include="TileMap.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Category.h" />
     <ClInclude Include="Fonts.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GameState.h" />
     <ClInclude Include="States.h" />
+    <ClInclude Include="Textures.h" />
     <ClInclude Include="TitleState.h" />
+    <ClInclude Include="TileMap.h" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="Media\Fonts\Capture_it.ttf" />
@@ -85,6 +91,10 @@
     <ProjectReference Include="..\Engine\Engine.vcxproj">
       <Project>{59411d53-c094-465d-9f92-7ef5dfb26397}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Media\Textures\FloorTest.png" />
+    <Image Include="Media\Textures\SkyTest.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

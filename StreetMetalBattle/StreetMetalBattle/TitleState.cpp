@@ -4,6 +4,7 @@
 #include "SFML\Graphics.hpp"
 #include "Utility.h"
 #include "Fonts.h"
+#include "States.h"
 
 TitleState::TitleState(StateStack & stack, Context context)
 	: State(stack, context)
@@ -55,7 +56,7 @@ bool TitleState::handleEvent(const sf::Event & event)
 	if (event.type == sf::Event::KeyPressed)
 	{
 		requestStackPop();
-		//requestStackPush(States::Menu);
+		requestStackPush(States::GAME);
 	}
 
 	return true;

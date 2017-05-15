@@ -34,6 +34,18 @@
     <Filter Include="StreetMetalBattle\States\Source Files">
       <UniqueIdentifier>{ec434719-1ede-4f64-9efa-716c686ae09c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="StreetMetalBattle\World">
+      <UniqueIdentifier>{ffb3d5a0-4f7b-421e-9227-d30360881390}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="StreetMetalBattle\World\Header Files">
+      <UniqueIdentifier>{7842da39-482d-4164-bafe-aa24990af6c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="StreetMetalBattle\World\Source Files">
+      <UniqueIdentifier>{9a70ee94-0a72-4b68-aa16-5408a97dd016}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="StreetMetalBattle\Resource Files\Media\Textures">
+      <UniqueIdentifier>{a628350f-3f92-4fbc-a17f-1f08f2204916}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -42,6 +54,12 @@
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="TitleState.cpp">
       <Filter>StreetMetalBattle\States\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState.cpp">
+      <Filter>StreetMetalBattle\States\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TileMap.cpp">
+      <Filter>StreetMetalBattle\World\Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -60,10 +78,30 @@
     <ClInclude Include="TitleState.h">
       <Filter>StreetMetalBattle\States\Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="GameState.h">
+      <Filter>StreetMetalBattle\States\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TileMap.h">
+      <Filter>StreetMetalBattle\World\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Textures.h">
+      <Filter>StreetMetalBattle\Identifiers</Filter>
+    </ClInclude>
+    <ClInclude Include="Category.h">
+      <Filter>StreetMetalBattle\Identifiers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Font Include="Media\Fonts\Capture_it.ttf">
       <Filter>StreetMetalBattle\Resource Files\Media\Fonts</Filter>
     </Font>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Media\Textures\FloorTest.png">
+      <Filter>StreetMetalBattle\Resource Files\Media\Textures</Filter>
+    </Image>
+    <Image Include="Media\Textures\SkyTest.png">
+      <Filter>StreetMetalBattle\Resource Files\Media\Textures</Filter>
+    </Image>
   </ItemGroup>
 </Project>
