@@ -2,6 +2,8 @@
 #include "Textures.h"
 #include "SpriteNode.h"
 #include "Category.h"
+#include <algorithm>
+
 
 TileMap::TileMap(sf::RenderWindow & window, FontHolder& fonts)
 	: mTarget(window)
@@ -33,6 +35,19 @@ void TileMap::update(sf::Time dt)
 	}
 
 	mSceneGraph.update(dt, mCommandQueue);
+	CheckPlayerInsideZone();
+}
+
+void TileMap::CheckPlayerInsideZone()
+{
+	sf::FloatRect viewBounds(mWorldView.getCenter() - mWorldView.getSize() / 2.f, mWorldView.getSize());
+	const float borderDistance = 60.f;
+	sf::Vector2f position = mPlayer->getPosition();
+	position.x = std::max(position.x, viewBounds.left + borderDistance / 2);
+	position.x = std::min(position.x, viewBounds.left + viewBounds.width - borderDistance / 2);
+	position.y = std::max(position.y, viewBounds.top + mWorldBounds.height / 2.f);
+	position.y = std::min(position.y, viewBounds.top + viewBounds.height - borderDistance);
+	mPlayer->setPosition(position);
 }
 
 void TileMap::draw()
@@ -66,7 +81,7 @@ void TileMap::buildScene()
 	mSceneLayers[Background]->attachChild(std::move(backgroundSprite));
 	
 	sf::Texture& textureFloor = mTextures.get(Textures::TestFloor);
-	sf::IntRect textureRectFloor(0.f, 0.f, mWorldBounds.width, mWorldBounds.height/2.f);
+	sf::IntRect textureRectFloor(0, 0, (int)(mWorldBounds.width), (int)(mWorldBounds.height/2.f));
 	textureFloor.setRepeated(true);
 
 	std::unique_ptr<SpriteNode> floorSprite(new SpriteNode(textureFloor, textureRectFloor));

@@ -14,6 +14,7 @@ Animation::Animation()
 Animation::Animation(const sf::Texture & texture)
 	: mSprite(texture)
 	, mFrameSize()
+	, mFrameOrigin()
 	, mNumFrames(0)
 	, mCurrentFrame(0)
 	, mDuration(sf::Time::Zero)
@@ -32,7 +33,7 @@ void Animation::update(sf::Time dt)
 
 	if (mCurrentFrame == 0)
 	{
-		textureRect = sf::IntRect(0, 0, mFrameSize.x, mFrameSize.y);
+		textureRect = sf::IntRect(mFrameOrigin.x, mFrameOrigin.y, mFrameSize.x, mFrameSize.y);
 	}
 
 	while (mElapsedTime >= timePerFrame && (mCurrentFrame <= mNumFrames || mRepeat))
@@ -53,7 +54,7 @@ void Animation::update(sf::Time dt)
 
 			if (mCurrentFrame == 0)
 			{
-				textureRect = sf::IntRect(0, 0, mFrameSize.x, mFrameSize.y);
+				textureRect = sf::IntRect(mFrameOrigin.x, mFrameOrigin.y, mFrameSize.x, mFrameSize.y);
 			}
 		}
 		else
@@ -90,6 +91,16 @@ void Animation::setFrameSize(sf::Vector2i frameSize)
 sf::Vector2i Animation::getFrameSize() const
 {
 	return mFrameSize;
+}
+
+void Animation::setFrameOrigin(sf::Vector2i frameOrigin)
+{
+	mFrameOrigin = frameOrigin;
+}
+
+sf::Vector2i Animation::getFrameOrigin() const
+{
+	return mFrameOrigin;
 }
 
 void Animation::setNumFrames(std::size_t numFrames)

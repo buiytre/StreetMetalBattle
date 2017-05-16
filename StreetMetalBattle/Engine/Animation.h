@@ -13,6 +13,9 @@ public:
 	void setFrameSize(sf::Vector2i frameSize);
 	sf::Vector2i getFrameSize() const;
 
+	void setFrameOrigin(sf::Vector2i frameOrigin);
+	sf::Vector2i getFrameOrigin() const;
+
 	void setNumFrames(std::size_t numFrames);
 	std::size_t getNumFrames() const;
 
@@ -37,6 +40,7 @@ private:
 
 private:
 	sf::Sprite mSprite;
+	sf::Vector2i mFrameOrigin;
 	sf::Vector2i mFrameSize;
 	std::size_t mNumFrames;
 	std::size_t mCurrentFrame;
