@@ -35,12 +35,14 @@ void TileMap::update(sf::Time dt)
 	}
 
 	mSceneGraph.update(dt, mCommandQueue);
+	mWorldView.setCenter(mPlayer->getWorldPosition());
 	CheckPlayerInsideZone();
 }
 
 void TileMap::CheckPlayerInsideZone()
 {
-	sf::FloatRect viewBounds(mWorldView.getCenter() - mWorldView.getSize() / 2.f, mWorldView.getSize());
+	
+	sf::FloatRect worldBounds(mWorldBounds.left,mWorldBounds.top, mWorldBounds.width, mWorldBounds.height);
 	const float borderDistance = 60.f;
 	sf::Vector2f position = mPlayer->getPosition();
 	position.x = std::max(position.x, viewBounds.left + borderDistance / 2);
