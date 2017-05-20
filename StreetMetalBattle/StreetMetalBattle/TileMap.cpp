@@ -19,8 +19,8 @@ TileMap::TileMap(sf::RenderWindow & window, FontHolder& fonts)
 		mWorldView.getSize().y) //height
 	, mCommandQueue()
 	, mSpawnPosition(
-		mWorldView.getSize().x / 2.f, // x
-		mWorldBounds.height - mWorldView.getSize().y / 2.f) //y
+		mWorldBounds.left, // x
+		mWorldBounds.height - mWorldBounds.height / 2.f) //y
 {
 	mWorldView.setCenter(mWorldView.getSize()/2.f);
 	loadTextures();
@@ -41,7 +41,6 @@ void TileMap::update(sf::Time dt)
 
 void TileMap::CheckPlayerInsideZone()
 {
-	
 	sf::FloatRect worldBounds(mWorldBounds.left,mWorldBounds.top, mWorldBounds.width, mWorldBounds.height);
 	const float borderDistance = 60.f;
 	sf::Vector2f position = mPlayer->getPosition();

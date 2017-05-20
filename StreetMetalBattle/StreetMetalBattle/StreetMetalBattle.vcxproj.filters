@@ -18,30 +18,9 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="StreetMetalBattle\Identifiers">
-      <UniqueIdentifier>{13cc8563-43a0-4c79-8a5d-5df2d098c104}</UniqueIdentifier>
-    </Filter>
     <Filter Include="StreetMetalBattle\Header Files">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
-    <Filter Include="StreetMetalBattle\States">
-      <UniqueIdentifier>{bb6c5cdb-63b4-4bb6-be22-bd081a1105d1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="StreetMetalBattle\States\Header Files">
-      <UniqueIdentifier>{ced6be52-cff8-4237-b861-094c36c3b0f6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="StreetMetalBattle\States\Source Files">
-      <UniqueIdentifier>{ec434719-1ede-4f64-9efa-716c686ae09c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="StreetMetalBattle\World">
-      <UniqueIdentifier>{ffb3d5a0-4f7b-421e-9227-d30360881390}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="StreetMetalBattle\World\Header Files">
-      <UniqueIdentifier>{7842da39-482d-4164-bafe-aa24990af6c1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="StreetMetalBattle\World\Source Files">
-      <UniqueIdentifier>{9a70ee94-0a72-4b68-aa16-5408a97dd016}</UniqueIdentifier>
     </Filter>
     <Filter Include="StreetMetalBattle\Resource Files\Media\Textures">
       <UniqueIdentifier>{a628350f-3f92-4fbc-a17f-1f08f2204916}</UniqueIdentifier>
@@ -49,28 +28,55 @@
     <Filter Include="StreetMetalBattle\Resource Files\Media\Sprites">
       <UniqueIdentifier>{e88c69e8-b48a-4d46-9230-d4cab8b00324}</UniqueIdentifier>
     </Filter>
+    <Filter Include="StreetMetalBattle\Header Files\Identifiers">
+      <UniqueIdentifier>{82bff4a4-6717-40e7-bbcf-f9c360745c25}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="StreetMetalBattle\Header Files\Controller">
+      <UniqueIdentifier>{05d07c1f-0afd-45f3-8948-fc6e0c33485d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="StreetMetalBattle\Header Files\Entities">
+      <UniqueIdentifier>{bd0b47b1-6644-4360-81d1-b50112e1defc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="StreetMetalBattle\Header Files\States">
+      <UniqueIdentifier>{ed19824b-cb0d-4002-86e5-e8e6508773c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="StreetMetalBattle\Header Files\World">
+      <UniqueIdentifier>{3db75a77-10e4-490d-9c7f-33ddcc923858}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="StreetMetalBattle\Source Files\Controller">
+      <UniqueIdentifier>{bff60de8-f8da-41f8-b601-8e2f71d9e896}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="StreetMetalBattle\Source Files\Entities">
+      <UniqueIdentifier>{27bcace1-f36f-44aa-bd23-8c036eba259a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="StreetMetalBattle\Source Files\States">
+      <UniqueIdentifier>{bb6c5cdb-63b4-4bb6-be22-bd081a1105d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="StreetMetalBattle\Source Files\World">
+      <UniqueIdentifier>{ffb3d5a0-4f7b-421e-9227-d30360881390}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
       <Filter>StreetMetalBattle\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TitleState.cpp">
-      <Filter>StreetMetalBattle\States\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GameState.cpp">
-      <Filter>StreetMetalBattle\States\Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="TileMap.cpp">
-      <Filter>StreetMetalBattle\World\Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Main.cpp">
       <Filter>StreetMetalBattle\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Fighter.cpp">
-      <Filter>StreetMetalBattle\Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Player.cpp">
-      <Filter>StreetMetalBattle\Source Files</Filter>
+      <Filter>StreetMetalBattle\Source Files\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="Fighter.cpp">
+      <Filter>StreetMetalBattle\Source Files\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState.cpp">
+      <Filter>StreetMetalBattle\Source Files\States</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleState.cpp">
+      <Filter>StreetMetalBattle\Source Files\States</Filter>
+    </ClCompile>
+    <ClCompile Include="TileMap.cpp">
+      <Filter>StreetMetalBattle\Source Files\World</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -80,32 +86,32 @@
     <ClInclude Include="Game.h">
       <Filter>StreetMetalBattle\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Fonts.h">
-      <Filter>StreetMetalBattle\Identifiers</Filter>
-    </ClInclude>
-    <ClInclude Include="States.h">
-      <Filter>StreetMetalBattle\Identifiers</Filter>
-    </ClInclude>
-    <ClInclude Include="TitleState.h">
-      <Filter>StreetMetalBattle\States\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GameState.h">
-      <Filter>StreetMetalBattle\States\Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TileMap.h">
-      <Filter>StreetMetalBattle\World\Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Textures.h">
-      <Filter>StreetMetalBattle\Identifiers</Filter>
+      <Filter>StreetMetalBattle\Header Files\Identifiers</Filter>
     </ClInclude>
     <ClInclude Include="Category.h">
-      <Filter>StreetMetalBattle\Identifiers</Filter>
+      <Filter>StreetMetalBattle\Header Files\Identifiers</Filter>
     </ClInclude>
-    <ClInclude Include="Fighter.h">
-      <Filter>StreetMetalBattle\Header Files</Filter>
+    <ClInclude Include="Fonts.h">
+      <Filter>StreetMetalBattle\Header Files\Identifiers</Filter>
+    </ClInclude>
+    <ClInclude Include="States.h">
+      <Filter>StreetMetalBattle\Header Files\Identifiers</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
-      <Filter>StreetMetalBattle\Header Files</Filter>
+      <Filter>StreetMetalBattle\Header Files\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="Fighter.h">
+      <Filter>StreetMetalBattle\Header Files\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleState.h">
+      <Filter>StreetMetalBattle\Header Files\States</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState.h">
+      <Filter>StreetMetalBattle\Header Files\States</Filter>
+    </ClInclude>
+    <ClInclude Include="TileMap.h">
+      <Filter>StreetMetalBattle\Header Files\World</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
