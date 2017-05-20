@@ -45,10 +45,10 @@ void TileMap::CheckPlayerInsideZone()
 	sf::FloatRect worldBounds(mWorldBounds.left,mWorldBounds.top, mWorldBounds.width, mWorldBounds.height);
 	const float borderDistance = 60.f;
 	sf::Vector2f position = mPlayer->getPosition();
-	position.x = std::max(position.x, viewBounds.left + borderDistance / 2);
-	position.x = std::min(position.x, viewBounds.left + viewBounds.width - borderDistance / 2);
-	position.y = std::max(position.y, viewBounds.top + mWorldBounds.height / 2.f);
-	position.y = std::min(position.y, viewBounds.top + viewBounds.height - borderDistance);
+	position.x = std::max(position.x, worldBounds.left + borderDistance / 2);
+	position.x = std::min(position.x, worldBounds.left + worldBounds.width - borderDistance / 2);
+	position.y = std::max(position.y, worldBounds.top + mWorldBounds.height / 2.f);
+	position.y = std::min(position.y, worldBounds.top + worldBounds.height - borderDistance);
 	mPlayer->setPosition(position);
 }
 
