@@ -50,6 +50,7 @@ class Fighter : public SceneNode
 		void setStandByAnimation();
 		void setWalkingAnimation();
 		void setPunchingAnimation();
+		sf::FloatRect getBoundingRect() const;
 
 	private:
 		Type mType;

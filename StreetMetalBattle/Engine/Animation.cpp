@@ -145,7 +145,7 @@ bool Animation::isFinished() const
 
 sf::FloatRect Animation::getLocalBounds() const
 {
-	return sf::FloatRect(getOrigin(), static_cast<sf::Vector2f>(getFrameSize()));
+	return sf::FloatRect(mSprite.getOrigin(), static_cast<sf::Vector2f>(getFrameSize()));
 }
 
 sf::FloatRect Animation::getGlobalBounds() const

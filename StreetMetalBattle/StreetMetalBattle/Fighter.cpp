@@ -2,6 +2,7 @@
 #include "Utility.h"
 #include "Textures.h"
 #include "Category.h"
+#include <iostream>
 
 namespace {
 	const int texture = Textures::TestFighter;
@@ -210,4 +211,9 @@ void Fighter::setPunchingAnimation()
 	}
 
 	mFighterAnimation.restart();
+}
+
+sf::FloatRect Fighter::getBoundingRect() const
+{
+	return getWorldTransform().transformRect(mFighterAnimation.getGlobalBounds());
 }
