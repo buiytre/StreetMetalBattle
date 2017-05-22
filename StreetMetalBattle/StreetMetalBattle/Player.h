@@ -13,6 +13,7 @@ public:
 		MoveRight,
 		MoveUp,
 		MoveDown,
+		Punch,
 	};
 
 public:

@@ -2,7 +2,6 @@
 #include "Utility.h"
 #include "Textures.h"
 #include "Category.h"
-#include <iostream>
 
 namespace {
 	const int texture = Textures::TestFighter;
@@ -14,9 +13,10 @@ Fighter::Fighter(Type type, const TextureHolder & textures, sf::Vector2f positio
 	: mFighterAnimation(textures.get(texture))
 	, mOrientation(Right)
 	, mVelocity(0.f, 0.f)
-	, mLastActionMoving(false)
 	, mPosition(position)
 	, mType(type)
+	, mPunching(false)
+	, mLastAction(LastAction::None)
 {
 	setStandByAnimation();
 	centerOrigin(mFighterAnimation);
@@ -24,6 +24,11 @@ Fighter::Fighter(Type type, const TextureHolder & textures, sf::Vector2f positio
 
 void Fighter::moveLeft()
 {
+	if (mPunching)
+	{
+		return;
+	}
+
 	if (mOrientation == Right)
 	{
 		mFighterAnimation.setScale(-2.f, 2.f);
@@ -34,6 +39,11 @@ void Fighter::moveLeft()
 
 void Fighter::moveRight()
 {
+	if (mPunching)
+	{
+		return;
+	}
+
 	if (mOrientation == Left)
 	{
 		mFighterAnimation.setScale(2.f, 2.f);
@@ -44,13 +54,29 @@ void Fighter::moveRight()
 
 void Fighter::moveUp()
 {
+	if (mPunching)
+	{
+		return;
+	}
+
 	mVelocity.y -= speed;
 }
 
 void Fighter::moveDown()
 {
-	mVelocity.x += 0;
+	if (mPunching)
+	{
+		return;
+	}
+
 	mVelocity.y += speed;
+}
+
+void Fighter::punch()
+{
+	std::cout << "PUNCH! " << std::endl;
+	mPunching = true;
+	timeLastPunch = sf::Time::Zero;
 }
 
 void Fighter::updateCurrent(sf::Time dt, CommandQueue & commands)
@@ -60,7 +86,14 @@ void Fighter::updateCurrent(sf::Time dt, CommandQueue & commands)
 	mPosition += mVelocity * dt.asSeconds();
 	mVelocity.x = 0;
 	mVelocity.y = 0;
-	std::cout << "X: " << mPosition.x << "Y: " << mPosition.y << std::endl;
+	if (mPunching) 
+	{
+		timeLastPunch += dt;
+		if (timeLastPunch > sf::seconds(1.f)) 
+		{
+			mPunching = false;
+		}
+	}
 }
 
 void Fighter::drawCurrent(sf::RenderTarget & target, sf::RenderStates states) const
@@ -91,20 +124,28 @@ unsigned int Fighter::getCategory() const
 
 void Fighter::updateAnimation(sf::Time dt)
 {
-	if (!mLastActionMoving)
+	if (mPunching)
 	{
-		if (mVelocity.x != 0 || mVelocity.y != 0)
+		if (mLastAction != LastAction::Punch)
 		{
-			setWalkingAnimation();
-			mLastActionMoving = true;
+			setPunchingAnimation();
+			mLastAction = LastAction::Punch;
 		}
 	}
-	else if (mLastActionMoving)
+	else if (mVelocity.x != 0 || mVelocity.y != 0)
 	{
-		if (mVelocity.x == 0 && mVelocity.y == 0)
+		if (mLastAction != LastAction::Moving)
+		{
+			setWalkingAnimation();
+			mLastAction = LastAction::Moving;
+		}
+	}
+	else if (mVelocity.x == 0 && mVelocity.y == 0)
+	{
+		if (mLastAction != LastAction::Stand) 
 		{
 			setStandByAnimation();
-			mLastActionMoving = false;
+			mLastAction = LastAction::Stand;
 		}
 	}
 
@@ -113,7 +154,7 @@ void Fighter::updateAnimation(sf::Time dt)
 
 void Fighter::setStandByAnimation()
 {
-	mFighterAnimation.setFrameOrigin(sf::Vector2i(0, 0));
+	mFighterAnimation.setFrameOrigin(sf::Vector2i(0, 64*0));
 	mFighterAnimation.setFrameSize(sf::Vector2i(textureRect.width, textureRect.height));
 	mFighterAnimation.setNumFrames(4);
 	mFighterAnimation.setRepeating(true);
@@ -133,9 +174,29 @@ void Fighter::setStandByAnimation()
 
 void Fighter::setWalkingAnimation()
 {
-	mFighterAnimation.setFrameOrigin(sf::Vector2i(0, 64));
+	mFighterAnimation.setFrameOrigin(sf::Vector2i(0, 64*1));
 	mFighterAnimation.setFrameSize(sf::Vector2i(textureRect.width, textureRect.height));
 	mFighterAnimation.setNumFrames(8);
+	mFighterAnimation.setRepeating(true);
+	mFighterAnimation.setDuration(sf::seconds(1));
+
+	if (mOrientation == Left)
+	{
+		mFighterAnimation.setScale(-2.f, 2.f);
+	}
+	else if (mOrientation == Right)
+	{
+		mFighterAnimation.setScale(2.f, 2.f);
+	}
+
+	mFighterAnimation.restart();
+}
+
+void Fighter::setPunchingAnimation()
+{
+	mFighterAnimation.setFrameOrigin(sf::Vector2i(0, 64*9));
+	mFighterAnimation.setFrameSize(sf::Vector2i(textureRect.width, textureRect.height));
+	mFighterAnimation.setNumFrames(6);
 	mFighterAnimation.setRepeating(true);
 	mFighterAnimation.setDuration(sf::seconds(1));
 

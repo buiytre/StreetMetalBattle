@@ -22,6 +22,7 @@ class Fighter : public SceneNode
 		void moveRight();
 		void moveUp();
 		void moveDown();
+		void punch();
 
 	private:
 		enum Direction
@@ -30,6 +31,13 @@ class Fighter : public SceneNode
 			Right,
 			Up,
 			Down,
+		};
+		enum LastAction
+		{
+			Moving,
+			Stand,
+			Punch,
+			None
 		};
 
 	private:
@@ -41,6 +49,7 @@ class Fighter : public SceneNode
 		void updateAnimation(sf::Time dt);
 		void setStandByAnimation();
 		void setWalkingAnimation();
+		void setPunchingAnimation();
 
 	private:
 		Type mType;
@@ -48,5 +57,7 @@ class Fighter : public SceneNode
 		Direction mOrientation;
 		sf::Vector2f mVelocity;
 		sf::Vector2f mPosition;
-		bool mLastActionMoving;
+		LastAction mLastAction;
+		bool mPunching;
+		sf::Time timeLastPunch;
 };
