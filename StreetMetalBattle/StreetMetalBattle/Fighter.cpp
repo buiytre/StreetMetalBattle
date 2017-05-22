@@ -10,11 +10,13 @@ namespace {
 	const int speed = 100;
 }
 
-Fighter::Fighter(const TextureHolder & textures)
+Fighter::Fighter(Type type, const TextureHolder & textures, sf::Vector2f position)
 	: mFighterAnimation(textures.get(texture))
 	, mOrientation(Right)
-	, mVelocity(0.f,0.f)
+	, mVelocity(0.f, 0.f)
 	, mLastActionMoving(false)
+	, mPosition(position)
+	, mType(type)
 {
 	setStandByAnimation();
 	centerOrigin(mFighterAnimation);
@@ -55,8 +57,10 @@ void Fighter::updateCurrent(sf::Time dt, CommandQueue & commands)
 {
 	updateAnimation(dt);
 	move(mVelocity * dt.asSeconds());
+	mPosition += mVelocity * dt.asSeconds();
 	mVelocity.x = 0;
 	mVelocity.y = 0;
+	std::cout << "X: " << mPosition.x << "Y: " << mPosition.y << std::endl;
 }
 
 void Fighter::drawCurrent(sf::RenderTarget & target, sf::RenderStates states) const
@@ -64,9 +68,25 @@ void Fighter::drawCurrent(sf::RenderTarget & target, sf::RenderStates states) co
 	target.draw(mFighterAnimation, states);
 }
 
+sf::Vector2f Fighter::getWorldPosition() const
+{
+	return mPosition;
+}
+
+void Fighter::setPosition(const sf::Vector2f & position)
+{
+	mPosition = position;
+	SceneNode::setPosition(position);
+}
+
 unsigned int Fighter::getCategory() const
 {
-	return Category::FIGHTER;
+	if (mType == Fighter::Type::Player) 
+	{
+		return Category::PlayerFighter;
+	}
+
+	return Category::EnemyFighter;
 }
 
 void Fighter::updateAnimation(sf::Time dt)

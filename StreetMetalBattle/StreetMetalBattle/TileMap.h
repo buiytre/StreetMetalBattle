@@ -38,6 +38,7 @@ class TileMap : private sf::NonCopyable
 		FontHolder& mFonts;
 		SceneNode mSceneGraph;
 		std::array<SceneNode*, LayerCount> mSceneLayers;
+		std::vector<Fighter*> mFighters;
 
 
 		sf::FloatRect mWorldBounds;

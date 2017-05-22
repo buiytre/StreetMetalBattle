@@ -14,26 +14,26 @@ Player::Player()
 	{
 		f.moveLeft();
 	});
-	mActionBinding[MoveLeft].category = Category::FIGHTER;
+	mActionBinding[MoveLeft].category = Category::PlayerFighter;
 
 	mActionBinding[MoveRight].action = derivedAction<Fighter>([](Fighter& f, sf::Time)
 	{
 		f.moveRight();
 	});
-	mActionBinding[MoveRight].category = Category::FIGHTER;
+	mActionBinding[MoveRight].category = Category::PlayerFighter;
 
 	mActionBinding[MoveUp].action = derivedAction<Fighter>([](Fighter& f, sf::Time)
 	{
 		f.moveUp();
 	});
-	mActionBinding[MoveUp].category = Category::FIGHTER;
+	mActionBinding[MoveUp].category = Category::PlayerFighter;
 
 
 	mActionBinding[MoveDown].action = derivedAction<Fighter>([](Fighter& f, sf::Time)
 	{
 		f.moveDown();
 	});
-	mActionBinding[MoveDown].category = Category::FIGHTER;
+	mActionBinding[MoveDown].category = Category::PlayerFighter;
 
 }
 

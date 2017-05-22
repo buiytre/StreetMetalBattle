@@ -6,7 +6,17 @@
 class Fighter : public SceneNode
 {
 	public:
-		explicit Fighter(const TextureHolder& textures);
+		enum Type
+		{
+			Player,
+			Enemy,
+			TypeCount,
+		};
+
+	public:
+		explicit Fighter(Type type, const TextureHolder & textures, sf::Vector2f position);
+		sf::Vector2f getWorldPosition() const;
+		void setPosition(const sf::Vector2f& position);
 
 		void moveLeft();
 		void moveRight();
@@ -33,8 +43,10 @@ class Fighter : public SceneNode
 		void setWalkingAnimation();
 
 	private:
+		Type mType;
 		Animation mFighterAnimation;
 		Direction mOrientation;
 		sf::Vector2f mVelocity;
+		sf::Vector2f mPosition;
 		bool mLastActionMoving;
 };

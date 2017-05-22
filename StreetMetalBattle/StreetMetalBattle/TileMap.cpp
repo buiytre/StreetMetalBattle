@@ -31,11 +31,22 @@ void TileMap::update(sf::Time dt)
 {
 	while (!mCommandQueue.isEmpty())
 	{
-		mSceneGraph.onCommand(mCommandQueue.pop(), dt);
+		Command command = mCommandQueue.pop();
+		mSceneGraph.onCommand(command, dt);
+		for (Fighter* f : mFighters)
+		{
+			(*f).onCommand(command, dt);
+		}
 	}
 
 	mSceneGraph.update(dt, mCommandQueue);
-	mWorldView.setCenter(mPlayer->getWorldPosition());
+
+	for (Fighter* f : mFighters)
+	{
+		(*f).update(dt, mCommandQueue);
+	}
+
+	//mWorldView.setCenter(mPlayer->getWorldPosition());
 	CheckPlayerInsideZone();
 }
 
@@ -55,6 +66,14 @@ void TileMap::draw()
 {
 	mTarget.setView(mWorldView);
 	mTarget.draw(mSceneGraph);
+	std::sort(mFighters.begin(), mFighters.end(), [](Fighter* a, Fighter* b)
+	{
+		return a->getWorldPosition().y < b->getWorldPosition().y;
+	});
+	for (Fighter* f : mFighters)
+	{
+		mTarget.draw(*f);
+	}
 }
 
 CommandQueue& TileMap::getCommandQueue()
@@ -89,10 +108,14 @@ void TileMap::buildScene()
 	floorSprite->setPosition(mWorldBounds.left, mWorldBounds.height/2.f);
 	mSceneLayers[Floor]->attachChild(std::move(floorSprite));
 
-	std::unique_ptr<Fighter> fighter(new Fighter(mTextures));
-	mPlayer = fighter.get();
+	Fighter* fighter = new Fighter(Fighter::Type::Player, mTextures, mSpawnPosition);
+	mPlayer = fighter;
 	mPlayer->setPosition(mSpawnPosition);
-	mSceneLayers[ActionLayer]->attachChild(std::move(fighter));
+	mFighters.push_back(fighter);
+
+	Fighter* enemy = new Fighter(Fighter::Type::Enemy, mTextures, sf::Vector2f(mWorldBounds.width / 2.f, mWorldBounds.height / 2.f + 100));
+	enemy->setPosition(enemy->getWorldPosition());
+	mFighters.push_back(enemy);
 }
 
 void TileMap::loadTextures()
