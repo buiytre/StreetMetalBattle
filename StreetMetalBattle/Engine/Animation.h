@@ -19,6 +19,8 @@ public:
 	void setNumFrames(std::size_t numFrames);
 	std::size_t getNumFrames() const;
 
+	std::size_t getCurrentFrame() const;
+
 	void setDuration(sf::Time duration);
 	sf::Time getDuration() const;
 

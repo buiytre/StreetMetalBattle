@@ -17,6 +17,7 @@ Fighter::Fighter(Type type, const TextureHolder & textures, sf::Vector2f positio
 	, mPosition(position)
 	, mType(type)
 	, mPunching(false)
+	, mPunchingCombo(false)
 	, mLastAction(LastAction::None)
 {
 	setStandByAnimation();
@@ -76,8 +77,15 @@ void Fighter::moveDown()
 void Fighter::punch()
 {
 	std::cout << "PUNCH! " << std::endl;
-	mPunching = true;
-	timeLastPunch = sf::Time::Zero;
+	if (mPunching && !mPunchingCombo) 
+	{
+		mPunchingCombo = true;
+	}
+	else 
+	{
+		mPunching = true;
+		timeLastPunch = sf::Time::Zero;
+	}
 }
 
 void Fighter::updateCurrent(sf::Time dt, CommandQueue & commands)
@@ -90,7 +98,15 @@ void Fighter::updateCurrent(sf::Time dt, CommandQueue & commands)
 	if (mPunching) 
 	{
 		timeLastPunch += dt;
-		if (timeLastPunch > sf::seconds(1.f)) 
+		if (mPunchingCombo) 
+		{
+			if (timeLastPunch > sf::seconds(1.f))
+			{
+				mPunching = false;
+				mPunchingCombo = false;
+			}
+		} 
+		else if (timeLastPunch > sf::seconds(0.5f)) 
 		{
 			mPunching = false;
 		}
@@ -100,6 +116,8 @@ void Fighter::updateCurrent(sf::Time dt, CommandQueue & commands)
 void Fighter::drawCurrent(sf::RenderTarget & target, sf::RenderStates states) const
 {
 	target.draw(mFighterAnimation, states);
+
+	drawBoundingPunch(target, states);
 }
 
 sf::Vector2f Fighter::getWorldPosition() const
@@ -111,6 +129,12 @@ void Fighter::setPosition(const sf::Vector2f & position)
 {
 	mPosition = position;
 	SceneNode::setPosition(position);
+}
+
+bool Fighter::isHitting()
+{
+	size_t currentFrame = mFighterAnimation.getCurrentFrame();
+	return mPunching && (currentFrame == 4 || currentFrame == 5 || currentFrame == 7 || currentFrame == 8);
 }
 
 unsigned int Fighter::getCategory() const
@@ -125,12 +149,28 @@ unsigned int Fighter::getCategory() const
 
 void Fighter::updateAnimation(sf::Time dt)
 {
-	if (mPunching)
+	if (mPunching && !mPunchingCombo)
 	{
 		if (mLastAction != LastAction::Punch)
 		{
 			setPunchingAnimation();
 			mLastAction = LastAction::Punch;
+		}
+	}
+	else if (mPunchingCombo) 
+	{
+		if (mLastAction != LastAction::Punch && mLastAction != LastAction::PunchCombo)
+		{
+			setPunchingAnimation();
+			mFighterAnimation.setNumFrames(10);
+			mFighterAnimation.setDuration(sf::seconds(1));
+			mLastAction = LastAction::PunchCombo;
+		}
+		else if (mLastAction == LastAction::Punch)
+		{
+			mFighterAnimation.setNumFrames(10);
+			mFighterAnimation.setDuration(sf::seconds(1));
+			mLastAction = LastAction::PunchCombo;
 		}
 	}
 	else if (mVelocity.x != 0 || mVelocity.y != 0)
@@ -199,7 +239,7 @@ void Fighter::setPunchingAnimation()
 	mFighterAnimation.setFrameSize(sf::Vector2i(textureRect.width, textureRect.height));
 	mFighterAnimation.setNumFrames(6);
 	mFighterAnimation.setRepeating(true);
-	mFighterAnimation.setDuration(sf::seconds(1));
+	mFighterAnimation.setDuration(sf::seconds(0.5));
 
 	if (mOrientation == Left)
 	{
@@ -215,5 +255,42 @@ void Fighter::setPunchingAnimation()
 
 sf::FloatRect Fighter::getBoundingRect() const
 {
-	return getWorldTransform().transformRect(mFighterAnimation.getGlobalBounds());
+	return getWorldTransform().transformRect(mFighterAnimation.getTransform().transformRect(sf::FloatRect(21.f, 25.f, 17.f, 29.f)));
+}
+
+sf::FloatRect Fighter::getPunchBoundingRect() const
+{
+	switch (mLastAction)
+	{
+		case LastAction::Punch:
+		case LastAction::PunchCombo:
+		{
+			size_t currentFrame = mFighterAnimation.getCurrentFrame();
+			if (currentFrame == 4 || currentFrame == 5)
+			{
+				return getWorldTransform().transformRect(mFighterAnimation.getTransform().transformRect(sf::FloatRect(35.f, 40.f, 10.f, 6.f)));
+			}
+			if (currentFrame == 7 || currentFrame == 8)
+			{
+				return getWorldTransform().transformRect(mFighterAnimation.getTransform().transformRect(sf::FloatRect(32.f, 38.f, 10.f, 6.f)));
+			}
+		}
+		default:
+			return sf::FloatRect();
+	}
+}
+
+
+void Fighter::drawBoundingPunch(sf::RenderTarget & target, sf::RenderStates states) const
+{
+	sf::FloatRect rect = getPunchBoundingRect();
+
+	sf::RectangleShape shape;
+	shape.setPosition(sf::Vector2f(rect.left, rect.top));
+	shape.setSize(sf::Vector2f(rect.width, rect.height));
+	shape.setFillColor(sf::Color::Transparent);
+	shape.setOutlineColor(sf::Color::Red);
+	shape.setOutlineThickness(1.f);
+
+	target.draw(shape);
 }

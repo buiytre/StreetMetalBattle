@@ -113,6 +113,11 @@ std::size_t Animation::getNumFrames() const
 	return mNumFrames;
 }
 
+std::size_t Animation::getCurrentFrame() const
+{
+	return mCurrentFrame;
+}
+
 void Animation::setDuration(sf::Time duration)
 {
 	mDuration = duration;

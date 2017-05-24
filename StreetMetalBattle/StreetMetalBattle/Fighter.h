@@ -18,11 +18,16 @@ class Fighter : public SceneNode
 		sf::Vector2f getWorldPosition() const;
 		void setPosition(const sf::Vector2f& position);
 
+		bool isHitting();
+
 		void moveLeft();
 		void moveRight();
 		void moveUp();
 		void moveDown();
 		void punch();
+
+		sf::FloatRect getBoundingRect() const;
+		sf::FloatRect getPunchBoundingRect() const;
 
 	private:
 		enum Direction
@@ -37,6 +42,7 @@ class Fighter : public SceneNode
 			Moving,
 			Stand,
 			Punch,
+			PunchCombo,
 			None
 		};
 
@@ -50,7 +56,8 @@ class Fighter : public SceneNode
 		void setStandByAnimation();
 		void setWalkingAnimation();
 		void setPunchingAnimation();
-		sf::FloatRect getBoundingRect() const;
+
+		void drawBoundingPunch(sf::RenderTarget & target, sf::RenderStates states) const;
 
 	private:
 		Type mType;
@@ -60,5 +67,6 @@ class Fighter : public SceneNode
 		sf::Vector2f mPosition;
 		LastAction mLastAction;
 		bool mPunching;
+		bool mPunchingCombo;
 		sf::Time timeLastPunch;
 };

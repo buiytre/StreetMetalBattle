@@ -3,6 +3,8 @@
 #include "SpriteNode.h"
 #include "Category.h"
 #include <algorithm>
+#include <iostream>
+#include "Utility.h"
 
 
 TileMap::TileMap(sf::RenderWindow & window, FontHolder& fonts)
@@ -46,6 +48,8 @@ void TileMap::update(sf::Time dt)
 		(*f).update(dt, mCommandQueue);
 	}
 
+	handleCollisions();
+
 	//mWorldView.setCenter(mPlayer->getWorldPosition());
 	CheckPlayerInsideZone();
 }
@@ -60,6 +64,35 @@ void TileMap::CheckPlayerInsideZone()
 	position.y = std::max(position.y, worldBounds.top + mWorldBounds.height / 2.f);
 	position.y = std::min(position.y, worldBounds.top + worldBounds.height - borderDistance);
 	mPlayer->setPosition(position);
+}
+
+void TileMap::handleCollisions()
+{
+	for (size_t i = 0; i < mFighters.size(); i++)
+	{
+		for (size_t j = 0; j < mFighters.size(); j++)
+		{
+			if (i != j)
+			{
+				if ((*mFighters[i]).isHitting())
+				{
+					bool hit = (*mFighters[i]).getPunchBoundingRect().intersects((*mFighters[j]).getBoundingRect());
+					if (hit)
+					{
+						sf::Vector2f attackant = (*mFighters[i]).getPosition();
+						sf::Vector2f hitted = (*mFighters[j]).getPosition();
+						float diff = std::abs(hitted.y - attackant.y);
+						std::cout << diff << std::endl;
+						if (diff <= 20.f) 
+						{
+							std::cout << "HIT!" << std::endl;
+							(*mFighters[j]).setPosition(unitVector(hitted - attackant) + hitted);
+						}
+					}
+				}
+			}
+		}
+	}
 }
 
 void TileMap::draw()

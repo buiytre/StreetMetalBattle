@@ -28,6 +28,7 @@ class TileMap : private sf::NonCopyable
 		void buildScene();
 		void loadTextures();
 		void CheckPlayerInsideZone();
+		void handleCollisions();
 
 	private:
 		Fighter* mPlayer;
