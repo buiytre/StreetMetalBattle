@@ -49,21 +49,24 @@ void TileMap::update(sf::Time dt)
 	}
 
 	handleCollisions();
-
+	CheckDeathFighters();
 	//mWorldView.setCenter(mPlayer->getWorldPosition());
-	CheckPlayerInsideZone();
+	CheckFightersInsideZone();
 }
 
-void TileMap::CheckPlayerInsideZone()
+void TileMap::CheckFightersInsideZone()
 {
-	sf::FloatRect worldBounds(mWorldBounds.left,mWorldBounds.top, mWorldBounds.width, mWorldBounds.height);
-	const float borderDistance = 60.f;
-	sf::Vector2f position = mPlayer->getPosition();
-	position.x = std::max(position.x, worldBounds.left + borderDistance / 2);
-	position.x = std::min(position.x, worldBounds.left + worldBounds.width - borderDistance / 2);
-	position.y = std::max(position.y, worldBounds.top + mWorldBounds.height / 2.f);
-	position.y = std::min(position.y, worldBounds.top + worldBounds.height - borderDistance);
-	mPlayer->setPosition(position);
+	for (Fighter* f : mFighters)
+	{
+		sf::FloatRect worldBounds(mWorldBounds.left, mWorldBounds.top, mWorldBounds.width, mWorldBounds.height);
+		const float borderDistance = 60.f;
+		sf::Vector2f position = (*f).getPosition();
+		position.x = std::max(position.x, worldBounds.left + borderDistance / 2);
+		position.x = std::min(position.x, worldBounds.left + worldBounds.width - borderDistance / 2);
+		position.y = std::max(position.y, worldBounds.top + mWorldBounds.height / 2.f);
+		position.y = std::min(position.y, worldBounds.top + worldBounds.height - borderDistance);
+		(*f).setPosition(position);
+	}
 }
 
 void TileMap::handleCollisions()
@@ -74,25 +77,37 @@ void TileMap::handleCollisions()
 		{
 			if (i != j)
 			{
-				if ((*mFighters[i]).isHitting())
+				bool touch = (*mFighters[i]).getBoundingRect().intersects((*mFighters[j]).getBoundingRect());
+				bool hit = (*mFighters[i]).getPunchBoundingRect().intersects((*mFighters[j]).getBoundingRect());
+				if (touch && !hit) 
 				{
-					bool hit = (*mFighters[i]).getPunchBoundingRect().intersects((*mFighters[j]).getBoundingRect());
-					if (hit)
+					sf::Vector2f fighterOne = (*mFighters[i]).getPosition();
+					sf::Vector2f fighterTwo = (*mFighters[j]).getPosition();
+					float diff = std::abs(fighterOne.y - fighterTwo.y);
+					if (diff <= 20.f)
 					{
-						sf::Vector2f attackant = (*mFighters[i]).getPosition();
-						sf::Vector2f hitted = (*mFighters[j]).getPosition();
-						float diff = std::abs(hitted.y - attackant.y);
-						std::cout << diff << std::endl;
-						if (diff <= 20.f) 
-						{
-							std::cout << "HIT!" << std::endl;
-							(*mFighters[j]).setPosition(unitVector(hitted - attackant) + hitted);
-						}
+						(*mFighters[j]).setPosition(unitVector(fighterTwo - fighterOne) + fighterTwo);
+					}
+				}
+				else if (hit) 
+				{
+					sf::Vector2f fighterOne = (*mFighters[i]).getPosition();
+					sf::Vector2f fighterTwo = (*mFighters[j]).getPosition();
+					float diff = std::abs(fighterOne.y - fighterTwo.y);
+					if (diff <= 20.f)
+					{
+						(*mFighters[j]).getHit(10);
+						(*mFighters[j]).setPosition(unitVector(fighterTwo - fighterOne)*2.f + fighterTwo);
 					}
 				}
 			}
 		}
 	}
+}
+
+void TileMap::CheckDeathFighters()
+{
+	mFighters.erase(std::remove_if(mFighters.begin(), mFighters.end(),[&](const Fighter* f){ return (*f).isMarkedForRemoval(); }), mFighters.end());
 }
 
 void TileMap::draw()
@@ -141,12 +156,12 @@ void TileMap::buildScene()
 	floorSprite->setPosition(mWorldBounds.left, mWorldBounds.height/2.f);
 	mSceneLayers[Floor]->attachChild(std::move(floorSprite));
 
-	Fighter* fighter = new Fighter(Fighter::Type::Player, mTextures, mSpawnPosition);
+	Fighter* fighter = new Fighter(Fighter::Type::Player, mTextures, mSpawnPosition, 100);
 	mPlayer = fighter;
 	mPlayer->setPosition(mSpawnPosition);
 	mFighters.push_back(fighter);
 
-	Fighter* enemy = new Fighter(Fighter::Type::Enemy, mTextures, sf::Vector2f(mWorldBounds.width / 2.f, mWorldBounds.height / 2.f + 100));
+	Fighter* enemy = new Fighter(Fighter::Type::Enemy, mTextures, sf::Vector2f(mWorldBounds.width / 2.f, mWorldBounds.height / 2.f + 100), 100);
 	enemy->setPosition(enemy->getWorldPosition());
 	mFighters.push_back(enemy);
 }

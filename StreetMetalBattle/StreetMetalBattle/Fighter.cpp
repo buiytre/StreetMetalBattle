@@ -10,7 +10,7 @@ namespace {
 	const int speed = 100;
 }
 
-Fighter::Fighter(Type type, const TextureHolder & textures, sf::Vector2f position)
+Fighter::Fighter(Type type, const TextureHolder & textures, sf::Vector2f position, sf::Int16 hitPoints)
 	: mFighterAnimation(textures.get(texture))
 	, mOrientation(Right)
 	, mVelocity(0.f, 0.f)
@@ -19,6 +19,9 @@ Fighter::Fighter(Type type, const TextureHolder & textures, sf::Vector2f positio
 	, mPunching(false)
 	, mPunchingCombo(false)
 	, mLastAction(LastAction::None)
+	, mBeingPunched(false)
+	, mHitPoints(hitPoints)
+	, mIsDying(false)
 {
 	setStandByAnimation();
 	centerOrigin(mFighterAnimation);
@@ -84,8 +87,14 @@ void Fighter::punch()
 	else 
 	{
 		mPunching = true;
-		timeLastPunch = sf::Time::Zero;
+		mTimeLastPunch = sf::Time::Zero;
 	}
+}
+
+void Fighter::getHit(sf::Int16 damage)
+{
+	mHitPoints -= damage;
+	mBeingPunched = true;
 }
 
 void Fighter::updateCurrent(sf::Time dt, CommandQueue & commands)
@@ -95,18 +104,26 @@ void Fighter::updateCurrent(sf::Time dt, CommandQueue & commands)
 	mPosition += mVelocity * dt.asSeconds();
 	mVelocity.x = 0;
 	mVelocity.y = 0;
-	if (mPunching) 
+	if (isDestroyed())
 	{
-		timeLastPunch += dt;
+		if (!mIsDying) 
+		{
+			setDyingAnimation();
+			mIsDying = true;
+		}
+	}
+	else if (mPunching) 
+	{
+		mTimeLastPunch += dt;
 		if (mPunchingCombo) 
 		{
-			if (timeLastPunch > sf::seconds(1.f))
+			if (mTimeLastPunch > sf::seconds(1.f))
 			{
 				mPunching = false;
 				mPunchingCombo = false;
 			}
 		} 
-		else if (timeLastPunch > sf::seconds(0.5f)) 
+		else if (mTimeLastPunch > sf::seconds(0.5f)) 
 		{
 			mPunching = false;
 		}
@@ -149,7 +166,22 @@ unsigned int Fighter::getCategory() const
 
 void Fighter::updateAnimation(sf::Time dt)
 {
-	if (mPunching && !mPunchingCombo)
+	if (mBeingPunched)
+	{
+		if (mLastAction != LastAction::BeingPunched)
+		{
+			setBeingPunchedAnimation();
+			mLastAction = LastAction::BeingPunched;
+		}
+		else 
+		{
+			if (mFighterAnimation.isFinished())
+			{
+				mBeingPunched = false;
+			}
+		}
+	}
+	else if (mPunching && !mPunchingCombo)
 	{
 		if (mLastAction != LastAction::Punch)
 		{
@@ -251,6 +283,57 @@ void Fighter::setPunchingAnimation()
 	}
 
 	mFighterAnimation.restart();
+}
+
+void Fighter::setBeingPunchedAnimation()
+{
+	mFighterAnimation.setFrameOrigin(sf::Vector2i(0, 64 * 4));
+	mFighterAnimation.setFrameSize(sf::Vector2i(textureRect.width, textureRect.height));
+	mFighterAnimation.setNumFrames(2);
+	mFighterAnimation.setRepeating(false);
+	mFighterAnimation.setDuration(sf::seconds(0.5f));
+
+	if (mOrientation == Left)
+	{
+		mFighterAnimation.setScale(-2.f, 2.f);
+	}
+	else if (mOrientation == Right)
+	{
+		mFighterAnimation.setScale(2.f, 2.f);
+	}
+
+	mFighterAnimation.restart();
+}
+
+void Fighter::setDyingAnimation()
+{
+	mFighterAnimation.setFrameOrigin(sf::Vector2i(0, 64 * 4));
+	mFighterAnimation.setFrameSize(sf::Vector2i(textureRect.width, textureRect.height));
+	mFighterAnimation.setNumFrames(7);
+	mFighterAnimation.setRepeating(false);
+	mFighterAnimation.setDuration(sf::seconds(1.f));
+
+	if (mOrientation == Left)
+	{
+		mFighterAnimation.setScale(-2.f, 2.f);
+	}
+	else if (mOrientation == Right)
+	{
+		mFighterAnimation.setScale(2.f, 2.f);
+	}
+
+	mFighterAnimation.restart();
+}
+
+bool Fighter::isDestroyed() const
+{
+	return mHitPoints <= 0;
+}
+
+
+bool Fighter::isMarkedForRemoval() const
+{
+	return (isDestroyed() && mFighterAnimation.isFinished());
 }
 
 sf::FloatRect Fighter::getBoundingRect() const

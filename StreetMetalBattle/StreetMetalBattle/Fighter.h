@@ -14,7 +14,7 @@ class Fighter : public SceneNode
 		};
 
 	public:
-		explicit Fighter(Type type, const TextureHolder & textures, sf::Vector2f position);
+		explicit Fighter(Type type, const TextureHolder & textures, sf::Vector2f position, sf::Int16 hitPoints);
 		sf::Vector2f getWorldPosition() const;
 		void setPosition(const sf::Vector2f& position);
 
@@ -25,6 +25,9 @@ class Fighter : public SceneNode
 		void moveUp();
 		void moveDown();
 		void punch();
+		void getHit(sf::Int16 damage);
+
+		virtual bool isMarkedForRemoval() const;
 
 		sf::FloatRect getBoundingRect() const;
 		sf::FloatRect getPunchBoundingRect() const;
@@ -43,6 +46,7 @@ class Fighter : public SceneNode
 			Stand,
 			Punch,
 			PunchCombo,
+			BeingPunched,
 			None
 		};
 
@@ -56,6 +60,11 @@ class Fighter : public SceneNode
 		void setStandByAnimation();
 		void setWalkingAnimation();
 		void setPunchingAnimation();
+		void setBeingPunchedAnimation();
+		void setDyingAnimation();
+
+		virtual bool isDestroyed() const;
+
 
 		void drawBoundingPunch(sf::RenderTarget & target, sf::RenderStates states) const;
 
@@ -68,5 +77,8 @@ class Fighter : public SceneNode
 		LastAction mLastAction;
 		bool mPunching;
 		bool mPunchingCombo;
-		sf::Time timeLastPunch;
+		bool mBeingPunched;
+		bool mIsDying;
+		sf::Time mTimeLastPunch;
+		sf::Int32 mHitPoints;
 };
