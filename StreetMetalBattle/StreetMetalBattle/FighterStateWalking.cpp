@@ -10,8 +10,8 @@
 
 FighterStateWalking::FighterStateWalking(const TextureHolder & textures, int orientation)
 	:	mTextures(textures)
-{
-	mFighterAnimation.setTexture(textures.get(texture));
+	,	mFighterAnimation(textures.get(texture))
+{	
 	mFighterAnimation.setFrameOrigin(sf::Vector2i(0, 64 * 1));
 	mFighterAnimation.setFrameSize(sf::Vector2i(textureRect.width, textureRect.height));
 	mFighterAnimation.setNumFrames(8);
@@ -28,6 +28,7 @@ FighterStateWalking::FighterStateWalking(const TextureHolder & textures, int ori
 		mFighterAnimation.setScale(2.f, 2.f);
 	}
 	centerOrigin(mFighterAnimation);
+	mFighterAnimation.restart();
 }
 
 FighterStateWalking::~FighterStateWalking()
@@ -38,6 +39,8 @@ FighterState * FighterStateWalking::handleInput(Fighter & fighter, int input)
 {
 	switch (input)
 	{
+	case Inputs::GoToStandBy:
+			return new FighterStateStandBy(mTextures, mOrientation);
 		case Inputs::GetPunched:
 			return new FighterStateGetPunched(mTextures, mOrientation);
 		case Inputs::Die:
@@ -71,18 +74,23 @@ FighterState * FighterStateWalking::handleInput(Fighter & fighter, int input)
 	return nullptr;
 }
 
-FighterState* FighterStateWalking::update(Fighter & fighter, sf::Time dt, CommandQueue & commands)
+void FighterStateWalking::update(Fighter & fighter, sf::Time dt, CommandQueue & commands)
 {
+	mFighterAnimation.update(dt);
 	if (mVelocity.x == 0 && mVelocity.y == 0)
 	{
-		return new FighterStateStandBy(mTextures, mOrientation);
+		Command goToStandBy;
+		goToStandBy.category = fighter.getCategory();
+		goToStandBy.action = derivedAction<Fighter>([](Fighter& f, sf::Time)
+		{
+			f.goToStandBy();
+		});
+		commands.push(goToStandBy);
 	}
 
 	fighter.setPosition(fighter.getPosition() + mVelocity * dt.asSeconds());
 	mVelocity.x = 0;
 	mVelocity.y = 0;
-	mFighterAnimation.update(dt);
-	return nullptr;
 }
 
 void FighterStateWalking::drawCurrent(sf::RenderTarget & target, sf::RenderStates states) const

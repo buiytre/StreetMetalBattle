@@ -10,7 +10,7 @@ class FighterStateStandBy : public FighterState
 		explicit FighterStateStandBy(const TextureHolder& textures, int direction);
 		~FighterStateStandBy();
 		FighterState* handleInput(Fighter& fighter, int input);
-		FighterState* update(Fighter& fighter, sf::Time dt, CommandQueue & commands);
+		void update(Fighter& fighter, sf::Time dt, CommandQueue & commands);
 		void drawCurrent(sf::RenderTarget & target, sf::RenderStates states) const;
 		sf::FloatRect getBoundingRect() const;
 

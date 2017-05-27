@@ -72,9 +72,6 @@
     <ClCompile Include="Player.cpp">
       <Filter>StreetMetalBattle\Source Files\Controller</Filter>
     </ClCompile>
-    <ClCompile Include="Fighter.cpp">
-      <Filter>StreetMetalBattle\Source Files\Entities</Filter>
-    </ClCompile>
     <ClCompile Include="GameState.cpp">
       <Filter>StreetMetalBattle\Source Files\States</Filter>
     </ClCompile>
@@ -98,6 +95,9 @@
     </ClCompile>
     <ClCompile Include="FighterStateDying.cpp">
       <Filter>StreetMetalBattle\Source Files\Entities\FighterStates</Filter>
+    </ClCompile>
+    <ClCompile Include="Fighter.cpp">
+      <Filter>StreetMetalBattle\Source Files\Entities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

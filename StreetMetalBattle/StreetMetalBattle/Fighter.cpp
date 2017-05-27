@@ -13,8 +13,21 @@ Fighter::Fighter(Type type, const TextureHolder & textures, sf::Vector2f positio
 	, mType(type)
 	, mHitPoints(hitPoints)
 	, mTextures(textures)
+	, mGetHitCommand()
 {
 	mState = new FighterStateStandBy(textures, Orientation::RIGHT);
+	mGetHitCommand.category = getCategory();
+	mGetHitCommand.action = [this, &textures](SceneNode& node, sf::Time)
+	{
+		if (mHitPoints <= 0)
+		{
+			handleInput(Inputs::Die);
+		}
+		else
+		{
+			handleInput(Inputs::GetPunched);
+		}
+	};
 }
 
 void Fighter::handleInput(int input)
@@ -24,7 +37,13 @@ void Fighter::handleInput(int input)
 	{
 		delete mState;
 		mState = state;
+		mState->handleInput(*this, input);
 	}
+}
+
+void Fighter::goToStandBy()
+{
+	handleInput(Inputs::GoToStandBy);
 }
 
 void Fighter::moveLeft()
@@ -52,27 +71,15 @@ void Fighter::punch()
 	handleInput(Inputs::Punch);
 }
 
-void Fighter::getHit(sf::Int16 damage)
+void Fighter::getHit(CommandQueue & commands, sf::Int16 damage)
 {
 	mHitPoints -= damage;
-	if (mHitPoints <= 0)
-	{
-		handleInput(Inputs::Die);
-	}
-	else
-	{
-		handleInput(Inputs::GetPunched);
-	}
+	commands.push(mGetHitCommand);
 }
 
 void Fighter::updateCurrent(sf::Time dt, CommandQueue & commands)
 {
-	FighterState* state = mState->update(*this, dt, commands);
-	if (state != NULL)
-	{
-		delete mState;
-		mState = state;
-	}
+	mState->update(*this, dt, commands);
 }
 
 void Fighter::drawCurrent(sf::RenderTarget & target, sf::RenderStates states) const

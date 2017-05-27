@@ -16,7 +16,7 @@ class FighterState
 	public:
 		virtual ~FighterState() {}
 		virtual FighterState* handleInput(Fighter& fighter, int input) { return nullptr; }
-		virtual FighterState* update(Fighter& fighter, sf::Time dt, CommandQueue & commands) { return nullptr; }
+		virtual void update(Fighter& fighter, sf::Time dt, CommandQueue & commands) {};
 		virtual void drawCurrent(sf::RenderTarget & target, sf::RenderStates states) const {};
 		virtual sf::FloatRect getBoundingRect() const { return sf::FloatRect(); };
 		virtual sf::FloatRect getPunchBoundingRect() const { return sf::FloatRect(); };

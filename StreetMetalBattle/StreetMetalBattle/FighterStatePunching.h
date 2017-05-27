@@ -9,7 +9,7 @@ class FighterStatePunching : public FighterState
 		explicit FighterStatePunching(const TextureHolder& textures, int direction);
 		~FighterStatePunching();
 		FighterState* handleInput(Fighter& fighter, int input);
-		FighterState*  update(Fighter& fighter, sf::Time dt, CommandQueue & commands);
+		void update(Fighter& fighter, sf::Time dt, CommandQueue & commands);
 		void drawCurrent(sf::RenderTarget & target, sf::RenderStates states) const;
 		sf::FloatRect getBoundingRect() const;
 		sf::FloatRect getPunchBoundingRect() const;

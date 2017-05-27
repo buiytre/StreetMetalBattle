@@ -2,11 +2,13 @@
 #include "FighterStateStandBy.h"
 #include "Orientation.h"
 #include "Utility.h"
+#include "Command.h"
+#include "Fighter.h"
 
 FighterStatePunching::FighterStatePunching(const TextureHolder & textures, int direction)
 	: mTextures(textures)
+	, mFighterAnimation(textures.get(texture))
 {
-	mFighterAnimation.setTexture(textures.get(texture));
 	mFighterAnimation.setFrameOrigin(sf::Vector2i(0, 64 * 9));
 	mFighterAnimation.setFrameSize(sf::Vector2i(textureRect.width, textureRect.height));
 	mFighterAnimation.setNumFrames(6);
@@ -24,6 +26,7 @@ FighterStatePunching::FighterStatePunching(const TextureHolder & textures, int d
 		mFighterAnimation.setScale(2.f, 2.f);
 	}
 	centerOrigin(mFighterAnimation);
+	mFighterAnimation.restart();
 }
 
 FighterStatePunching::~FighterStatePunching()
@@ -32,19 +35,26 @@ FighterStatePunching::~FighterStatePunching()
 
 FighterState * FighterStatePunching::handleInput(Fighter & fighter, int input)
 {
+	if (input == Inputs::GoToStandBy)
+	{
+		return new FighterStateStandBy(mTextures, mOrientation);
+	}
 	return nullptr;
 }
 
-FighterState* FighterStatePunching::update(Fighter & fighter, sf::Time dt, CommandQueue & commands)
+void FighterStatePunching::update(Fighter & fighter, sf::Time dt, CommandQueue & commands)
 {
 	mFighterAnimation.update(dt);
 	if (mFighterAnimation.isFinished())
 	{
-		FighterState* state = new FighterStateStandBy(mTextures, mOrientation);
-		state->update(fighter, dt, commands);
-		return state;
+		Command goToStandBy;
+		goToStandBy.category = fighter.getCategory();
+		goToStandBy.action = derivedAction<Fighter>([](Fighter& f, sf::Time)
+		{
+			f.goToStandBy();
+		});
+		commands.push(goToStandBy);
 	}
-	return nullptr;
 }
 
 void FighterStatePunching::drawCurrent(sf::RenderTarget & target, sf::RenderStates states) const

@@ -8,10 +8,10 @@
 
 FighterStateStandBy::FighterStateStandBy(const TextureHolder & textures, int orientation)
 	: mTextures(textures)
+	, mFighterAnimation(textures.get(texture))
 {
-	mFighterAnimation.setTexture(textures.get(texture));
-	mFighterAnimation.setFrameOrigin(sf::Vector2i(0, 64 * 0));
 	mFighterAnimation.setFrameSize(sf::Vector2i(textureRect.width, textureRect.height));
+	mFighterAnimation.setFrameOrigin(sf::Vector2i(0, 64 * 0));
 	mFighterAnimation.setNumFrames(4);
 	mFighterAnimation.setRepeating(true);
 
@@ -27,6 +27,7 @@ FighterStateStandBy::FighterStateStandBy(const TextureHolder & textures, int ori
 		mFighterAnimation.setScale(2.f, 2.f);
 	}
 	centerOrigin(mFighterAnimation);
+	mFighterAnimation.restart();
 }
 
 FighterStateStandBy::~FighterStateStandBy()
@@ -54,14 +55,12 @@ FighterState * FighterStateStandBy::handleInput(Fighter& fighter, int input)
 		return new FighterStateDying(mTextures, mOrientation);
 	}
 
-
 	return nullptr;
 }
 
-FighterState* FighterStateStandBy::update(Fighter & fighter, sf::Time dt, CommandQueue & commands)
+void FighterStateStandBy::update(Fighter & fighter, sf::Time dt, CommandQueue & commands)
 {
 	mFighterAnimation.update(dt);
-	return nullptr;
 }
 
 void FighterStateStandBy::drawCurrent(sf::RenderTarget & target, sf::RenderStates states) const

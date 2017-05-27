@@ -4,8 +4,8 @@
 
 FighterStateDying::FighterStateDying(const TextureHolder & textures, int direction)
 	: mTextures(textures)
+	, mFighterAnimation(textures.get(texture))
 {
-	mFighterAnimation.setTexture(textures.get(texture));
 	mFighterAnimation.setFrameOrigin(sf::Vector2i(0, 64 * 4));
 	mFighterAnimation.setFrameSize(sf::Vector2i(textureRect.width, textureRect.height));
 	mFighterAnimation.setNumFrames(7);
@@ -23,6 +23,7 @@ FighterStateDying::FighterStateDying(const TextureHolder & textures, int directi
 		mFighterAnimation.setScale(2.f, 2.f);
 	}
 	centerOrigin(mFighterAnimation);
+	mFighterAnimation.restart();
 }
 
 FighterStateDying::~FighterStateDying()
@@ -34,10 +35,9 @@ FighterState * FighterStateDying::handleInput(Fighter & fighter, int input)
 	return nullptr;
 }
 
-FighterState * FighterStateDying::update(Fighter & fighter, sf::Time dt, CommandQueue & commands)
+void FighterStateDying::update(Fighter & fighter, sf::Time dt, CommandQueue & commands)
 {
 	mFighterAnimation.update(dt);
-	return nullptr;
 }
 
 void FighterStateDying::drawCurrent(sf::RenderTarget & target, sf::RenderStates states) const

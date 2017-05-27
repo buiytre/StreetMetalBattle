@@ -96,7 +96,7 @@ void TileMap::handleCollisions()
 					float diff = std::abs(fighterOne.y - fighterTwo.y);
 					if (diff <= 20.f)
 					{
-						(*mFighters[j]).getHit(10);
+						(*mFighters[j]).getHit(mCommandQueue, 10);
 						(*mFighters[j]).setPosition(unitVector(fighterTwo - fighterOne)*2.f + fighterTwo);
 					}
 				}

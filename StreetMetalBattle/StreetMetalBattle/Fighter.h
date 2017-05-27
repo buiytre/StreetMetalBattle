@@ -21,24 +21,26 @@ class Fighter : public SceneNode
 
 		bool isHitting();
 
+		void goToStandBy();
 		void moveLeft();
 		void moveRight();
 		void moveUp();
 		void moveDown();
 		void punch();
-		void getHit(sf::Int16 damage);
+		void getHit(CommandQueue & commands, sf::Int16 damage);
 
 		virtual bool isMarkedForRemoval() const;
 
 		sf::FloatRect getBoundingRect() const;
 		sf::FloatRect getPunchBoundingRect() const;
 
+		unsigned int getCategory() const;
+
 	private:
 		virtual void updateCurrent(sf::Time dt, CommandQueue& commands);
 		virtual void drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const;
 		void handleInput(int input);
-
-		unsigned int getCategory() const;
+				
 
 	private:
 		virtual bool isDestroyed() const;
@@ -47,6 +49,8 @@ class Fighter : public SceneNode
 	private:
 		Type mType;
 		FighterState* mState;
+
+		Command mGetHitCommand;
 
 		sf::Vector2f mPosition;
 		sf::Int32 mHitPoints;
