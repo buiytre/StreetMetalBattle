@@ -39,6 +39,13 @@ FighterState * FighterStatePunching::handleInput(Fighter & fighter, int input)
 	{
 		return new FighterStateStandBy(mTextures, mOrientation);
 	}
+
+	if (input == Inputs::Punch && !mFighterAnimation.isFinished()) 
+	{
+		mFighterAnimation.setNumFrames(9);
+		mFighterAnimation.setDuration(sf::seconds(1));
+	}
+
 	return nullptr;
 }
 

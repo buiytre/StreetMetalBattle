@@ -37,7 +37,6 @@ void Fighter::handleInput(int input)
 	{
 		delete mState;
 		mState = state;
-		mState->handleInput(*this, input);
 	}
 }
 
