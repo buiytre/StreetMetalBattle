@@ -65,6 +65,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="FighterStateDying.cpp" />
+    <ClCompile Include="FighterStateGetPunched.cpp" />
+    <ClCompile Include="FighterStatePunching.cpp" />
+    <ClCompile Include="FighterStateStandBy.cpp" />
+    <ClCompile Include="FighterStateWalking.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Fighter.cpp" />
     <ClCompile Include="Game.cpp" />
@@ -77,6 +82,14 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="FighterStateDying.h" />
+    <ClInclude Include="FighterState.h" />
+    <ClInclude Include="FighterStateGetPunched.h" />
+    <ClInclude Include="FighterStatePunching.h" />
+    <ClInclude Include="FighterStateStandBy.h" />
+    <ClInclude Include="FighterStateWalking.h" />
+    <ClInclude Include="Inputs.h" />
+    <ClInclude Include="Orientation.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Category.h" />
     <ClInclude Include="Fighter.h" />

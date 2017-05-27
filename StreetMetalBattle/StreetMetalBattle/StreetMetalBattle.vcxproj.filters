@@ -55,6 +55,12 @@
     <Filter Include="StreetMetalBattle\Source Files\World">
       <UniqueIdentifier>{ffb3d5a0-4f7b-421e-9227-d30360881390}</UniqueIdentifier>
     </Filter>
+    <Filter Include="StreetMetalBattle\Header Files\Entities\FighterStates">
+      <UniqueIdentifier>{a73e2be9-9724-45d1-9e0a-ae595655bd89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="StreetMetalBattle\Source Files\Entities\FighterStates">
+      <UniqueIdentifier>{ab5ab3c0-87d5-46d0-89d7-70c3f7f74235}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -77,6 +83,21 @@
     </ClCompile>
     <ClCompile Include="TileMap.cpp">
       <Filter>StreetMetalBattle\Source Files\World</Filter>
+    </ClCompile>
+    <ClCompile Include="FighterStateStandBy.cpp">
+      <Filter>StreetMetalBattle\Source Files\Entities\FighterStates</Filter>
+    </ClCompile>
+    <ClCompile Include="FighterStateWalking.cpp">
+      <Filter>StreetMetalBattle\Source Files\Entities\FighterStates</Filter>
+    </ClCompile>
+    <ClCompile Include="FighterStatePunching.cpp">
+      <Filter>StreetMetalBattle\Source Files\Entities\FighterStates</Filter>
+    </ClCompile>
+    <ClCompile Include="FighterStateGetPunched.cpp">
+      <Filter>StreetMetalBattle\Source Files\Entities\FighterStates</Filter>
+    </ClCompile>
+    <ClCompile Include="FighterStateDying.cpp">
+      <Filter>StreetMetalBattle\Source Files\Entities\FighterStates</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -112,6 +133,30 @@
     </ClInclude>
     <ClInclude Include="TileMap.h">
       <Filter>StreetMetalBattle\Header Files\World</Filter>
+    </ClInclude>
+    <ClInclude Include="FighterStateStandBy.h">
+      <Filter>StreetMetalBattle\Header Files\Entities\FighterStates</Filter>
+    </ClInclude>
+    <ClInclude Include="FighterStateWalking.h">
+      <Filter>StreetMetalBattle\Header Files\Entities\FighterStates</Filter>
+    </ClInclude>
+    <ClInclude Include="FighterStatePunching.h">
+      <Filter>StreetMetalBattle\Header Files\Entities\FighterStates</Filter>
+    </ClInclude>
+    <ClInclude Include="FighterState.h">
+      <Filter>StreetMetalBattle\Header Files\Entities\FighterStates</Filter>
+    </ClInclude>
+    <ClInclude Include="Orientation.h">
+      <Filter>StreetMetalBattle\Header Files\Identifiers</Filter>
+    </ClInclude>
+    <ClInclude Include="Inputs.h">
+      <Filter>StreetMetalBattle\Header Files\Identifiers</Filter>
+    </ClInclude>
+    <ClInclude Include="FighterStateGetPunched.h">
+      <Filter>StreetMetalBattle\Header Files\Entities\FighterStates</Filter>
+    </ClInclude>
+    <ClInclude Include="FighterStateDying.h">
+      <Filter>StreetMetalBattle\Header Files\Entities\FighterStates</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
