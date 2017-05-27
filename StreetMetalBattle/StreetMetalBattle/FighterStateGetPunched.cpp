@@ -1,5 +1,6 @@
 #include "FighterStateGetPunched.h"
 #include "FighterStateStandBy.h"
+#include "FighterStateDying.h"
 #include "Orientation.h"
 #include "Utility.h"
 
@@ -32,19 +33,24 @@ FighterStateGetPunched::~FighterStateGetPunched()
 
 FighterState * FighterStateGetPunched::handleInput(Fighter & fighter, int input)
 {
+	if (input == Inputs::Die)
+	{
+		return new FighterStateDying(mTextures, mOrientation);
+	}
 	return nullptr;
 }
 
 FighterState * FighterStateGetPunched::update(Fighter & fighter, sf::Time dt, CommandQueue & commands)
 {
-	mFighterAnimation.update(dt);
-	if (mFighterAnimation.isFinished()) 
+	if (!mFighterAnimation.isFinished()) 
 	{
-		FighterState* state = new FighterStateStandBy(mTextures, mOrientation);
-		state->update(fighter, dt, commands);
-		return state;
+		mFighterAnimation.update(dt);
+		return nullptr;
 	}
-	return nullptr;
+
+	FighterState* state = new FighterStateStandBy(mTextures, mOrientation);
+	state->update(fighter, dt, commands);
+	return state;
 }
 
 void FighterStateGetPunched::drawCurrent(sf::RenderTarget & target, sf::RenderStates states) const

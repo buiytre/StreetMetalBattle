@@ -8,4 +8,6 @@ class Inputs
 		static const int MoveRight = 3;
 		static const int MoveUp = 4;
 		static const int MoveDown = 5;
+		static const int GetPunched = 6;
+		static const int Die = 7;
 };

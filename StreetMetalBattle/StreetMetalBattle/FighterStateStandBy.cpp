@@ -3,6 +3,8 @@
 #include "FighterStatePunching.h"
 #include "Inputs.h"
 #include "Utility.h"
+#include "FighterStateGetPunched.h"
+#include "FighterStateDying.h"
 
 FighterStateStandBy::FighterStateStandBy(const TextureHolder & textures, int orientation)
 	: mTextures(textures)
@@ -43,6 +45,15 @@ FighterState * FighterStateStandBy::handleInput(Fighter& fighter, int input)
 	{
 		return new FighterStatePunching(mTextures, mOrientation);
 	}
+	if (input == Inputs::GetPunched)
+	{
+		return new FighterStateGetPunched(mTextures, mOrientation);
+	}
+	if (input == Inputs::Die)
+	{
+		return new FighterStateDying(mTextures, mOrientation);
+	}
+
 
 	return nullptr;
 }

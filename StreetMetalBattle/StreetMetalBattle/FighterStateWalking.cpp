@@ -1,9 +1,12 @@
 #include "FighterStateWalking.h"
 #include "FighterStatePunching.h"
 #include "FighterStateStandBy.h"
+#include "FighterStateGetPunched.h"
+#include "FighterStateDying.h"
 #include "Inputs.h"
 #include "Fighter.h"
 #include "Utility.h"
+#include <iostream>
 
 FighterStateWalking::FighterStateWalking(const TextureHolder & textures, int orientation)
 	:	mTextures(textures)
@@ -21,7 +24,7 @@ FighterStateWalking::FighterStateWalking(const TextureHolder & textures, int ori
 	}
 	else
 	{
-		orientation = Orientation::RIGHT;
+		mOrientation = Orientation::RIGHT;
 		mFighterAnimation.setScale(2.f, 2.f);
 	}
 	centerOrigin(mFighterAnimation);
@@ -35,31 +38,35 @@ FighterState * FighterStateWalking::handleInput(Fighter & fighter, int input)
 {
 	switch (input)
 	{
-	case Inputs::Punch:
-		return new FighterStatePunching(mTextures, mOrientation);
-		break;
-	case Inputs::MoveLeft:
-		if (mOrientation != Orientation::LEFT)
-		{
-			mOrientation = Orientation::LEFT;
-			mFighterAnimation.setScale(-2.f, 2.f);
-		}		
-		mVelocity.x -= speed;
-		break;
-	case Inputs::MoveRight:
-		if (mOrientation != Orientation::RIGHT)
-		{
-			mOrientation = Orientation::RIGHT;
-			mFighterAnimation.setScale(2.f, 2.f);
-		}
-		mVelocity.x += speed;
-		break;
-	case Inputs::MoveUp:
-		mVelocity.y -= speed;
-		break;
-	case Inputs::MoveDown:
-		mVelocity.y += speed;
-		break;
+		case Inputs::GetPunched:
+			return new FighterStateGetPunched(mTextures, mOrientation);
+		case Inputs::Die:
+			return new FighterStateDying(mTextures, mOrientation);
+		case Inputs::Punch:
+			return new FighterStatePunching(mTextures, mOrientation);
+			break;
+		case Inputs::MoveLeft:
+			if (mOrientation != Orientation::LEFT)
+			{
+				mOrientation = Orientation::LEFT;
+				mFighterAnimation.setScale(-2.f, 2.f);
+			}		
+			mVelocity.x -= speed;
+			break;
+		case Inputs::MoveRight:
+			if (mOrientation != Orientation::RIGHT)
+			{
+				mOrientation = Orientation::RIGHT;
+				mFighterAnimation.setScale(2.f, 2.f);
+			}
+			mVelocity.x += speed;
+			break;
+		case Inputs::MoveUp:
+			mVelocity.y -= speed;
+			break;
+		case Inputs::MoveDown:
+			mVelocity.y += speed;
+			break;
 	}
 	return nullptr;
 }
@@ -68,8 +75,7 @@ FighterState* FighterStateWalking::update(Fighter & fighter, sf::Time dt, Comman
 {
 	if (mVelocity.x == 0 && mVelocity.y == 0)
 	{
-		FighterState* state = new FighterStateStandBy(mTextures, mOrientation);
-		return state->update(fighter, dt, commands);
+		return new FighterStateStandBy(mTextures, mOrientation);
 	}
 
 	fighter.setPosition(fighter.getPosition() + mVelocity * dt.asSeconds());

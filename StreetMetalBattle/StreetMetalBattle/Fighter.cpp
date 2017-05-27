@@ -55,18 +55,14 @@ void Fighter::punch()
 void Fighter::getHit(sf::Int16 damage)
 {
 	mHitPoints -= damage;
-	FighterState* state;
-	if (mHitPoints <= 0) 
+	if (mHitPoints <= 0)
 	{
-		state = new FighterStateDying(mTextures, Orientation::RIGHT);
+		handleInput(Inputs::Die);
 	}
 	else
 	{
-		state = new FighterStateGetPunched(mTextures, Orientation::RIGHT);
+		handleInput(Inputs::GetPunched);
 	}
-	
-	delete mState;
-	mState = state;
 }
 
 void Fighter::updateCurrent(sf::Time dt, CommandQueue & commands)
