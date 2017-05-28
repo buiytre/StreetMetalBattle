@@ -5,25 +5,26 @@
 #include "Command.h"
 #include "Fighter.h"
 
-FighterStatePunching::FighterStatePunching(const TextureHolder & textures, int direction)
+FighterStatePunching::FighterStatePunching(const TextureHolder & textures, const FighterInfo & fighterInfo, int direction)
 	: mTextures(textures)
-	, mFighterAnimation(textures.get(texture))
+	, mInfo(fighterInfo)
 {
-	mFighterAnimation.setFrameOrigin(sf::Vector2i(0, 64 * 9));
-	mFighterAnimation.setFrameSize(sf::Vector2i(textureRect.width, textureRect.height));
-	mFighterAnimation.setNumFrames(6);
+	mAnimationInfo = mInfo.punching.animation;
+	mFighterAnimation.setTexture(textures.get(mAnimationInfo.textureId));
+	mFighterAnimation.setFrameSize(mAnimationInfo.frameSize);
+	mFighterAnimation.setFrameOrigin(mAnimationInfo.originalFrame);
+	mFighterAnimation.setNumFrames(mAnimationInfo.numFrames);
 	mFighterAnimation.setRepeating(false);
-	mFighterAnimation.setDuration(sf::seconds(0.5));
-
+	mFighterAnimation.setDuration(sf::seconds(mAnimationInfo.numSencondsDuration));
 	if (direction == Orientation::LEFT)
 	{
 		mOrientation = Orientation::LEFT;
-		mFighterAnimation.setScale(-2.f, 2.f);
+		mFighterAnimation.setScale(-1.f, 1.f);
 	}
 	else if (direction == Orientation::RIGHT)
 	{
 		mOrientation = Orientation::RIGHT;
-		mFighterAnimation.setScale(2.f, 2.f);
+		mFighterAnimation.setScale(1.f, 1.f);
 	}
 	centerOrigin(mFighterAnimation);
 	mFighterAnimation.restart();
@@ -37,13 +38,14 @@ FighterState * FighterStatePunching::handleInput(Fighter & fighter, int input)
 {
 	if (input == Inputs::GoToStandBy)
 	{
-		return new FighterStateStandBy(mTextures, mOrientation);
+		return new FighterStateStandBy(mTextures, mInfo, mOrientation);
 	}
 
 	if (input == Inputs::Punch && !mFighterAnimation.isFinished()) 
 	{
-		mFighterAnimation.setNumFrames(9);
-		mFighterAnimation.setDuration(sf::seconds(1));
+		//todo combo
+		//mFighterAnimation.setNumFrames(9);
+		//mFighterAnimation.setDuration(sf::seconds(1));
 	}
 
 	return nullptr;
@@ -62,30 +64,6 @@ void FighterStatePunching::update(Fighter & fighter, sf::Time dt, CommandQueue &
 		});
 		commands.push(goToStandBy);
 	}
-}
-
-void FighterStatePunching::drawCurrent(sf::RenderTarget & target, sf::RenderStates states) const
-{
-	target.draw(mFighterAnimation, states);
-}
-
-sf::FloatRect FighterStatePunching::getBoundingRect() const
-{
-	return mFighterAnimation.getTransform().transformRect(sf::FloatRect(21.f, 25.f, 17.f, 29.f));
-}
-
-sf::FloatRect FighterStatePunching::getPunchBoundingRect() const
-{
-	size_t currentFrame = mFighterAnimation.getCurrentFrame();
-	if (currentFrame == 4 || currentFrame == 5)
-	{
-		return mFighterAnimation.getTransform().transformRect(sf::FloatRect(35.f, 40.f, 10.f, 6.f));
-	}
-	if (currentFrame == 7 || currentFrame == 8)
-	{
-		return mFighterAnimation.getTransform().transformRect(sf::FloatRect(32.f, 38.f, 10.f, 6.f));
-	}
-	return sf::FloatRect();
 }
 
 bool FighterStatePunching::isHitting() const

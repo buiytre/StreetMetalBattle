@@ -8,24 +8,26 @@
 #include "Utility.h"
 #include <iostream>
 
-FighterStateWalking::FighterStateWalking(const TextureHolder & textures, int orientation)
-	:	mTextures(textures)
-	,	mFighterAnimation(textures.get(texture))
-{	
-	mFighterAnimation.setFrameOrigin(sf::Vector2i(0, 64 * 1));
-	mFighterAnimation.setFrameSize(sf::Vector2i(textureRect.width, textureRect.height));
-	mFighterAnimation.setNumFrames(8);
+FighterStateWalking::FighterStateWalking(const TextureHolder & textures, const FighterInfo & fighterInfo, int direction)
+	: mTextures(textures)
+	, mInfo(fighterInfo)
+{
+	mAnimationInfo = mInfo.walking.animation;
+	mFighterAnimation.setTexture(textures.get(mAnimationInfo.textureId));
+	mFighterAnimation.setFrameSize(mAnimationInfo.frameSize);
+	mFighterAnimation.setFrameOrigin(mAnimationInfo.originalFrame);
+	mFighterAnimation.setNumFrames(mAnimationInfo.numFrames);
 	mFighterAnimation.setRepeating(true);
-	mFighterAnimation.setDuration(sf::seconds(1));
-	if (orientation == Orientation::LEFT)
+	mFighterAnimation.setDuration(sf::seconds(mAnimationInfo.numSencondsDuration));
+	if (direction == Orientation::LEFT)
 	{
 		mOrientation = Orientation::LEFT;
-		mFighterAnimation.setScale(-2.f, 2.f);
+		mFighterAnimation.setScale(-1.f, 1.f);
 	}
-	else
+	else if (direction == Orientation::RIGHT)
 	{
 		mOrientation = Orientation::RIGHT;
-		mFighterAnimation.setScale(2.f, 2.f);
+		mFighterAnimation.setScale(1.f, 1.f);
 	}
 	centerOrigin(mFighterAnimation);
 	mFighterAnimation.restart();
@@ -40,35 +42,35 @@ FighterState * FighterStateWalking::handleInput(Fighter & fighter, int input)
 	switch (input)
 	{
 	case Inputs::GoToStandBy:
-			return new FighterStateStandBy(mTextures, mOrientation);
+			return new FighterStateStandBy(mTextures, mInfo, mOrientation);
 		case Inputs::GetPunched:
-			return new FighterStateGetPunched(mTextures, mOrientation);
+			return new FighterStateGetPunched(mTextures, mInfo, mOrientation);
 		case Inputs::Die:
-			return new FighterStateDying(mTextures, mOrientation);
+			return new FighterStateDying(mTextures, mInfo, mOrientation);
 		case Inputs::Punch:
-			return new FighterStatePunching(mTextures, mOrientation);
+			return new FighterStatePunching(mTextures, mInfo, mOrientation);
 			break;
 		case Inputs::MoveLeft:
 			if (mOrientation != Orientation::LEFT)
 			{
 				mOrientation = Orientation::LEFT;
-				mFighterAnimation.setScale(-2.f, 2.f);
+				mFighterAnimation.setScale(-1.f, 1.f);
 			}		
-			mVelocity.x -= speed;
+			mVelocity.x -= mInfo.speed;
 			break;
 		case Inputs::MoveRight:
 			if (mOrientation != Orientation::RIGHT)
 			{
 				mOrientation = Orientation::RIGHT;
-				mFighterAnimation.setScale(2.f, 2.f);
+				mFighterAnimation.setScale(1.f, 1.f);
 			}
-			mVelocity.x += speed;
+			mVelocity.x += mInfo.speed;
 			break;
 		case Inputs::MoveUp:
-			mVelocity.y -= speed;
+			mVelocity.y -= mInfo.speed;
 			break;
 		case Inputs::MoveDown:
-			mVelocity.y += speed;
+			mVelocity.y += mInfo.speed;
 			break;
 	}
 	return nullptr;
@@ -91,14 +93,4 @@ void FighterStateWalking::update(Fighter & fighter, sf::Time dt, CommandQueue & 
 	fighter.setPosition(fighter.getPosition() + mVelocity * dt.asSeconds());
 	mVelocity.x = 0;
 	mVelocity.y = 0;
-}
-
-void FighterStateWalking::drawCurrent(sf::RenderTarget & target, sf::RenderStates states) const
-{
-	target.draw(mFighterAnimation, states);
-}
-
-sf::FloatRect FighterStateWalking::getBoundingRect() const
-{
-	return mFighterAnimation.getTransform().transformRect(sf::FloatRect(21.f, 25.f, 17.f, 29.f));
 }

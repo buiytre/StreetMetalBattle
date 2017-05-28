@@ -6,15 +6,13 @@
 class FighterStateGetPunched : public FighterState
 {
 public:
-	explicit FighterStateGetPunched(const TextureHolder& textures, int direction);
+	explicit FighterStateGetPunched(const TextureHolder& textures, const FighterInfo& fighterInfo, int direction);
 	~FighterStateGetPunched();
 	FighterState* handleInput(Fighter& fighter, int input);
 	void update(Fighter& fighter, sf::Time dt, CommandQueue & commands);
-	void drawCurrent(sf::RenderTarget & target, sf::RenderStates states) const;
-	sf::FloatRect getBoundingRect() const;
 
 private:
-	Animation mFighterAnimation;
 	int mOrientation;
 	const TextureHolder& mTextures;
+	const FighterInfo& mInfo;
 };

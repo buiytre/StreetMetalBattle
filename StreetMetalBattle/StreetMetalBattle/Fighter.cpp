@@ -6,7 +6,12 @@
 #include "FighterStateStandBy.h"
 #include "FighterStateDying.h"
 #include "FighterStateGetPunched.h"
+#include "FighterData.h"
 
+namespace
+{
+	const std::vector<FighterInfo> Table = initializeFighterData();
+}
 
 Fighter::Fighter(Type type, const TextureHolder & textures, sf::Vector2f position, sf::Int16 hitPoints)
 	: mPosition(position)
@@ -15,7 +20,7 @@ Fighter::Fighter(Type type, const TextureHolder & textures, sf::Vector2f positio
 	, mTextures(textures)
 	, mGetHitCommand()
 {
-	mState = new FighterStateStandBy(textures, Orientation::RIGHT);
+	mState = new FighterStateStandBy(textures, Table[type], Orientation::RIGHT);
 	mGetHitCommand.category = getCategory();
 	mGetHitCommand.action = [this, &textures](SceneNode& node, sf::Time)
 	{

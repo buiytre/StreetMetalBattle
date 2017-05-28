@@ -6,25 +6,26 @@
 #include "Command.h"
 #include "Fighter.h"
 
-FighterStateGetPunched::FighterStateGetPunched(const TextureHolder & textures, int direction)
+FighterStateGetPunched::FighterStateGetPunched(const TextureHolder & textures, const FighterInfo & fighterInfo, int direction)
 	: mTextures(textures)
-	, mFighterAnimation(textures.get(texture))
+	, mInfo(fighterInfo)
 {
-	mFighterAnimation.setFrameOrigin(sf::Vector2i(0, 64 * 4));
-	mFighterAnimation.setFrameSize(sf::Vector2i(textureRect.width, textureRect.height));
-	mFighterAnimation.setNumFrames(2);
+	mAnimationInfo = mInfo.getPunched.animation;
+	mFighterAnimation.setTexture(textures.get(mAnimationInfo.textureId));
+	mFighterAnimation.setFrameSize(mAnimationInfo.frameSize);
+	mFighterAnimation.setFrameOrigin(mAnimationInfo.originalFrame);
+	mFighterAnimation.setNumFrames(mAnimationInfo.numFrames);
 	mFighterAnimation.setRepeating(false);
-	mFighterAnimation.setDuration(sf::seconds(0.5f));
-	
+	mFighterAnimation.setDuration(sf::seconds(mAnimationInfo.numSencondsDuration));
 	if (direction == Orientation::LEFT)
 	{
 		mOrientation = Orientation::LEFT;
-		mFighterAnimation.setScale(-2.f, 2.f);
+		mFighterAnimation.setScale(-1.f, 1.f);
 	}
 	else if (direction == Orientation::RIGHT)
 	{
 		mOrientation = Orientation::RIGHT;
-		mFighterAnimation.setScale(2.f, 2.f);
+		mFighterAnimation.setScale(1.f, 1.f);
 	}
 	centerOrigin(mFighterAnimation);
 	mFighterAnimation.restart();
@@ -38,11 +39,11 @@ FighterState * FighterStateGetPunched::handleInput(Fighter & fighter, int input)
 {
 	if (input == Inputs::Die)
 	{
-		return new FighterStateDying(mTextures, mOrientation);
+		return new FighterStateDying(mTextures, mInfo, mOrientation);
 	}
 	if (input == Inputs::GoToStandBy)
 	{
-		return new FighterStateStandBy(mTextures, mOrientation);
+		return new FighterStateStandBy(mTextures, mInfo, mOrientation);
 	}
 	return nullptr;
 }
@@ -62,13 +63,4 @@ void FighterStateGetPunched::update(Fighter & fighter, sf::Time dt, CommandQueue
 	}
 }
 
-void FighterStateGetPunched::drawCurrent(sf::RenderTarget & target, sf::RenderStates states) const
-{
-	target.draw(mFighterAnimation, states);
-}
-
-sf::FloatRect FighterStateGetPunched::getBoundingRect() const
-{
-	return sf::FloatRect();
-}
 

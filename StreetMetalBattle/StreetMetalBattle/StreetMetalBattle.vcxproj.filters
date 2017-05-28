@@ -61,6 +61,12 @@
     <Filter Include="StreetMetalBattle\Source Files\Entities\FighterStates">
       <UniqueIdentifier>{ab5ab3c0-87d5-46d0-89d7-70c3f7f74235}</UniqueIdentifier>
     </Filter>
+    <Filter Include="StreetMetalBattle\Header Files\Data">
+      <UniqueIdentifier>{4cf050c7-5a2f-4d9f-8327-fca8a60eba5e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="StreetMetalBattle\Source Files\Data">
+      <UniqueIdentifier>{46f79d68-aed0-457d-844a-5a63dbeb28c4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -84,9 +90,6 @@
     <ClCompile Include="FighterStateStandBy.cpp">
       <Filter>StreetMetalBattle\Source Files\Entities\FighterStates</Filter>
     </ClCompile>
-    <ClCompile Include="FighterStateWalking.cpp">
-      <Filter>StreetMetalBattle\Source Files\Entities\FighterStates</Filter>
-    </ClCompile>
     <ClCompile Include="FighterStatePunching.cpp">
       <Filter>StreetMetalBattle\Source Files\Entities\FighterStates</Filter>
     </ClCompile>
@@ -98,6 +101,15 @@
     </ClCompile>
     <ClCompile Include="Fighter.cpp">
       <Filter>StreetMetalBattle\Source Files\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="FighterData.cpp">
+      <Filter>StreetMetalBattle\Source Files\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="FighterStateWalking.cpp">
+      <Filter>StreetMetalBattle\Source Files\Entities\FighterStates</Filter>
+    </ClCompile>
+    <ClCompile Include="FighterState.cpp">
+      <Filter>StreetMetalBattle\Source Files\Entities\FighterStates</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -157,6 +169,9 @@
     </ClInclude>
     <ClInclude Include="FighterStateDying.h">
       <Filter>StreetMetalBattle\Header Files\Entities\FighterStates</Filter>
+    </ClInclude>
+    <ClInclude Include="FighterData.h">
+      <Filter>StreetMetalBattle\Header Files\Data</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

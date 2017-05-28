@@ -2,25 +2,26 @@
 #include "Orientation.h"
 #include "Utility.h"
 
-FighterStateDying::FighterStateDying(const TextureHolder & textures, int direction)
+FighterStateDying::FighterStateDying(const TextureHolder & textures, const FighterInfo & fighterInfo, int direction)
 	: mTextures(textures)
-	, mFighterAnimation(textures.get(texture))
+	, mInfo(fighterInfo)
 {
-	mFighterAnimation.setFrameOrigin(sf::Vector2i(0, 64 * 4));
-	mFighterAnimation.setFrameSize(sf::Vector2i(textureRect.width, textureRect.height));
-	mFighterAnimation.setNumFrames(7);
+	mAnimationInfo = mInfo.die.animation;
+	mFighterAnimation.setTexture(textures.get(mAnimationInfo.textureId));
+	mFighterAnimation.setFrameSize(mAnimationInfo.frameSize);
+	mFighterAnimation.setFrameOrigin(mAnimationInfo.originalFrame);
+	mFighterAnimation.setNumFrames(mAnimationInfo.numFrames);
 	mFighterAnimation.setRepeating(false);
-	mFighterAnimation.setDuration(sf::seconds(1.f));
-	
+	mFighterAnimation.setDuration(sf::seconds(mAnimationInfo.numSencondsDuration));
 	if (direction == Orientation::LEFT)
 	{
 		mOrientation = Orientation::LEFT;
-		mFighterAnimation.setScale(-2.f, 2.f);
+		mFighterAnimation.setScale(-1.f, 1.f);
 	}
 	else if (direction == Orientation::RIGHT)
 	{
 		mOrientation = Orientation::RIGHT;
-		mFighterAnimation.setScale(2.f, 2.f);
+		mFighterAnimation.setScale(1.f, 1.f);
 	}
 	centerOrigin(mFighterAnimation);
 	mFighterAnimation.restart();
@@ -28,26 +29,6 @@ FighterStateDying::FighterStateDying(const TextureHolder & textures, int directi
 
 FighterStateDying::~FighterStateDying()
 {
-}
-
-FighterState * FighterStateDying::handleInput(Fighter & fighter, int input)
-{
-	return nullptr;
-}
-
-void FighterStateDying::update(Fighter & fighter, sf::Time dt, CommandQueue & commands)
-{
-	mFighterAnimation.update(dt);
-}
-
-void FighterStateDying::drawCurrent(sf::RenderTarget & target, sf::RenderStates states) const
-{
-	target.draw(mFighterAnimation, states);
-}
-
-sf::FloatRect FighterStateDying::getBoundingRect() const
-{
-	return sf::FloatRect();
 }
 
 bool FighterStateDying::end() const
