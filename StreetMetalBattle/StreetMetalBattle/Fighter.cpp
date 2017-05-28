@@ -89,6 +89,7 @@ void Fighter::updateCurrent(sf::Time dt, CommandQueue & commands)
 void Fighter::drawCurrent(sf::RenderTarget & target, sf::RenderStates states) const
 {
 	mState->drawCurrent(target, states);
+	drawBoundingPunch(target, states);
 }
 
 sf::Vector2f Fighter::getWorldPosition() const
@@ -141,12 +142,18 @@ void Fighter::drawBoundingPunch(sf::RenderTarget & target, sf::RenderStates stat
 {
 	sf::FloatRect rect = getPunchBoundingRect();
 
+	sf::RectangleShape background;
+	background.setPosition(sf::Vector2f(rect.left, rect.top));
+	background.setSize(sf::Vector2f(rect.width, rect.height));
+	background.setFillColor(sf::Color(255,0,0,50));
+	background.setOutlineColor(sf::Color::Red);
+
 	sf::RectangleShape shape;
 	shape.setPosition(sf::Vector2f(rect.left, rect.top));
 	shape.setSize(sf::Vector2f(rect.width, rect.height));
 	shape.setFillColor(sf::Color::Transparent);
 	shape.setOutlineColor(sf::Color::Red);
 	shape.setOutlineThickness(1.f);
-
+	target.draw(background);
 	target.draw(shape);
 }

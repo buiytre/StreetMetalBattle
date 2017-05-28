@@ -89,6 +89,12 @@ void SceneNode::drawBoundingRect(sf::RenderTarget & target, sf::RenderStates sta
 {
 	sf::FloatRect rect = getBoundingRect();
 
+	sf::RectangleShape background;
+	background.setPosition(sf::Vector2f(rect.left, rect.top));
+	background.setSize(sf::Vector2f(rect.width, rect.height));
+	background.setFillColor(sf::Color(0, 255, 0, 50));
+	background.setOutlineColor(sf::Color::Green);
+
 	sf::RectangleShape shape;
 	shape.setPosition(sf::Vector2f(rect.left, rect.top));
 	shape.setSize(sf::Vector2f(rect.width, rect.height));
@@ -96,6 +102,7 @@ void SceneNode::drawBoundingRect(sf::RenderTarget & target, sf::RenderStates sta
 	shape.setOutlineColor(sf::Color::Green);
 	shape.setOutlineThickness(1.f);
 
+	target.draw(background);
 	target.draw(shape);
 }
 
