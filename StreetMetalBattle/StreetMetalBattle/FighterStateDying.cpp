@@ -12,7 +12,7 @@ FighterStateDying::FighterStateDying(const TextureHolder & textures, const Fight
 	mFighterAnimation.setFrameOrigin(mAnimationInfo.originalFrame);
 	mFighterAnimation.setNumFrames(mAnimationInfo.numFrames);
 	mFighterAnimation.setRepeating(false);
-	mFighterAnimation.setDuration(sf::seconds(mAnimationInfo.numSencondsDuration));
+	mFighterAnimation.setDuration(sf::seconds(mAnimationInfo.numSecondsDuration));
 	if (direction == Orientation::LEFT)
 	{
 		mOrientation = Orientation::LEFT;

@@ -14,7 +14,7 @@ std::vector<FighterInfo> initializeFighterData()
 	data[Fighter::Player].die.animation.textureId = Textures::TestFighter;
 	data[Fighter::Player].die.animation.frameSize = sf::Vector2i(64, 64);
 	data[Fighter::Player].die.animation.originalFrame = sf::Vector2i(0, 64 * 4);
-	data[Fighter::Player].die.animation.numSencondsDuration = 1.f;
+	data[Fighter::Player].die.animation.numSecondsDuration = 1.f;
 	data[Fighter::Player].die.animation.numFrames = 7;
 	data[Fighter::Player].die.animation.frames = std::vector<FrameInfo>(data[Fighter::Player].die.animation.numFrames);
 	for (size_t i = 0; i < data[Fighter::Player].die.animation.numFrames; i++)
@@ -27,7 +27,7 @@ std::vector<FighterInfo> initializeFighterData()
 	data[Fighter::Player].getPunched.animation.textureId = Textures::TestFighter;
 	data[Fighter::Player].getPunched.animation.frameSize = sf::Vector2i(64, 64);
 	data[Fighter::Player].getPunched.animation.originalFrame = sf::Vector2i(0, 64 * 4);
-	data[Fighter::Player].getPunched.animation.numSencondsDuration = 0.5f;
+	data[Fighter::Player].getPunched.animation.numSecondsDuration = 0.5f;
 	data[Fighter::Player].getPunched.animation.numFrames = 2;
 	data[Fighter::Player].getPunched.animation.frames = std::vector<FrameInfo>(data[Fighter::Player].getPunched.animation.numFrames);
 	for (size_t i = 0; i < data[Fighter::Player].getPunched.animation.numFrames; i++)
@@ -40,7 +40,7 @@ std::vector<FighterInfo> initializeFighterData()
 	data[Fighter::Player].punching.animation.textureId = Textures::TestFighter;
 	data[Fighter::Player].punching.animation.frameSize = sf::Vector2i(64, 64); 
 	data[Fighter::Player].punching.animation.originalFrame = sf::Vector2i(0, 64 * 9);
-	data[Fighter::Player].punching.animation.numSencondsDuration = 0.5f;
+	data[Fighter::Player].punching.animation.numSecondsDuration = 0.5f;
 	data[Fighter::Player].punching.animation.numFrames = 6;
 	data[Fighter::Player].punching.animation.frames = std::vector<FrameInfo>(data[Fighter::Player].punching.animation.numFrames);
 	for (size_t i = 0; i < data[Fighter::Player].punching.animation.numFrames; i++)
@@ -61,7 +61,7 @@ std::vector<FighterInfo> initializeFighterData()
 	data[Fighter::Player].standBy.animation.textureId = Textures::TestFighter;
 	data[Fighter::Player].standBy.animation.frameSize = sf::Vector2i(64, 64);
 	data[Fighter::Player].standBy.animation.originalFrame = sf::Vector2i(0, 64 * 0);
-	data[Fighter::Player].standBy.animation.numSencondsDuration = 1.f;
+	data[Fighter::Player].standBy.animation.numSecondsDuration = 1.f;
 	data[Fighter::Player].standBy.animation.numFrames = 4;
 	data[Fighter::Player].standBy.animation.frames = std::vector<FrameInfo>(data[Fighter::Player].standBy.animation.numFrames);
 	for (size_t i = 0; i < data[Fighter::Player].standBy.animation.numFrames; i++)
@@ -74,7 +74,7 @@ std::vector<FighterInfo> initializeFighterData()
 	data[Fighter::Player].walking.animation.textureId = Textures::TestFighter;
 	data[Fighter::Player].walking.animation.frameSize = sf::Vector2i(64, 64);
 	data[Fighter::Player].walking.animation.originalFrame = sf::Vector2i(0, 64 * 1);
-	data[Fighter::Player].walking.animation.numSencondsDuration = 1.f;
+	data[Fighter::Player].walking.animation.numSecondsDuration = 1.f;
 	data[Fighter::Player].walking.animation.numFrames = 8;
 	data[Fighter::Player].walking.animation.frames = std::vector<FrameInfo>(data[Fighter::Player].walking.animation.numFrames);
 	for (size_t i = 0; i < data[Fighter::Player].walking.animation.numFrames; i++)
@@ -91,7 +91,7 @@ std::vector<FighterInfo> initializeFighterData()
 	data[Fighter::Enemy].die.animation.textureId = Textures::TestFighter;
 	data[Fighter::Enemy].die.animation.frameSize = sf::Vector2i(64, 64);
 	data[Fighter::Enemy].die.animation.originalFrame = sf::Vector2i(0, 64 * 4);
-	data[Fighter::Enemy].die.animation.numSencondsDuration = 1.f;
+	data[Fighter::Enemy].die.animation.numSecondsDuration = 1.f;
 	data[Fighter::Enemy].die.animation.numFrames = 7;
 	data[Fighter::Enemy].die.animation.frames = std::vector<FrameInfo>(data[Fighter::Enemy].die.animation.numFrames);
 	for (size_t i = 0; i < data[Fighter::Enemy].die.animation.numFrames; i++)
@@ -104,7 +104,7 @@ std::vector<FighterInfo> initializeFighterData()
 	data[Fighter::Enemy].getPunched.animation.textureId = Textures::TestFighter;
 	data[Fighter::Enemy].getPunched.animation.frameSize = sf::Vector2i(64, 64);
 	data[Fighter::Enemy].getPunched.animation.originalFrame = sf::Vector2i(0, 64 * 4);
-	data[Fighter::Enemy].getPunched.animation.numSencondsDuration = 0.5f;
+	data[Fighter::Enemy].getPunched.animation.numSecondsDuration = 0.5f;
 	data[Fighter::Enemy].getPunched.animation.numFrames = 2;
 	data[Fighter::Enemy].getPunched.animation.frames = std::vector<FrameInfo>(data[Fighter::Enemy].getPunched.animation.numFrames);
 	for (size_t i = 0; i < data[Fighter::Enemy].getPunched.animation.numFrames; i++)
@@ -117,7 +117,7 @@ std::vector<FighterInfo> initializeFighterData()
 	data[Fighter::Enemy].punching.animation.textureId = Textures::TestFighter;
 	data[Fighter::Enemy].punching.animation.frameSize = sf::Vector2i(64, 64);
 	data[Fighter::Enemy].punching.animation.originalFrame = sf::Vector2i(0, 64 * 9);
-	data[Fighter::Enemy].punching.animation.numSencondsDuration = 0.5f;
+	data[Fighter::Enemy].punching.animation.numSecondsDuration = 0.5f;
 	data[Fighter::Enemy].punching.animation.numFrames = 6;
 	data[Fighter::Enemy].punching.animation.frames = std::vector<FrameInfo>(data[Fighter::Enemy].punching.animation.numFrames);
 	for (size_t i = 0; i < data[Fighter::Enemy].punching.animation.numFrames; i++)
@@ -138,7 +138,7 @@ std::vector<FighterInfo> initializeFighterData()
 	data[Fighter::Enemy].standBy.animation.textureId = Textures::TestFighter;
 	data[Fighter::Enemy].standBy.animation.frameSize = sf::Vector2i(64, 64);
 	data[Fighter::Enemy].standBy.animation.originalFrame = sf::Vector2i(0, 64 * 0);
-	data[Fighter::Enemy].standBy.animation.numSencondsDuration = 1.f;
+	data[Fighter::Enemy].standBy.animation.numSecondsDuration = 1.f;
 	data[Fighter::Enemy].standBy.animation.numFrames = 4;
 	data[Fighter::Enemy].standBy.animation.frames = std::vector<FrameInfo>(data[Fighter::Enemy].standBy.animation.numFrames);
 	for (size_t i = 0; i < data[Fighter::Enemy].standBy.animation.numFrames; i++)
@@ -151,7 +151,7 @@ std::vector<FighterInfo> initializeFighterData()
 	data[Fighter::Enemy].walking.animation.textureId = Textures::TestFighter;
 	data[Fighter::Enemy].walking.animation.frameSize = sf::Vector2i(64, 64);
 	data[Fighter::Enemy].walking.animation.originalFrame = sf::Vector2i(0, 64 * 1);
-	data[Fighter::Enemy].walking.animation.numSencondsDuration = 1.f;
+	data[Fighter::Enemy].walking.animation.numSecondsDuration = 1.f;
 	data[Fighter::Enemy].walking.animation.numFrames = 8;
 	data[Fighter::Enemy].walking.animation.frames = std::vector<FrameInfo>(data[Fighter::Enemy].walking.animation.numFrames);
 	for (size_t i = 0; i < data[Fighter::Enemy].walking.animation.numFrames; i++)

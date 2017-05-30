@@ -13,7 +13,7 @@ struct AnimationInfo
 	sf::Vector2i frameSize;
 	sf::Vector2i originalFrame;
 	size_t numFrames;
-	float numSencondsDuration;
+	float numSecondsDuration;
 	std::vector<FrameInfo> frames;
 };
 
