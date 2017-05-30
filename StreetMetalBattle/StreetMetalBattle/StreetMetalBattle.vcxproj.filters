@@ -84,9 +84,6 @@
     <ClCompile Include="TitleState.cpp">
       <Filter>StreetMetalBattle\Source Files\States</Filter>
     </ClCompile>
-    <ClCompile Include="TileMap.cpp">
-      <Filter>StreetMetalBattle\Source Files\World</Filter>
-    </ClCompile>
     <ClCompile Include="FighterStateStandBy.cpp">
       <Filter>StreetMetalBattle\Source Files\Entities\FighterStates</Filter>
     </ClCompile>
@@ -110,6 +107,12 @@
     </ClCompile>
     <ClCompile Include="FighterState.cpp">
       <Filter>StreetMetalBattle\Source Files\Entities\FighterStates</Filter>
+    </ClCompile>
+    <ClCompile Include="AiController.cpp">
+      <Filter>StreetMetalBattle\Source Files\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="WorldMap.cpp">
+      <Filter>StreetMetalBattle\Source Files\World</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -143,9 +146,6 @@
     <ClInclude Include="GameState.h">
       <Filter>StreetMetalBattle\Header Files\States</Filter>
     </ClInclude>
-    <ClInclude Include="TileMap.h">
-      <Filter>StreetMetalBattle\Header Files\World</Filter>
-    </ClInclude>
     <ClInclude Include="FighterStateStandBy.h">
       <Filter>StreetMetalBattle\Header Files\Entities\FighterStates</Filter>
     </ClInclude>
@@ -172,6 +172,12 @@
     </ClInclude>
     <ClInclude Include="FighterData.h">
       <Filter>StreetMetalBattle\Header Files\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="AiController.h">
+      <Filter>StreetMetalBattle\Header Files\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldMap.h">
+      <Filter>StreetMetalBattle\Header Files\World</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

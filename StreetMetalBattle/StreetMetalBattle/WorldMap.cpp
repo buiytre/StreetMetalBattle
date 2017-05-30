@@ -1,4 +1,4 @@
-#include "TileMap.h"
+#include "WorldMap.h"
 #include "Textures.h"
 #include "SpriteNode.h"
 #include "Category.h"
@@ -7,7 +7,7 @@
 #include "Utility.h"
 
 
-TileMap::TileMap(sf::RenderWindow & window, FontHolder& fonts)
+WorldMap::WorldMap(sf::RenderWindow & window, FontHolder& fonts)
 	: mTarget(window)
 	, mWorldView(window.getDefaultView())
 	, mTextures()
@@ -29,7 +29,7 @@ TileMap::TileMap(sf::RenderWindow & window, FontHolder& fonts)
 	buildScene();
 }
 
-void TileMap::update(sf::Time dt)
+void WorldMap::update(sf::Time dt)
 {
 	while (!mCommandQueue.isEmpty())
 	{
@@ -54,7 +54,7 @@ void TileMap::update(sf::Time dt)
 	CheckFightersInsideZone();
 }
 
-void TileMap::CheckFightersInsideZone()
+void WorldMap::CheckFightersInsideZone()
 {
 	for (Fighter* f : mFighters)
 	{
@@ -69,7 +69,7 @@ void TileMap::CheckFightersInsideZone()
 	}
 }
 
-void TileMap::handleCollisions()
+void WorldMap::handleCollisions()
 {
 	for (size_t i = 0; i < mFighters.size(); i++)
 	{
@@ -105,12 +105,12 @@ void TileMap::handleCollisions()
 	}
 }
 
-void TileMap::CheckDeathFighters()
+void WorldMap::CheckDeathFighters()
 {
 	mFighters.erase(std::remove_if(mFighters.begin(), mFighters.end(),[&](const Fighter* f){ return (*f).isMarkedForRemoval(); }), mFighters.end());
 }
 
-void TileMap::draw()
+void WorldMap::draw()
 {
 	mTarget.setView(mWorldView);
 	mTarget.draw(mSceneGraph);
@@ -124,12 +124,17 @@ void TileMap::draw()
 	}
 }
 
-CommandQueue& TileMap::getCommandQueue()
+CommandQueue& WorldMap::getCommandQueue()
 {
 	return mCommandQueue;
 }
 
-void TileMap::buildScene()
+std::vector<Fighter*> WorldMap::getFighters()
+{
+	return mFighters;
+}
+
+void WorldMap::buildScene()
 {
 	for (std::size_t i = 0; i < LayerCount; ++i)
 	{
@@ -156,17 +161,17 @@ void TileMap::buildScene()
 	floorSprite->setPosition(mWorldBounds.left, mWorldBounds.height/2.f);
 	mSceneLayers[Floor]->attachChild(std::move(floorSprite));
 
-	Fighter* fighter = new Fighter(Fighter::Type::Player, mTextures, mSpawnPosition, 100);
+	Fighter* fighter = new Fighter(Fighter::Type::Player, mTextures, 0, mSpawnPosition, 100);
 	mPlayer = fighter;
 	mPlayer->setPosition(mSpawnPosition);
 	mFighters.push_back(fighter);
 
-	Fighter* enemy = new Fighter(Fighter::Type::Enemy, mTextures, sf::Vector2f(mWorldBounds.width / 2.f, mWorldBounds.height / 2.f + 100), 100);
+	Fighter* enemy = new Fighter(Fighter::Type::Enemy, mTextures, 1, sf::Vector2f(mWorldBounds.width / 2.f, mWorldBounds.height / 2.f + 100), 100);
 	enemy->setPosition(enemy->getWorldPosition());
 	mFighters.push_back(enemy);
 }
 
-void TileMap::loadTextures()
+void WorldMap::loadTextures()
 {
 	mTextures.load(Textures::TestSky, "Media/Textures/SkyTest.png");
 	mTextures.load(Textures::TestFloor, "Media/Textures/FloorTest.png");

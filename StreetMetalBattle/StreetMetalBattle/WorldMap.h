@@ -6,14 +6,15 @@
 #include "CommandQueue.h"
 #include "Fighter.h"
 
-class TileMap : private sf::NonCopyable
+class WorldMap : private sf::NonCopyable
 {
 	public:
-		explicit TileMap(sf::RenderWindow & window, FontHolder& fonts);
+		explicit WorldMap(sf::RenderWindow & window, FontHolder& fonts);
 		void update(sf::Time dt);
 		void draw();
 
 		CommandQueue& getCommandQueue();
+		std::vector<Fighter*> getFighters();
 
 	private:
 		enum Layer

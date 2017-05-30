@@ -15,7 +15,8 @@ class Fighter : public SceneNode
 		};
 
 	public:
-		explicit Fighter(Type type, const TextureHolder & textures, sf::Vector2f position, sf::Int16 hitPoints);
+		explicit Fighter(Type type, const TextureHolder & textures, sf::Int32 fighterId, sf::Vector2f position, sf::Int16 hitPoints);
+		
 		sf::Vector2f getWorldPosition() const;
 		void setPosition(const sf::Vector2f& position);
 
@@ -36,6 +37,9 @@ class Fighter : public SceneNode
 
 		unsigned int getCategory() const;
 
+		sf::Int32 getIdentifier();
+		void setIdentifier(sf::Int32 identifier);
+
 	private:
 		virtual void updateCurrent(sf::Time dt, CommandQueue& commands);
 		virtual void drawCurrent(sf::RenderTarget& target, sf::RenderStates states) const;
@@ -55,4 +59,6 @@ class Fighter : public SceneNode
 		sf::Vector2f mPosition;
 		sf::Int32 mHitPoints;
 		const TextureHolder& mTextures;
+
+		sf::Int32 mFighterId;
 };

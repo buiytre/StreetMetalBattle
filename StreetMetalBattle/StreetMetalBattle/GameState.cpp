@@ -6,6 +6,7 @@ GameState::GameState(StateStack & stack, Context context)
 	: State(stack, context)
 	, mWorld(*context.window, *context.fonts)
 	, mPlayer(*context.player)
+	, mAiController(&mWorld)
 {
 }
 
@@ -20,7 +21,7 @@ bool GameState::update(sf::Time dt)
 
 	CommandQueue& commands = mWorld.getCommandQueue();
 	mPlayer.handleRealtimeInput(commands);
-
+	mAiController.makeDecissions();
 	return true;
 }
 

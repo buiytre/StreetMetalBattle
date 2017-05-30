@@ -41,7 +41,7 @@ FighterState * FighterStateWalking::handleInput(Fighter & fighter, int input)
 {
 	switch (input)
 	{
-	case Inputs::GoToStandBy:
+		case Inputs::GoToStandBy:
 			return new FighterStateStandBy(mTextures, mInfo, mOrientation);
 		case Inputs::GetPunched:
 			return new FighterStateGetPunched(mTextures, mInfo, mOrientation);

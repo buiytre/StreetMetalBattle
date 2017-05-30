@@ -13,12 +13,13 @@ namespace
 	const std::vector<FighterInfo> Table = initializeFighterData();
 }
 
-Fighter::Fighter(Type type, const TextureHolder & textures, sf::Vector2f position, sf::Int16 hitPoints)
+Fighter::Fighter(Type type, const TextureHolder & textures, sf::Int32 fighterId, sf::Vector2f position, sf::Int16 hitPoints)
 	: mPosition(position)
 	, mType(type)
 	, mHitPoints(hitPoints)
 	, mTextures(textures)
 	, mGetHitCommand()
+	, mFighterId(fighterId)
 {
 	mState = new FighterStateStandBy(textures, Table[type], Orientation::RIGHT);
 	mGetHitCommand.category = getCategory();
@@ -116,6 +117,16 @@ unsigned int Fighter::getCategory() const
 	}
 
 	return Category::EnemyFighter;
+}
+
+sf::Int32 Fighter::getIdentifier()
+{
+	return mFighterId;
+}
+
+void Fighter::setIdentifier(sf::Int32 identifier)
+{
+	mFighterId = identifier;
 }
 
 bool Fighter::isDestroyed() const

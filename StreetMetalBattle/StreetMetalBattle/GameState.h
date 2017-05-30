@@ -1,7 +1,8 @@
 #pragma once
 #include "State.h"
 #include "SFML\Graphics.hpp"
-#include "TileMap.h"
+#include "WorldMap.h"
+#include "AiController.h"
 
 class GameState : State
 {
@@ -13,6 +14,7 @@ class GameState : State
 		virtual bool handleEvent(const sf::Event& event);
 
 	private:
-		TileMap mWorld;
+		WorldMap mWorld;
 		Player& mPlayer;
+		AiController mAiController;
 };
