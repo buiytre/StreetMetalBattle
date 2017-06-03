@@ -90,7 +90,7 @@ void FighterStateWalking::update(Fighter & fighter, sf::Time dt, CommandQueue & 
 		commands.push(goToStandBy);
 	}
 
-	fighter.setPosition(fighter.getPosition() + mVelocity * dt.asSeconds());
+	fighter.setWantToWalkPosition(fighter.getPosition() + mVelocity * dt.asSeconds());
 	mVelocity.x = 0;
 	mVelocity.y = 0;
 }

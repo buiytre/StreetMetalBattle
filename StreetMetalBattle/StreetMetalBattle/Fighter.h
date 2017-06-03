@@ -18,7 +18,9 @@ class Fighter : public SceneNode
 		explicit Fighter(Type type, const TextureHolder & textures, sf::Int32 fighterId, sf::Vector2f position, sf::Int16 hitPoints);
 		
 		sf::Vector2f getWorldPosition() const;
+		sf::Vector2f getWantToWalkPosition() const;
 		void setPosition(const sf::Vector2f& position);
+		void setWantToWalkPosition(const sf::Vector2f& position);
 
 		bool isHitting();
 
@@ -57,6 +59,7 @@ class Fighter : public SceneNode
 		Command mGetHitCommand;
 
 		sf::Vector2f mPosition;
+		sf::Vector2f mWantToWalk;
 		sf::Int32 mHitPoints;
 		const TextureHolder& mTextures;
 

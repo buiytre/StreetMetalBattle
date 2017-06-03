@@ -78,6 +78,8 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Tile.cpp" />
+    <ClCompile Include="TileMapLoader.cpp" />
     <ClCompile Include="TitleState.cpp" />
     <ClCompile Include="WorldMap.cpp" />
   </ItemGroup>
@@ -103,6 +105,9 @@
     <ClInclude Include="GameState.h" />
     <ClInclude Include="States.h" />
     <ClInclude Include="Textures.h" />
+    <ClInclude Include="Tile.h" />
+    <ClInclude Include="TileMapLoader.h" />
+    <ClInclude Include="TileType.h" />
     <ClInclude Include="TitleState.h" />
     <ClInclude Include="WorldMap.h" />
   </ItemGroup>

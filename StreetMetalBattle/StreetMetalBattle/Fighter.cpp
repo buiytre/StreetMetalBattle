@@ -20,6 +20,7 @@ Fighter::Fighter(Type type, const TextureHolder & textures, sf::Int32 fighterId,
 	, mTextures(textures)
 	, mGetHitCommand()
 	, mFighterId(fighterId)
+	, mWantToWalk(position)
 {
 	mState = new FighterStateStandBy(textures, Table[type], Orientation::RIGHT);
 	mGetHitCommand.category = getCategory();
@@ -98,10 +99,20 @@ sf::Vector2f Fighter::getWorldPosition() const
 	return mPosition;
 }
 
+sf::Vector2f Fighter::getWantToWalkPosition() const
+{
+	return mWantToWalk;
+}
+
 void Fighter::setPosition(const sf::Vector2f & position)
 {
 	mPosition = position;
 	SceneNode::setPosition(position);
+}
+
+void Fighter::setWantToWalkPosition(const sf::Vector2f & position)
+{
+	mWantToWalk = position;
 }
 
 bool Fighter::isHitting()

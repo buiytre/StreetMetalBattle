@@ -67,6 +67,12 @@
     <Filter Include="StreetMetalBattle\Source Files\Data">
       <UniqueIdentifier>{46f79d68-aed0-457d-844a-5a63dbeb28c4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="StreetMetalBattle\Header Files\World\Scenario">
+      <UniqueIdentifier>{2730c972-4162-430f-a30b-3a342ab8aefb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="StreetMetalBattle\Source Files\World\Scenario">
+      <UniqueIdentifier>{3ad7031e-f7fc-4be4-80dc-0f97a8398295}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -113,6 +119,12 @@
     </ClCompile>
     <ClCompile Include="WorldMap.cpp">
       <Filter>StreetMetalBattle\Source Files\World</Filter>
+    </ClCompile>
+    <ClCompile Include="Tile.cpp">
+      <Filter>StreetMetalBattle\Source Files\World\Scenario</Filter>
+    </ClCompile>
+    <ClCompile Include="TileMapLoader.cpp">
+      <Filter>StreetMetalBattle\Source Files\World\Scenario</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -178,6 +190,15 @@
     </ClInclude>
     <ClInclude Include="WorldMap.h">
       <Filter>StreetMetalBattle\Header Files\World</Filter>
+    </ClInclude>
+    <ClInclude Include="Tile.h">
+      <Filter>StreetMetalBattle\Header Files\World\Scenario</Filter>
+    </ClInclude>
+    <ClInclude Include="TileMapLoader.h">
+      <Filter>StreetMetalBattle\Header Files\World\Scenario</Filter>
+    </ClInclude>
+    <ClInclude Include="TileType.h">
+      <Filter>StreetMetalBattle\Header Files\Identifiers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

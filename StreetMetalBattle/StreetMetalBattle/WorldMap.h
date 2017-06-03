@@ -5,6 +5,7 @@
 #include "SceneNode.h"
 #include "CommandQueue.h"
 #include "Fighter.h"
+#include "TileMapLoader.h"
 
 class WorldMap : private sf::NonCopyable
 {
@@ -31,6 +32,7 @@ class WorldMap : private sf::NonCopyable
 		void CheckFightersInsideZone();
 		void handleCollisions();
 		void CheckDeathFighters();
+		void buildLevelMap();
 
 	private:
 		Fighter* mPlayer;
@@ -47,4 +49,6 @@ class WorldMap : private sf::NonCopyable
 		sf::FloatRect mWorldBounds;
 		sf::Vector2f mSpawnPosition;
 		CommandQueue mCommandQueue;
+
+		TileMapLoader mTileMap;
 };

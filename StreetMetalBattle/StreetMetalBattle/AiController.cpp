@@ -15,31 +15,36 @@ struct FighterRandomMover
 		srand(time(NULL));
 		if (fighter.getIdentifier() == fighterID)
 		{
-			int i = rand() % 3 + 1;
-			if (i == 1) 
+			int i = rand() % 6;
+			switch (i)
 			{
-				fighter.moveDown();
-			}
-			else if (i == 2)
-			{
-				fighter.moveUp();
-			}
-
-			i = rand() % 3 + 1;
-			if (i == 1)
-			{
-				fighter.moveLeft();
-			}
-			else if (i == 2)
-			{
-				fighter.moveRight();
-			}
-
-
-			i = rand() % 2 + 1;
-			if (i == 1)
-			{
-				fighter.punch();
+				case 1:
+				{
+					fighter.moveDown();
+					break;
+				}
+				case 2:
+				{
+					fighter.moveUp();
+					break;
+				}
+				case 3:
+				{
+					fighter.moveLeft();
+					break;
+				}
+				case 4:
+				{
+					fighter.moveRight();
+					break;
+				}
+				case 5:
+				{
+					fighter.punch();
+					break;
+				}
+				default:
+					break;
 			}
 		}
 	}
