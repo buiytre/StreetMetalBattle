@@ -69,7 +69,14 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>C:\Users\buiytre\Source\Repos\StreetMetalBattle\StreetMetalBattle\Engine\Header Files;$(IncludePath)</IncludePath>
+    <SourcePath>C:\Users\buiytre\Source\Repos\StreetMetalBattle\StreetMetalBattle\Engine\Source Files;$(SourcePath)</SourcePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>C:\Users\buiytre\Source\Repos\StreetMetalBattle\StreetMetalBattle\Engine\Header Files;$(IncludePath)</IncludePath>
+    <SourcePath>C:\Users\buiytre\Source\Repos\StreetMetalBattle\StreetMetalBattle\Engine\Source Files;$(SourcePath)</SourcePath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <PrecompiledHeader>
@@ -134,29 +141,29 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Animation.h" />
-    <ClInclude Include="Command.h" />
-    <ClInclude Include="CommandQueue.h" />
-    <ClInclude Include="MusicPlayer.h" />
-    <ClInclude Include="ResourceHolder.h" />
-    <ClInclude Include="SceneNode.h" />
-    <ClInclude Include="SoundPlayer.h" />
-    <ClInclude Include="SpriteNode.h" />
-    <ClInclude Include="State.h" />
-    <ClInclude Include="StateStack.h" />
-    <ClInclude Include="Utility.h" />
+    <ClInclude Include="Header Files\Animation.h" />
+    <ClInclude Include="Header Files\Command.h" />
+    <ClInclude Include="Header Files\CommandQueue.h" />
+    <ClInclude Include="Header Files\MusicPlayer.h" />
+    <ClInclude Include="Header Files\ResourceHolder.h" />
+    <ClInclude Include="Header Files\SceneNode.h" />
+    <ClInclude Include="Header Files\SoundPlayer.h" />
+    <ClInclude Include="Header Files\SpriteNode.h" />
+    <ClInclude Include="Header Files\State.h" />
+    <ClInclude Include="Header Files\StateStack.h" />
+    <ClInclude Include="Header Files\Utility.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Animation.cpp" />
-    <ClCompile Include="Command.cpp" />
-    <ClCompile Include="CommandQueue.cpp" />
-    <ClCompile Include="MusicPlayer.cpp" />
-    <ClCompile Include="SceneNode.cpp" />
-    <ClCompile Include="SoundPlayer.cpp" />
-    <ClCompile Include="SpriteNode.cpp" />
-    <ClCompile Include="State.cpp" />
-    <ClCompile Include="StateStack.cpp" />
-    <ClCompile Include="Utility.cpp" />
+    <ClCompile Include="Source Files\Animation.cpp" />
+    <ClCompile Include="Source Files\Command.cpp" />
+    <ClCompile Include="Source Files\CommandQueue.cpp" />
+    <ClCompile Include="Source Files\MusicPlayer.cpp" />
+    <ClCompile Include="Source Files\SceneNode.cpp" />
+    <ClCompile Include="Source Files\SoundPlayer.cpp" />
+    <ClCompile Include="Source Files\SpriteNode.cpp" />
+    <ClCompile Include="Source Files\State.cpp" />
+    <ClCompile Include="Source Files\StateStack.cpp" />
+    <ClCompile Include="Source Files\Utility.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -38,7 +38,10 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>C:\Users\buiytre\Source\Repos\StreetMetalBattle\StreetMetalBattle\StreetMetalBattle\Header Files;$(IncludePath)</IncludePath>
+    <SourcePath>C:\Users\buiytre\Source\Repos\StreetMetalBattle\StreetMetalBattle\StreetMetalBattle\Header Files;$(SourcePath)</SourcePath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -65,51 +68,51 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="AiController.cpp" />
-    <ClCompile Include="FighterData.cpp" />
-    <ClCompile Include="FighterState.cpp" />
-    <ClCompile Include="FighterStateDying.cpp" />
-    <ClCompile Include="FighterStateGetPunched.cpp" />
-    <ClCompile Include="FighterStatePunching.cpp" />
-    <ClCompile Include="FighterStateStandBy.cpp" />
-    <ClCompile Include="FighterStateWalking.cpp" />
-    <ClCompile Include="Player.cpp" />
-    <ClCompile Include="Fighter.cpp" />
-    <ClCompile Include="Game.cpp" />
-    <ClCompile Include="GameState.cpp" />
-    <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Tile.cpp" />
-    <ClCompile Include="TileMapLoader.cpp" />
-    <ClCompile Include="TitleState.cpp" />
-    <ClCompile Include="WorldMap.cpp" />
+    <ClCompile Include="Source Files\Controller\AiController.cpp" />
+    <ClCompile Include="Source Files\Controller\Player.cpp" />
+    <ClCompile Include="Source Files\Data\FighterData.cpp" />
+    <ClCompile Include="Source Files\Entities\Fighter.cpp" />
+    <ClCompile Include="Source Files\Entities\FighterStates\FighterState.cpp" />
+    <ClCompile Include="Source Files\Entities\FighterStates\FighterStateDying.cpp" />
+    <ClCompile Include="Source Files\Entities\FighterStates\FighterStateGetPunched.cpp" />
+    <ClCompile Include="Source Files\Entities\FighterStates\FighterStatePunching.cpp" />
+    <ClCompile Include="Source Files\Entities\FighterStates\FighterStateStandBy.cpp" />
+    <ClCompile Include="Source Files\Entities\FighterStates\FighterStateWalking.cpp" />
+    <ClCompile Include="Source Files\Game.cpp" />
+    <ClCompile Include="Source Files\GameStates\GameState.cpp" />
+    <ClCompile Include="Source Files\GameStates\TitleState.cpp" />
+    <ClCompile Include="Source Files\Main.cpp" />
+    <ClCompile Include="Source Files\World\Scenario\Tile.cpp" />
+    <ClCompile Include="Source Files\World\Scenario\TileMapLoader.cpp" />
+    <ClCompile Include="Source Files\World\WorldMap.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AiController.h" />
-    <ClInclude Include="FighterData.h" />
-    <ClInclude Include="FighterStateDying.h" />
-    <ClInclude Include="FighterState.h" />
-    <ClInclude Include="FighterStateGetPunched.h" />
-    <ClInclude Include="FighterStatePunching.h" />
-    <ClInclude Include="FighterStateStandBy.h" />
-    <ClInclude Include="FighterStateWalking.h" />
-    <ClInclude Include="Inputs.h" />
-    <ClInclude Include="Orientation.h" />
-    <ClInclude Include="Player.h" />
-    <ClInclude Include="Category.h" />
-    <ClInclude Include="Fighter.h" />
-    <ClInclude Include="Fonts.h" />
-    <ClInclude Include="Game.h" />
-    <ClInclude Include="GameState.h" />
-    <ClInclude Include="States.h" />
-    <ClInclude Include="Textures.h" />
-    <ClInclude Include="Tile.h" />
-    <ClInclude Include="TileMapLoader.h" />
-    <ClInclude Include="TileType.h" />
-    <ClInclude Include="TitleState.h" />
-    <ClInclude Include="WorldMap.h" />
+    <ClInclude Include="Header Files\Controller\AiController.h" />
+    <ClInclude Include="Header Files\Controller\Player.h" />
+    <ClInclude Include="Header Files\Data\FighterData.h" />
+    <ClInclude Include="Header Files\Entities\Fighter.h" />
+    <ClInclude Include="Header Files\Entities\FighterStates\FighterState.h" />
+    <ClInclude Include="Header Files\Entities\FighterStates\FighterStateDying.h" />
+    <ClInclude Include="Header Files\Entities\FighterStates\FighterStateGetPunched.h" />
+    <ClInclude Include="Header Files\Entities\FighterStates\FighterStatePunching.h" />
+    <ClInclude Include="Header Files\Entities\FighterStates\FighterStateStandBy.h" />
+    <ClInclude Include="Header Files\Entities\FighterStates\FighterStateWalking.h" />
+    <ClInclude Include="Header Files\Game.h" />
+    <ClInclude Include="Header Files\GameStates\GameState.h" />
+    <ClInclude Include="Header Files\GameStates\TitleState.h" />
+    <ClInclude Include="Header Files\Identifiers\Category.h" />
+    <ClInclude Include="Header Files\Identifiers\Fonts.h" />
+    <ClInclude Include="Header Files\Identifiers\Inputs.h" />
+    <ClInclude Include="Header Files\Identifiers\Orientation.h" />
+    <ClInclude Include="Header Files\Identifiers\States.h" />
+    <ClInclude Include="Header Files\Identifiers\Textures.h" />
+    <ClInclude Include="Header Files\Identifiers\TileType.h" />
+    <ClInclude Include="Header Files\World\Scenario\Tile.h" />
+    <ClInclude Include="Header Files\World\Scenario\TileMapLoader.h" />
+    <ClInclude Include="Header Files\World\WorldMap.h" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="Media\Fonts\Capture_it.ttf" />
