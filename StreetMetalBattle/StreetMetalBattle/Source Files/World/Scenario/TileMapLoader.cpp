@@ -22,8 +22,8 @@ void TileMapLoader::load(std::vector<Tile> tiles, sf::Vector2u tileSize, sf::Tex
 		}
 	}
 
-	m_vertices.resize((maxX+1)* (maxY+1) * 4);
-	
+	m_vertices.resize((maxX + 1)* (maxY + 1) * 4);
+
 	for (Tile t : mTiles)
 	{
 		sf::Vector2u position = t.getPosition();
@@ -31,7 +31,7 @@ void TileMapLoader::load(std::vector<Tile> tiles, sf::Vector2u tileSize, sf::Tex
 		int tu = tileNumber % (mTexture.getSize().x / tileSize.x);
 		int tv = tileNumber / (mTexture.getSize().x / tileSize.x);
 
-		sf::Vertex* quad = &m_vertices[(position.x + position.y*(maxX+1)) * 4];
+		sf::Vertex* quad = &m_vertices[(position.x + position.y*(maxX + 1)) * 4];
 
 		quad[0].position = sf::Vector2f(position.x * tileSize.x, position.y * tileSize.y);
 		quad[1].position = sf::Vector2f((1 + position.x) * tileSize.x, position.y * tileSize.y);
@@ -55,9 +55,8 @@ bool TileMapLoader::canWalk(sf::Vector2f position)
 		//tilePosition.y = tilePosition.y / 2.f;
 		if (position.x >= (tilePosition.x * mTileSize.x) && position.x <= ((tilePosition.x + 1) * mTileSize.x))
 		{
-			if (position.y >= (tilePosition.y * mTileSize.y) && position.y <= ((tilePosition.y + 1) * mTileSize.y)) 
+			if (position.y >= (tilePosition.y * mTileSize.y) && position.y <= ((tilePosition.y + 1) * mTileSize.y))
 			{
-				std::cout << "Position x: " << position.x << " Pos y: " << position.y << " tileX " << tilePosition.x * mTileSize.x << "tileY " << (tilePosition.y * mTileSize.y) << " width x : "<< (tilePosition.x + 1) * mTileSize.x << " height y: " << (tilePosition.y + 1) * mTileSize.y <<  std::endl;
 				return t.canWalk();
 			}
 		}
@@ -69,7 +68,7 @@ void TileMapLoader::draw(sf::RenderTarget & target, sf::RenderStates states) con
 {
 	// apply the transform
 	states.transform *= getTransform();
-	
+
 	// apply the tileset texture
 	states.texture = &mTexture;
 

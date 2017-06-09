@@ -5,6 +5,7 @@ struct FrameInfo
 {
 	sf::FloatRect boundingBox;
 	sf::FloatRect boundingPunch;
+	sf::Vector2f offSetXYPosition;
 };
 
 struct AnimationInfo

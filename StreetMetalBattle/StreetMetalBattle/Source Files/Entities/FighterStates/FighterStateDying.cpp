@@ -23,7 +23,7 @@ FighterStateDying::FighterStateDying(const TextureHolder & textures, const Fight
 		mOrientation = Orientation::RIGHT;
 		mFighterAnimation.setScale(1.f, 1.f);
 	}
-	centerOrigin(mFighterAnimation);
+	centerBottom(mFighterAnimation);
 	mFighterAnimation.restart();
 }
 

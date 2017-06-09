@@ -27,7 +27,7 @@ FighterStateGetPunched::FighterStateGetPunched(const TextureHolder & textures, c
 		mOrientation = Orientation::RIGHT;
 		mFighterAnimation.setScale(1.f, 1.f);
 	}
-	centerOrigin(mFighterAnimation);
+	centerBottom(mFighterAnimation);
 	mFighterAnimation.restart();
 }
 

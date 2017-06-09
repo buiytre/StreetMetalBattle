@@ -30,7 +30,7 @@ FighterStateWalking::FighterStateWalking(const TextureHolder & textures, const F
 		mOrientation = Orientation::RIGHT;
 		mFighterAnimation.setScale(1.f, 1.f);
 	}
-	centerOrigin(mFighterAnimation);
+	centerBottom(mFighterAnimation);
 	mFighterAnimation.restart();
 }
 
@@ -42,37 +42,37 @@ FighterState * FighterStateWalking::handleInput(Fighter & fighter, int input)
 {
 	switch (input)
 	{
-		case Inputs::GoToStandBy:
-			return new FighterStateStandBy(mTextures, mInfo, mOrientation);
-		case Inputs::GetPunched:
-			return new FighterStateGetPunched(mTextures, mInfo, mOrientation);
-		case Inputs::Die:
-			return new FighterStateDying(mTextures, mInfo, mOrientation);
-		case Inputs::Punch:
-			return new FighterStatePunching(mTextures, mInfo, mOrientation);
-			break;
-		case Inputs::MoveLeft:
-			if (mOrientation != Orientation::LEFT)
-			{
-				mOrientation = Orientation::LEFT;
-				mFighterAnimation.setScale(-1.f, 1.f);
-			}		
-			mVelocity.x -= mInfo.speed;
-			break;
-		case Inputs::MoveRight:
-			if (mOrientation != Orientation::RIGHT)
-			{
-				mOrientation = Orientation::RIGHT;
-				mFighterAnimation.setScale(1.f, 1.f);
-			}
-			mVelocity.x += mInfo.speed;
-			break;
-		case Inputs::MoveUp:
-			mVelocity.y -= mInfo.speed;
-			break;
-		case Inputs::MoveDown:
-			mVelocity.y += mInfo.speed;
-			break;
+	case Inputs::GoToStandBy:
+		return new FighterStateStandBy(mTextures, mInfo, mOrientation);
+	case Inputs::GetPunched:
+		return new FighterStateGetPunched(mTextures, mInfo, mOrientation);
+	case Inputs::Die:
+		return new FighterStateDying(mTextures, mInfo, mOrientation);
+	case Inputs::Punch:
+		return new FighterStatePunching(mTextures, mInfo, mOrientation);
+		break;
+	case Inputs::MoveLeft:
+		if (mOrientation != Orientation::LEFT)
+		{
+			mOrientation = Orientation::LEFT;
+			mFighterAnimation.setScale(-1.f, 1.f);
+		}
+		mVelocity.x -= mInfo.speed;
+		break;
+	case Inputs::MoveRight:
+		if (mOrientation != Orientation::RIGHT)
+		{
+			mOrientation = Orientation::RIGHT;
+			mFighterAnimation.setScale(1.f, 1.f);
+		}
+		mVelocity.x += mInfo.speed;
+		break;
+	case Inputs::MoveUp:
+		mVelocity.y -= mInfo.speed;
+		break;
+	case Inputs::MoveDown:
+		mVelocity.y += mInfo.speed;
+		break;
 	}
 	return nullptr;
 }

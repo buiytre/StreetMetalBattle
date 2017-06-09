@@ -12,7 +12,11 @@ void FighterState::update(Fighter & fighter, sf::Time dt, CommandQueue & command
 
 void FighterState::drawCurrent(sf::RenderTarget & target, sf::RenderStates states) const
 {
-	target.draw(mFighterAnimation, states);
+	if (!mFighterAnimation.isFinished())
+	{
+		states.transform.translate(mAnimationInfo.frames[mFighterAnimation.getCurrentFrame()].offSetXYPosition);
+		target.draw(mFighterAnimation, states);
+	}
 }
 
 sf::FloatRect FighterState::getBoundingRect() const
@@ -21,9 +25,13 @@ sf::FloatRect FighterState::getBoundingRect() const
 	{
 		return sf::FloatRect();
 	}
-	else 
+	else
 	{
-		return mFighterAnimation.getTransform().transformRect(mAnimationInfo.frames[mFighterAnimation.getCurrentFrame()].boundingBox);
+		sf::Vector2f offset = mAnimationInfo.frames[mFighterAnimation.getCurrentFrame()].offSetXYPosition;
+		sf::FloatRect boundingBox = mAnimationInfo.frames[mFighterAnimation.getCurrentFrame()].boundingBox;
+		boundingBox.left = boundingBox.left + offset.x;
+		boundingBox.top = boundingBox.top + offset.y;
+		return mFighterAnimation.getTransform().transformRect(boundingBox);
 	}
 }
 
@@ -35,7 +43,11 @@ sf::FloatRect FighterState::getPunchBoundingRect() const
 	}
 	else
 	{
-		return mFighterAnimation.getTransform().transformRect(mAnimationInfo.frames[mFighterAnimation.getCurrentFrame()].boundingPunch);
+		sf::Vector2f offset = mAnimationInfo.frames[mFighterAnimation.getCurrentFrame()].offSetXYPosition;
+		sf::FloatRect boundingBox = mAnimationInfo.frames[mFighterAnimation.getCurrentFrame()].boundingPunch;
+		boundingBox.left = boundingBox.left + offset.x;
+		boundingBox.top = boundingBox.top + offset.y;
+		return mFighterAnimation.getTransform().transformRect(boundingBox);
 	}
 }
 

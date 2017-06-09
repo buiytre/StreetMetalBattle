@@ -24,6 +24,10 @@ float toRadian(float degree);
 void centerOrigin(sf::Sprite& sprite);
 void centerOrigin(sf::Text& text);
 void centerOrigin(Animation& animation);
+void centerBottom(sf::Sprite & sprite);
+void centerBottom(sf::Text & text);
+void centerBottom(Animation& animation);
+
 int randomInt(int exclusiveMax);
 
 template<typename T>

@@ -26,7 +26,7 @@ FighterStatePunching::FighterStatePunching(const TextureHolder & textures, const
 		mOrientation = Orientation::RIGHT;
 		mFighterAnimation.setScale(1.f, 1.f);
 	}
-	centerOrigin(mFighterAnimation);
+	centerBottom(mFighterAnimation);
 	mFighterAnimation.restart();
 }
 
@@ -41,7 +41,7 @@ FighterState * FighterStatePunching::handleInput(Fighter & fighter, int input)
 		return new FighterStateStandBy(mTextures, mInfo, mOrientation);
 	}
 
-	if (input == Inputs::Punch && !mFighterAnimation.isFinished()) 
+	if (input == Inputs::Punch && !mFighterAnimation.isFinished())
 	{
 		//todo combo
 		//mFighterAnimation.setNumFrames(9);
