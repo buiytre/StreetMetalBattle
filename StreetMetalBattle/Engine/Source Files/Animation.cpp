@@ -115,7 +115,14 @@ std::size_t Animation::getNumFrames() const
 
 std::size_t Animation::getCurrentFrame() const
 {
-	return mCurrentFrame;
+	if (isFinished())
+	{
+		return mNumFrames - 1;
+	}
+	else
+	{
+		return mCurrentFrame;
+	}
 }
 
 void Animation::setDuration(sf::Time duration)
