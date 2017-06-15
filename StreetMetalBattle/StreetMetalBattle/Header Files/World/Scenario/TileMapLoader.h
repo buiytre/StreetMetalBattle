@@ -1,8 +1,9 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include "SceneNode.h"
 #include "Tile.h"
 
-class TileMapLoader : public sf::Drawable, public sf::Transformable
+class TileMapLoader : public SceneNode
 {
 	public:
 		void load(std::vector<Tile> tiles, sf::Vector2u tileSize, sf::Texture texture);

@@ -1,8 +1,8 @@
 #pragma once
-#include "Header Files/ResourceHolder.h"
-#include "Header Files/StateStack.h"
-#include "Header Files/MusicPlayer.h"
-#include "Header Files/SoundPlayer.h"
+#include "ResourceHolder.h"
+#include "StateStack.h"
+#include "MusicPlayer.h"
+#include "SoundPlayer.h"
 #include "Controller/Player.h"
 
 class Game

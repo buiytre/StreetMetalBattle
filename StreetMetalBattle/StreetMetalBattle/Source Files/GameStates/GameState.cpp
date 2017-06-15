@@ -1,5 +1,5 @@
 #include "GameStates/GameState.h"
-#include "Header Files/CommandQueue.h"
+#include "CommandQueue.h"
 #include "Controller/Player.h"
 
 GameState::GameState(StateStack & stack, Context context)

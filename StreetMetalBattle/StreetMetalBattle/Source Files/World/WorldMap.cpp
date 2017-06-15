@@ -1,10 +1,10 @@
 #include "World/WorldMap.h"
 #include "Identifiers/Textures.h"
-#include "Header Files/SpriteNode.h"
+#include "SpriteNode.h"
 #include "Identifiers/Category.h"
 #include <algorithm>
 #include <iostream>
-#include "Header Files/Utility.h"
+#include "Utility.h"
 
 
 WorldMap::WorldMap(sf::RenderWindow & window, FontHolder& fonts)
@@ -27,7 +27,6 @@ WorldMap::WorldMap(sf::RenderWindow & window, FontHolder& fonts)
 {
 	mWorldView.setCenter(mWorldView.getSize()/2.f);
 	loadTextures();
-	buildLevelMap();
 	buildScene();
 }
 
@@ -37,18 +36,9 @@ void WorldMap::update(sf::Time dt)
 	{
 		Command command = mCommandQueue.pop();
 		mSceneGraph.onCommand(command, dt);
-		for (Fighter* f : mFighters)
-		{
-			(*f).onCommand(command, dt);
-		}
 	}
 
 	mSceneGraph.update(dt, mCommandQueue);
-
-	for (Fighter* f : mFighters)
-	{
-		(*f).update(dt, mCommandQueue);
-	}
 
 	handleCollisions();
 	CheckDeathFighters();
@@ -107,7 +97,7 @@ void WorldMap::handleCollisions()
 
 void WorldMap::CheckDeathFighters()
 {
-	mFighters.erase(std::remove_if(mFighters.begin(), mFighters.end(), [&](const Fighter* f) { return (*f).isMarkedForRemoval(); }), mFighters.end());
+	mSceneGraph.removeWrecks();
 }
 
 void WorldMap::buildLevelMap()
@@ -144,15 +134,6 @@ void WorldMap::draw()
 {
 	mTarget.setView(mWorldView);
 	mTarget.draw(mSceneGraph);
-	mTarget.draw(mTileMap);
-	std::sort(mFighters.begin(), mFighters.end(), [](Fighter* a, Fighter* b)
-	{
-		return a->getWorldPosition().y < b->getWorldPosition().y;
-	});
-	for (Fighter* f : mFighters)
-	{
-		mTarget.draw(*f);
-	}
 }
 
 CommandQueue& WorldMap::getCommandQueue()
@@ -170,8 +151,8 @@ void WorldMap::buildScene()
 	for (std::size_t i = 0; i < LayerCount; ++i)
 	{
 		int category = Category::NONE;
-		SceneNode::Ptr layer(new SceneNode(category));
-		mSceneLayers[i] = layer.get();
+		SceneNode* layer(new SceneNode(category));
+		mSceneLayers[i] = layer;
 
 		mSceneGraph.attachChild(std::move(layer));
 	}
@@ -180,7 +161,7 @@ void WorldMap::buildScene()
 	sf::IntRect textureRect(mWorldBounds);
 	texture.setRepeated(true);
 
-	std::unique_ptr<SpriteNode> backgroundSprite(new SpriteNode(texture, textureRect));
+	SpriteNode* backgroundSprite(new SpriteNode(texture, textureRect));
 	backgroundSprite->setPosition(mWorldBounds.left, mWorldBounds.top);
 	mSceneLayers[Background]->attachChild(std::move(backgroundSprite));
 	
@@ -188,17 +169,18 @@ void WorldMap::buildScene()
 	sf::IntRect textureRectFloor(0, 0, (int)(mWorldBounds.width), (int)(mWorldBounds.height/2.f));
 	textureFloor.setRepeated(true);
 
-	std::unique_ptr<SpriteNode> floorSprite(new SpriteNode(textureFloor, textureRectFloor));
-	floorSprite->setPosition(mWorldBounds.left, mWorldBounds.height/2.f);
-	mSceneLayers[Floor]->attachChild(std::move(floorSprite));
+	buildLevelMap();
+	mSceneLayers[Floor]->attachChild(std::move(&mTileMap));
 	
 	Fighter* fighter = new Fighter(Fighter::Type::Player, mTextures, 0, mSpawnPosition, 100);
 	mPlayer = fighter;
 	mPlayer->setPosition(mSpawnPosition);
+	mSceneLayers[ActionLayer]->attachChild(std::move(fighter));
 	mFighters.push_back(fighter);
 
 	Fighter* enemy = new Fighter(Fighter::Type::Enemy, mTextures, 1, sf::Vector2f(mWorldBounds.width / 2.f, mWorldBounds.height / 2.f + 100), 100);
 	enemy->setPosition(enemy->getWorldPosition());
+	mSceneLayers[ActionLayer]->attachChild(std::move(enemy));
 	mFighters.push_back(enemy);
 }
 

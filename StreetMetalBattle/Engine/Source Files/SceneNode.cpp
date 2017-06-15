@@ -18,7 +18,7 @@ void SceneNode::attachChild(Ptr child)
 
 SceneNode::Ptr SceneNode::deatachChild(const SceneNode & node)
 {
-	auto found = std::find_if(mChildren.begin(), mChildren.end(), [&](Ptr& p) -> bool { return p.get() == &node; });
+	auto found = std::find_if(mChildren.begin(), mChildren.end(), [&](Ptr& p) -> bool { return p == &node; });
 	assert(found != mChildren.end());
 
 	Ptr result = std::move(*found);
@@ -30,6 +30,10 @@ SceneNode::Ptr SceneNode::deatachChild(const SceneNode & node)
 void SceneNode::update(sf::Time dt, CommandQueue& commands)
 {
 	updateCurrent(dt, commands);
+	std::sort(mChildren.begin(), mChildren.end(), [](const SceneNode* a, const SceneNode* b)
+	{
+		return a->getWorldPosition().y < b->getWorldPosition().y;
+	});
 	updateChildren(dt, commands);
 }
 

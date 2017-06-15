@@ -1,7 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "Header Files/CommandQueue.h"
-#include "Header Files/Command.h"
+#include "CommandQueue.h"
+#include "Command.h"
 
 class Player
 {

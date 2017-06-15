@@ -1,6 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "Header Files/State.h"
+#include "State.h"
 #include "World/WorldMap.h"
 #include "Controller/AiController.h"
 

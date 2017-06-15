@@ -1,5 +1,5 @@
 #include "Entities/Fighter.h"
-#include "Header Files/Utility.h"
+#include "Utility.h"
 #include "Identifiers/Textures.h"
 #include "Identifiers/Category.h"
 #include "Identifiers/Orientation.h"

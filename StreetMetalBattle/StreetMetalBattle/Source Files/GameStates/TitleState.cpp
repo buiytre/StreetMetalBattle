@@ -1,8 +1,8 @@
 #include "GameStates/TitleState.h"
 #include <utility>
-#include "Header Files/ResourceHolder.h"
+#include "ResourceHolder.h"
 #include <SFML/Graphics.hpp>
-#include "Header Files/Utility.h"
+#include "Utility.h"
 #include "Identifiers/Fonts.h"
 #include "Identifiers/States.h"
 

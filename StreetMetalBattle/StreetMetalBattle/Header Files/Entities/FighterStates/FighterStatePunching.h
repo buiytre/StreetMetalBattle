@@ -1,5 +1,5 @@
 #pragma once
-#include "Header Files/ResourceHolder.h"
+#include "ResourceHolder.h"
 #include "FighterState.h"
 
 class FighterStatePunching : public FighterState

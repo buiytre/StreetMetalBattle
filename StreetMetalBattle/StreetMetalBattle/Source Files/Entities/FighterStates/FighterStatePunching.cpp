@@ -2,8 +2,8 @@
 #include "Entities/FighterStates/FighterStateStandBy.h"
 #include "Identifiers/Orientation.h"
 #include "Entities/Fighter.h"
-#include "Header Files/Command.h"
-#include "Header Files/Utility.h"
+#include "Command.h"
+#include "Utility.h"
 
 FighterStatePunching::FighterStatePunching(const TextureHolder & textures, const FighterInfo & fighterInfo, int direction)
 	: mTextures(textures)

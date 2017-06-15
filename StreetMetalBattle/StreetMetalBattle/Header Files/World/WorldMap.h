@@ -1,9 +1,9 @@
 #pragma once
 #include <array>
 #include <SFML/Graphics.hpp>
-#include "Header Files/ResourceHolder.h"
-#include "Header Files/SceneNode.h"
-#include "Header Files/CommandQueue.h"
+#include "ResourceHolder.h"
+#include "SceneNode.h"
+#include "CommandQueue.h"
 #include "Entities/Fighter.h"
 #include "World/Scenario/TileMapLoader.h"
 

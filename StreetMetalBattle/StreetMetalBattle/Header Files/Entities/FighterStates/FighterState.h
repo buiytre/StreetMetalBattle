@@ -1,5 +1,5 @@
 #pragma once
-#include "Header Files/Animation.h"
+#include "Animation.h"
 #include "Identifiers/Textures.h"
 #include "Identifiers/Inputs.h"
 #include "Data/FighterData.h"

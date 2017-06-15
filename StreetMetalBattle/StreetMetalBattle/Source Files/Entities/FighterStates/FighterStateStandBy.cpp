@@ -6,7 +6,7 @@
 #include "Identifiers/Orientation.h"
 #include "Entities/Fighter.h"
 #include "Identifiers/Inputs.h"
-#include "Header Files/Utility.h"
+#include "Utility.h"
 
 FighterStateStandBy::FighterStateStandBy(const TextureHolder & textures, const FighterInfo& fighterInfo, int orientation)
 	: mTextures(textures)

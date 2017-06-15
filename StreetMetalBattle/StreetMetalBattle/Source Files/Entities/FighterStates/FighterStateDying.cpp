@@ -1,6 +1,6 @@
 #include "Entities/FighterStates/FighterStateDying.h"
 #include "Identifiers/Orientation.h"
-#include "Header Files/Utility.h"
+#include "Utility.h"
 
 FighterStateDying::FighterStateDying(const TextureHolder & textures, const FighterInfo & fighterInfo, int direction)
 	: mTextures(textures)

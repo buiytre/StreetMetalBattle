@@ -1,7 +1,7 @@
 #pragma once
-#include "Header Files/SceneNode.h"
-#include "Header Files/ResourceHolder.h"
-#include "Header Files/Animation.h"
+#include "SceneNode.h"
+#include "ResourceHolder.h"
+#include "Animation.h"
 #include "FighterStates/FighterState.h"
 
 class Fighter : public SceneNode

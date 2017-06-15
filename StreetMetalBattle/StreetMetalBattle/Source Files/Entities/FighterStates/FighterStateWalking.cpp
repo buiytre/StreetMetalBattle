@@ -6,7 +6,7 @@
 #include "Identifiers/Orientation.h"
 #include "Entities/Fighter.h"
 #include "Identifiers/Inputs.h"
-#include "Header Files/Utility.h"
+#include "Utility.h"
 
 
 FighterStateWalking::FighterStateWalking(const TextureHolder & textures, const FighterInfo & fighterInfo, int direction)
