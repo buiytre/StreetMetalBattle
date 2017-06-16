@@ -15,7 +15,7 @@ class Fighter : public SceneNode
 		};
 
 	public:
-		explicit Fighter(Type type, const TextureHolder & textures, sf::Int32 fighterId, sf::Vector2f position, sf::Int16 hitPoints);
+		explicit Fighter(Type type, const TextureHolder & textures, sf::Int32 fighterId, sf::Vector2f position, sf::Int16 hitPoints, std::vector<FighterInfo>& fighterInfoTable);
 		
 		sf::Vector2f getWorldPosition() const;
 		sf::Vector2f getWantToWalkPosition() const;
@@ -64,4 +64,5 @@ class Fighter : public SceneNode
 		const TextureHolder& mTextures;
 
 		sf::Int32 mFighterId;
+		std::vector<FighterInfo>& mTableFighterInfo;
 };

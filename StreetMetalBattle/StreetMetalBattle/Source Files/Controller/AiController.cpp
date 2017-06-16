@@ -12,7 +12,7 @@ struct FighterRandomMover
 
 	void operator() (Fighter& fighter, sf::Time) const
 	{
-		srand(time(NULL));
+		srand(time(NULL) * fighterID);
 		if (fighter.getIdentifier() == fighterID)
 		{
 			int i = rand() % 6;

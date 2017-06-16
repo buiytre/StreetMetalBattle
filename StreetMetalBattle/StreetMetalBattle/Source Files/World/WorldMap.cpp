@@ -171,17 +171,23 @@ void WorldMap::buildScene()
 
 	buildLevelMap();
 	mSceneLayers[Floor]->attachChild(std::move(&mTileMap));
-	
-	Fighter* fighter = new Fighter(Fighter::Type::Player, mTextures, 0, mSpawnPosition, 100);
+	mFighterInfo = initializeFighterData();
+	Fighter* fighter = new Fighter(Fighter::Type::Player, mTextures, 0, mSpawnPosition, 100, mFighterInfo);
 	mPlayer = fighter;
 	mPlayer->setPosition(mSpawnPosition);
 	mSceneLayers[ActionLayer]->attachChild(std::move(fighter));
 	mFighters.push_back(fighter);
 
-	Fighter* enemy = new Fighter(Fighter::Type::Enemy, mTextures, 1, sf::Vector2f(mWorldBounds.width / 2.f, mWorldBounds.height / 2.f + 100), 100);
-	enemy->setPosition(enemy->getWorldPosition());
-	mSceneLayers[ActionLayer]->attachChild(std::move(enemy));
-	mFighters.push_back(enemy);
+	for (int i = 0; i < 10; i++)
+	{
+		for (int j = 0; j < 10; j++)
+		{
+			Fighter* enemy = new Fighter(Fighter::Type::Enemy, mTextures, j*10 + i + 1 , sf::Vector2f(mWorldBounds.width / 2.f - 200 + j * 100, mWorldBounds.height / 2.f + i * 100), 100, mFighterInfo);
+			enemy->setPosition(enemy->getWorldPosition());
+			mSceneLayers[ActionLayer]->attachChild(std::move(enemy));
+			mFighters.push_back(enemy);
+		}
+	}
 }
 
 void WorldMap::loadTextures()

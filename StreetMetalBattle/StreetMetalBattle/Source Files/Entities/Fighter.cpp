@@ -13,7 +13,7 @@ namespace
 	const std::vector<FighterInfo> Table = initializeFighterData();
 }
 
-Fighter::Fighter(Type type, const TextureHolder & textures, sf::Int32 fighterId, sf::Vector2f position, sf::Int16 hitPoints)
+Fighter::Fighter(Type type, const TextureHolder & textures, sf::Int32 fighterId, sf::Vector2f position, sf::Int16 hitPoints, std::vector<FighterInfo>& fighterInfoTable)
 	: mPosition(position)
 	, mType(type)
 	, mHitPoints(hitPoints)
@@ -21,6 +21,7 @@ Fighter::Fighter(Type type, const TextureHolder & textures, sf::Int32 fighterId,
 	, mGetHitCommand()
 	, mFighterId(fighterId)
 	, mWantToWalk(position)
+	, mTableFighterInfo(fighterInfoTable)
 {
 	mState = new FighterStateStandBy(textures, Table[type], Orientation::RIGHT);
 	mGetHitCommand.category = getCategory();

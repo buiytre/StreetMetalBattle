@@ -77,6 +77,14 @@
     <IncludePath>C:\Users\buiytre\Documents\GitHub\StreetMetalBattle\StreetMetalBattle\Engine\Header Files;$(IncludePath)</IncludePath>
     <SourcePath>C:\Users\buiytre\Documents\GitHub\StreetMetalBattle\StreetMetalBattle\Engine\Source Files;$(SourcePath)</SourcePath>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>C:\Users\buiytre\Documents\GitHub\StreetMetalBattle\StreetMetalBattle\Engine\Header Files;$(IncludePath)</IncludePath>
+    <SourcePath>C:\Users\buiytre\Documents\GitHub\StreetMetalBattle\StreetMetalBattle\Engine\Source Files;$(SourcePath)</SourcePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IncludePath>C:\Users\buiytre\Documents\GitHub\StreetMetalBattle\StreetMetalBattle\Engine\Header Files;$(IncludePath)</IncludePath>
+    <SourcePath>C:\Users\buiytre\Documents\GitHub\StreetMetalBattle\StreetMetalBattle\Engine\Source Files;$(SourcePath)</SourcePath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <PrecompiledHeader>

@@ -51,4 +51,5 @@ class WorldMap : private sf::NonCopyable
 		CommandQueue mCommandQueue;
 
 		TileMapLoader mTileMap;
+		std::vector<FighterInfo> mFighterInfo;
 };
