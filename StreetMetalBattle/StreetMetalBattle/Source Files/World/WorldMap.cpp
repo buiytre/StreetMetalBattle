@@ -50,12 +50,33 @@ void WorldMap::CheckFightersInsideZone()
 {
 	for (Fighter* f : mFighters)
 	{
-		sf::Vector2f position = (*f).getWantToWalkPosition();
-		
-		if (mTileMap.canWalk(position))
+		sf::Vector2f actualPosition = f->getPosition();
+		sf::Vector2f wantToWalkTo = f->getWantToWalkPosition();
+		std::cout << "Fighter " << f->getIdentifier() << " is on position (" << actualPosition.x << "," << actualPosition.y << ") and wants to walk to (" << wantToWalkTo.x << "," << wantToWalkTo.y << ")" << std::endl;
+
+		if (mTileMap.canWalk(wantToWalkTo))
 		{
-			(*f).setPosition(position);
+			std::cout << "Fighter " << f->getIdentifier() << " can walk to position " << std::endl;
+			(*f).setPosition(wantToWalkTo);
+			continue;
 		}
+			
+		sf::Vector2f positionX = sf::Vector2f(wantToWalkTo.x, actualPosition.y);
+		if (mTileMap.canWalk(positionX))
+		{
+			std::cout << "Fighter " << f->getIdentifier() << " just move x" << std::endl;
+			(*f).setPosition(positionX);
+			continue;
+		}
+
+		sf::Vector2f positionY = sf::Vector2f(actualPosition.x, wantToWalkTo.y);
+		if (mTileMap.canWalk(positionY)) 
+		{
+			std::cout << "Fighter " << f->getIdentifier() << " just move y" << std::endl;
+			(*f).setPosition(positionY);
+			continue;
+		}	
+		std::cout << "Fighter " << f->getIdentifier() << " can not walk to position" << std::endl;
 	}
 }
 
@@ -76,7 +97,7 @@ void WorldMap::handleCollisions()
 					float diff = std::abs(fighterOne.y - fighterTwo.y);
 					if (diff <= 20.f)
 					{
-						(*mFighters[j]).setPosition(unitVector(fighterTwo - fighterOne) + fighterTwo);
+						(*mFighters[j]).setWantToWalkPosition(unitVector(fighterTwo - fighterOne) + fighterTwo);
 					}
 				}
 				else if (hit) 
@@ -87,7 +108,7 @@ void WorldMap::handleCollisions()
 					if (diff <= 20.f)
 					{
 						(*mFighters[j]).getHit(mCommandQueue, 10);
-						(*mFighters[j]).setPosition(unitVector(fighterTwo - fighterOne)*2.f + fighterTwo);
+						(*mFighters[j]).setWantToWalkPosition(unitVector(fighterTwo - fighterOne)*2.f + fighterTwo);
 					}
 				}
 			}
@@ -103,31 +124,51 @@ void WorldMap::CheckDeathFighters()
 void WorldMap::buildLevelMap()
 {
 	std::vector<Tile> tiles;
-	for (int i = 0; i < 10; i++)
+	tiles.push_back(Tile(23, true, sf::Vector2u(0, 1)));
+
+	for (int x = 1; x < 40; x++)
 	{
-		for (int j = 1; j < 20; j++)
+		tiles.push_back(Tile(24, true, sf::Vector2u(x, 1)));
+	}
+
+	tiles.push_back(Tile(25, true, sf::Vector2u(40, 1)));
+
+	for (int y = 2; y < 24; y++) 
+	{
+		tiles.push_back(Tile(46, true, sf::Vector2u(0, y)));
+	}
+
+	tiles.push_back(Tile(69, true, sf::Vector2u(0, 24)));
+	
+	for (int x = 1; x < 40; x++)
+	{
+		tiles.push_back(Tile(70, true, sf::Vector2u(x, 24)));
+	}
+
+	tiles.push_back(Tile(71, true, sf::Vector2u(40, 24)));
+
+	for (int y = 2; y < 24; y++)
+	{
+		tiles.push_back(Tile(48, true, sf::Vector2u(40, y)));
+	}
+
+	for (int x = 1; x < 30; x++)
+	{
+		for (int y = 2; y < 24; y++)
 		{
-			tiles.push_back(Tile(0, true, sf::Vector2u(i, j)));
-		}
-		for (int j = 20; j < 30; j++)
-		{
-			tiles.push_back(Tile(1, true, sf::Vector2u(i, j)));
-		}
-		for (int j = 30; j < 40; j++)
-		{
-			tiles.push_back(Tile(2, false, sf::Vector2u(i, j)));
+			tiles.push_back(Tile(47, true, sf::Vector2u(x, y)));
 		}
 	}
 
-	for (int i = 10; i < 40; i++)
+	for (int x = 30; x < 40; x++)
 	{
-		for (int j = 15; j < 30; j++)
+		for (int y = 2; y < 24; y++)
 		{
-			tiles.push_back(Tile(1, true, sf::Vector2u(i, j)));
-		}	
+			tiles.push_back(Tile(73, false, sf::Vector2u(x, y)));
+		}
 	}
 	
-	mTileMap.load(tiles, sf::Vector2u(32,32), mTextures.get(Textures::TestFloor));
+	mTileMap.load(tiles, sf::Vector2u(32,32), mTextures.get(Textures::TestTile));
 }
 
 void WorldMap::draw()
@@ -178,11 +219,11 @@ void WorldMap::buildScene()
 	mSceneLayers[ActionLayer]->attachChild(std::move(fighter));
 	mFighters.push_back(fighter);
 
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < 1; i++)
 	{
-		for (int j = 0; j < 10; j++)
+		for (int j = 0; j < 1; j++)
 		{
-			Fighter* enemy = new Fighter(Fighter::Type::Enemy, mTextures, j*10 + i + 1 , sf::Vector2f(mWorldBounds.width / 2.f - 200 + j * 100, mWorldBounds.height / 2.f + i * 100), 100, mFighterInfo);
+			Fighter* enemy = new Fighter(Fighter::Type::Enemy, mTextures, j * i + 1 , sf::Vector2f(mWorldBounds.width / 2.f - 200 + j * 100, mWorldBounds.height / 2.f + i * 100), 100, mFighterInfo);
 			enemy->setPosition(enemy->getWorldPosition());
 			mSceneLayers[ActionLayer]->attachChild(std::move(enemy));
 			mFighters.push_back(enemy);
@@ -194,5 +235,6 @@ void WorldMap::loadTextures()
 {
 	mTextures.load(Textures::TestSky, "Media/Textures/SkyTest.png");
 	mTextures.load(Textures::TestFloor, "Media/Textures/FloorTest.png");
+	mTextures.load(Textures::TestTile, "Media/Textures/tileTest.png");
 	mTextures.load(Textures::TestFighter, "Media/Sprites/catFighterSprite.png");
 }

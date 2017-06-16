@@ -1,7 +1,7 @@
-#include "World/Scenario/TileMapLoader.h"
+#include "World/Scenario/TileMap.h"
 #include <iostream>
 
-void TileMapLoader::load(std::vector<Tile> tiles, sf::Vector2u tileSize, sf::Texture texture)
+void TileMap::load(std::vector<Tile> tiles, sf::Vector2u tileSize, sf::Texture texture)
 {
 	mTileSize = tileSize;
 	mTiles = tiles;
@@ -46,13 +46,11 @@ void TileMapLoader::load(std::vector<Tile> tiles, sf::Vector2u tileSize, sf::Tex
 	}
 }
 
-bool TileMapLoader::canWalk(sf::Vector2f position)
+bool TileMap::canWalk(sf::Vector2f position)
 {
 	for (Tile t : mTiles)
 	{
 		sf::Vector2u tilePosition = t.getPosition();
-		//tilePosition.x = tilePosition.x / 2.f;
-		//tilePosition.y = tilePosition.y / 2.f;
 		if (position.x >= (tilePosition.x * mTileSize.x) && position.x <= ((tilePosition.x + 1) * mTileSize.x))
 		{
 			if (position.y >= (tilePosition.y * mTileSize.y) && position.y <= ((tilePosition.y + 1) * mTileSize.y))
@@ -64,7 +62,7 @@ bool TileMapLoader::canWalk(sf::Vector2f position)
 	return false;
 }
 
-void TileMapLoader::draw(sf::RenderTarget & target, sf::RenderStates states) const
+void TileMap::draw(sf::RenderTarget & target, sf::RenderStates states) const
 {
 	// apply the transform
 	states.transform *= getTransform();
@@ -74,19 +72,4 @@ void TileMapLoader::draw(sf::RenderTarget & target, sf::RenderStates states) con
 
 	// draw the vertex array
 	target.draw(m_vertices, states);
-	drawMapForm(target, states);
-}
-
-void TileMapLoader::drawMapForm(sf::RenderTarget & target, sf::RenderStates states) const
-{
-	for (Tile t : mTiles)
-	{
-		sf::RectangleShape shape;
-		shape.setPosition(sf::Vector2f(t.getPosition().x * mTileSize.x, t.getPosition().y * mTileSize.y));
-		shape.setSize(sf::Vector2f(mTileSize.x, mTileSize.y));
-		shape.setFillColor(sf::Color::Transparent);
-		shape.setOutlineColor(sf::Color::Yellow);
-		shape.setOutlineThickness(1.f);
-		target.draw(shape);
-	}
 }

@@ -70,6 +70,9 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy "$(ProjectDir)Media" "$(TargetDir)Media" /e /y /i /r</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Source Files\Controller\AiController.cpp" />
@@ -87,7 +90,7 @@
     <ClCompile Include="Source Files\GameStates\TitleState.cpp" />
     <ClCompile Include="Source Files\Main.cpp" />
     <ClCompile Include="Source Files\World\Scenario\Tile.cpp" />
-    <ClCompile Include="Source Files\World\Scenario\TileMapLoader.cpp" />
+    <ClCompile Include="Source Files\World\Scenario\TileMap.cpp" />
     <ClCompile Include="Source Files\World\WorldMap.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -115,11 +118,9 @@
     <ClInclude Include="Header Files\Identifiers\Textures.h" />
     <ClInclude Include="Header Files\Identifiers\TileType.h" />
     <ClInclude Include="Header Files\World\Scenario\Tile.h" />
-    <ClInclude Include="Header Files\World\Scenario\TileMapLoader.h" />
+    <ClInclude Include="Header Files\World\Scenario\TileMap.h" />
     <ClInclude Include="Header Files\World\WorldMap.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <Font Include="Media\Fonts\Capture_it.ttf" />
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Engine\Engine.vcxproj">
@@ -127,9 +128,25 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="Media\Sprites\catFighterSprite.png" />
-    <Image Include="Media\Textures\FloorTest.png" />
-    <Image Include="Media\Textures\SkyTest.png" />
+    <Image Include="Media\Sprites\catFighterSprite.png">
+      <DeploymentContent>true</DeploymentContent>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+    </Image>
+    <Image Include="Media\Textures\FloorTest.png">
+      <DeploymentContent>true</DeploymentContent>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+    </Image>
+    <Image Include="Media\Textures\SkyTest.png">
+      <DeploymentContent>true</DeploymentContent>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+    </Image>
+    <Image Include="Media\Textures\tileTest.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="Media\Fonts\Capture_it.ttf">
+      <DeploymentContent>true</DeploymentContent>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
+    </Font>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -114,9 +114,6 @@
     <ClCompile Include="Source Files\World\Scenario\Tile.cpp">
       <Filter>StreetMetalBattle\Source Files\World\Scenario</Filter>
     </ClCompile>
-    <ClCompile Include="Source Files\World\Scenario\TileMapLoader.cpp">
-      <Filter>StreetMetalBattle\Source Files\World\Scenario</Filter>
-    </ClCompile>
     <ClCompile Include="Source Files\World\WorldMap.cpp">
       <Filter>StreetMetalBattle\Source Files\World</Filter>
     </ClCompile>
@@ -125,6 +122,9 @@
     </ClCompile>
     <ClCompile Include="Source Files\Main.cpp">
       <Filter>StreetMetalBattle\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source Files\World\Scenario\TileMap.cpp">
+      <Filter>StreetMetalBattle\Source Files\World\Scenario</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -194,17 +194,15 @@
     <ClInclude Include="Header Files\World\Scenario\Tile.h">
       <Filter>StreetMetalBattle\Header Files\World\Scenario</Filter>
     </ClInclude>
-    <ClInclude Include="Header Files\World\Scenario\TileMapLoader.h">
-      <Filter>StreetMetalBattle\Header Files\World\Scenario</Filter>
-    </ClInclude>
     <ClInclude Include="Header Files\Game.h">
       <Filter>StreetMetalBattle\Header Files</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <Font Include="Media\Fonts\Capture_it.ttf">
-      <Filter>StreetMetalBattle\Resource Files\Media\Fonts</Filter>
-    </Font>
+    <ClInclude Include="Header Files\World\Scenario\TileMap.h">
+      <Filter>StreetMetalBattle\Header Files\World\Scenario</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>StreetMetalBattle\Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Media\Textures\FloorTest.png">
@@ -216,5 +214,13 @@
     <Image Include="Media\Sprites\catFighterSprite.png">
       <Filter>StreetMetalBattle\Resource Files\Media\Sprites</Filter>
     </Image>
+    <Image Include="Media\Textures\tileTest.png">
+      <Filter>StreetMetalBattle\Resource Files\Media\Textures</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="Media\Fonts\Capture_it.ttf">
+      <Filter>StreetMetalBattle\Resource Files\Media\Fonts</Filter>
+    </Font>
   </ItemGroup>
 </Project>
