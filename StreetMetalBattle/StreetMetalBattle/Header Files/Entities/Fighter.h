@@ -11,6 +11,8 @@ class Fighter : public SceneNode
 		{
 			Player,
 			Enemy,
+			Warrior,
+			Ninja,
 			TypeCount,
 		};
 

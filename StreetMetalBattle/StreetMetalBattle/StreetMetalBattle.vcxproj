@@ -128,10 +128,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Image Include="Media\Sprites\advnt_full.png" />
     <Image Include="Media\Sprites\catFighterSprite.png">
       <DeploymentContent>true</DeploymentContent>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>
     </Image>
+    <Image Include="Media\Sprites\ninja_full.png" />
     <Image Include="Media\Textures\FloorTest.png">
       <DeploymentContent>true</DeploymentContent>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</ExcludedFromBuild>

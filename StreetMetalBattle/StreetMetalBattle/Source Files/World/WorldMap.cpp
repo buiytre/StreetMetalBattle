@@ -213,7 +213,7 @@ void WorldMap::buildScene()
 	buildLevelMap();
 	mSceneLayers[Floor]->attachChild(std::move(&mTileMap));
 	mFighterInfo = initializeFighterData();
-	Fighter* fighter = new Fighter(Fighter::Type::Player, mTextures, 0, mSpawnPosition, 100, mFighterInfo);
+	Fighter* fighter = new Fighter(Fighter::Type::Warrior, mTextures, 0, mSpawnPosition, 100, mFighterInfo);
 	mPlayer = fighter;
 	mPlayer->setPosition(mSpawnPosition);
 	mSceneLayers[ActionLayer]->attachChild(std::move(fighter));
@@ -237,4 +237,5 @@ void WorldMap::loadTextures()
 	mTextures.load(Textures::TestFloor, "Media/Textures/FloorTest.png");
 	mTextures.load(Textures::TestTile, "Media/Textures/tileTest.png");
 	mTextures.load(Textures::TestFighter, "Media/Sprites/catFighterSprite.png");
+	mTextures.load(Textures::TestWarrior, "Media/Sprites/advnt_full.png");
 }

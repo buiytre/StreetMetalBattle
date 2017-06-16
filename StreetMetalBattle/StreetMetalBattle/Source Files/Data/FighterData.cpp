@@ -169,5 +169,89 @@ std::vector<FighterInfo> initializeFighterData()
 		data[Fighter::Enemy].walking.animation.frames[i].boundingPunch = sf::FloatRect();
 	}
 
+
+	// Fighter::Player
+	data[Fighter::Warrior].hp = 100;
+	data[Fighter::Warrior].speed = 100;
+
+	// Fighter::Player die animation
+	data[Fighter::Warrior].die.animation.textureId = Textures::TestWarrior;
+	data[Fighter::Warrior].die.animation.frameSize = sf::Vector2i(32, 64);
+	data[Fighter::Warrior].die.animation.originalFrame = sf::Vector2i(0, 64 * 1);
+	data[Fighter::Warrior].die.animation.numSecondsDuration = 1.f;
+	data[Fighter::Warrior].die.animation.numFrames = 3;
+	data[Fighter::Warrior].die.animation.frames = std::vector<FrameInfo>(data[Fighter::Warrior].die.animation.numFrames);
+	for (size_t i = 0; i < data[Fighter::Warrior].die.animation.numFrames; i++)
+	{
+		data[Fighter::Warrior].die.animation.frames[i].boundingBox = sf::FloatRect();
+		data[Fighter::Warrior].die.animation.frames[i].boundingPunch = sf::FloatRect();
+		data[Fighter::Warrior].die.animation.frames[i].offSetXYPosition = sf::Vector2f(0.f, 0.f);
+	}
+
+	// Fighter::Player get punched animation
+	data[Fighter::Warrior].getPunched.animation.textureId = Textures::TestWarrior;
+	data[Fighter::Warrior].getPunched.animation.frameSize = sf::Vector2i(32, 64);
+	data[Fighter::Warrior].getPunched.animation.originalFrame = sf::Vector2i(32*3, 64 * 1);
+	data[Fighter::Warrior].getPunched.animation.numSecondsDuration = 0.5f;
+	data[Fighter::Warrior].getPunched.animation.numFrames = 2;
+	data[Fighter::Warrior].getPunched.animation.frames = std::vector<FrameInfo>(data[Fighter::Warrior].getPunched.animation.numFrames);
+	for (size_t i = 0; i < data[Fighter::Warrior].getPunched.animation.numFrames; i++)
+	{
+		data[Fighter::Warrior].getPunched.animation.frames[i].boundingBox = sf::FloatRect();
+		data[Fighter::Warrior].getPunched.animation.frames[i].boundingPunch = sf::FloatRect();
+		data[Fighter::Warrior].getPunched.animation.frames[i].offSetXYPosition = sf::Vector2f(0.f, 0.f);
+	}
+
+	// Fighter::Player punching animation
+	data[Fighter::Warrior].punching.animation.textureId = Textures::TestWarrior;
+	data[Fighter::Warrior].punching.animation.frameSize = sf::Vector2i(32, 64);
+	data[Fighter::Warrior].punching.animation.originalFrame = sf::Vector2i(32*7, 64 * 2);
+	data[Fighter::Warrior].punching.animation.numSecondsDuration = 0.5f;
+	data[Fighter::Warrior].punching.animation.numFrames = 2;
+	data[Fighter::Warrior].punching.animation.frames = std::vector<FrameInfo>(data[Fighter::Warrior].punching.animation.numFrames);
+	for (size_t i = 0; i < data[Fighter::Warrior].punching.animation.numFrames; i++)
+	{
+		data[Fighter::Warrior].punching.animation.frames[i].boundingBox = sf::FloatRect(7.f, 17.f, 20.f, 47.f);
+		data[Fighter::Warrior].punching.animation.frames[i].offSetXYPosition = sf::Vector2f(0.f, 0.f);
+		if (i == 1)
+		{
+			data[Fighter::Warrior].punching.animation.frames[i].boundingPunch = sf::FloatRect(20.f, 35.f, 12.f, 3.f);
+		}
+		else
+		{
+			data[Fighter::Warrior].punching.animation.frames[i].boundingPunch = sf::FloatRect();
+		}
+	}
+
+	// Fighter::Player standby animation
+	data[Fighter::Warrior].standBy.animation.textureId = Textures::TestWarrior;
+	data[Fighter::Warrior].standBy.animation.frameSize = sf::Vector2i(32, 64);
+	data[Fighter::Warrior].standBy.animation.originalFrame = sf::Vector2i(0, 64 * 0);
+	data[Fighter::Warrior].standBy.animation.numSecondsDuration = 1.f;
+	data[Fighter::Warrior].standBy.animation.numFrames = 1;
+	data[Fighter::Warrior].standBy.animation.frames = std::vector<FrameInfo>(data[Fighter::Warrior].standBy.animation.numFrames);
+	for (size_t i = 0; i < data[Fighter::Warrior].standBy.animation.numFrames; i++)
+	{
+		data[Fighter::Warrior].standBy.animation.frames[i].offSetXYPosition = sf::Vector2f(0.f, 0.f);
+		data[Fighter::Warrior].standBy.animation.frames[i].boundingBox = sf::FloatRect(7.f, 17.f, 20.f, 47.f);
+		data[Fighter::Warrior].standBy.animation.frames[i].boundingPunch = sf::FloatRect();
+	}
+
+	// Fighter::Player walking animation
+	data[Fighter::Warrior].walking.animation.textureId = Textures::TestWarrior;
+	data[Fighter::Warrior].walking.animation.frameSize = sf::Vector2i(32, 64);
+	data[Fighter::Warrior].walking.animation.originalFrame = sf::Vector2i(32, 64 * 0);
+	data[Fighter::Warrior].walking.animation.numSecondsDuration = 1.f;
+	data[Fighter::Warrior].walking.animation.numFrames = 6;
+	data[Fighter::Warrior].walking.animation.frames = std::vector<FrameInfo>(data[Fighter::Warrior].walking.animation.numFrames);
+	for (size_t i = 0; i < data[Fighter::Warrior].walking.animation.numFrames; i++)
+	{
+		data[Fighter::Warrior].walking.animation.frames[i].offSetXYPosition = sf::Vector2f(0.f, 0.f);
+		data[Fighter::Warrior].walking.animation.frames[i].boundingBox = sf::FloatRect(7.f, 17.f, 20.f, 47.f);
+		data[Fighter::Warrior].walking.animation.frames[i].boundingPunch = sf::FloatRect();
+	}
+	
+
 	return data;
 }
+

@@ -123,7 +123,7 @@ bool Fighter::isHitting()
 
 unsigned int Fighter::getCategory() const
 {
-	if (mType == Fighter::Type::Player) 
+	if (mFighterId == 0)
 	{
 		return Category::PlayerFighter;
 	}

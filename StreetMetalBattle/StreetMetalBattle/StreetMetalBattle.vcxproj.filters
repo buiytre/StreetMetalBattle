@@ -217,6 +217,12 @@
     <Image Include="Media\Textures\tileTest.png">
       <Filter>StreetMetalBattle\Resource Files\Media\Textures</Filter>
     </Image>
+    <Image Include="Media\Sprites\advnt_full.png">
+      <Filter>StreetMetalBattle\Resource Files\Media\Sprites</Filter>
+    </Image>
+    <Image Include="Media\Sprites\ninja_full.png">
+      <Filter>StreetMetalBattle\Resource Files\Media\Sprites</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Font Include="Media\Fonts\Capture_it.ttf">
