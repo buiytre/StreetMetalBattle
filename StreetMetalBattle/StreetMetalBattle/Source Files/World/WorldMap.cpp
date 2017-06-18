@@ -5,7 +5,7 @@
 #include <algorithm>
 #include <iostream>
 #include "Utility.h"
-
+#include "World/Scenario/TileMapLoader.h"
 
 WorldMap::WorldMap(sf::RenderWindow & window, FontHolder& fonts)
 	: mTarget(window)
@@ -54,12 +54,12 @@ void WorldMap::CheckFightersInsideZone()
 		sf::Vector2f wantToWalkTo = f->getWantToWalkPosition();
 		std::cout << "Fighter " << f->getIdentifier() << " is on position (" << actualPosition.x << "," << actualPosition.y << ") and wants to walk to (" << wantToWalkTo.x << "," << wantToWalkTo.y << ")" << std::endl;
 
-		if (mTileMap.canWalk(wantToWalkTo))
-		{
+		//if (mTileMap.canWalk(wantToWalkTo))
+		//{
 			std::cout << "Fighter " << f->getIdentifier() << " can walk to position " << std::endl;
 			(*f).setPosition(wantToWalkTo);
 			continue;
-		}
+		//}
 			
 		sf::Vector2f positionX = sf::Vector2f(wantToWalkTo.x, actualPosition.y);
 		if (mTileMap.canWalk(positionX))
@@ -123,52 +123,55 @@ void WorldMap::CheckDeathFighters()
 
 void WorldMap::buildLevelMap()
 {
-	std::vector<Tile> tiles;
-	tiles.push_back(Tile(23, true, sf::Vector2u(0, 1)));
-
-	for (int x = 1; x < 40; x++)
-	{
-		tiles.push_back(Tile(24, true, sf::Vector2u(x, 1)));
-	}
-
-	tiles.push_back(Tile(25, true, sf::Vector2u(40, 1)));
-
-	for (int y = 2; y < 24; y++) 
-	{
-		tiles.push_back(Tile(46, true, sf::Vector2u(0, y)));
-	}
-
-	tiles.push_back(Tile(69, true, sf::Vector2u(0, 24)));
+	TileMapLoader loader;
+	std::vector<Tile> tileMap = loader.LoadFile("C:/Users/buiytre/Desktop/tiledtest/map.csv");
+	mTileMap.load(tileMap, sf::Vector2u(32, 32), mTextures.get(Textures::TestTile));
+	//std::vector<Tile> tiles;
+	//tiles.push_back(Tile(23, true, sf::Vector2u(0, 1)));
+	//
+	//for (int x = 1; x < 40; x++)
+	//{
+	//	tiles.push_back(Tile(24, true, sf::Vector2u(x, 1)));
+	//}
+	//
+	//tiles.push_back(Tile(25, true, sf::Vector2u(40, 1)));
+	//
+	//for (int y = 2; y < 24; y++) 
+	//{
+	//	tiles.push_back(Tile(46, true, sf::Vector2u(0, y)));
+	//}
+	//
+	//tiles.push_back(Tile(69, true, sf::Vector2u(0, 24)));
+	//
+	//for (int x = 1; x < 40; x++)
+	//{
+	//	tiles.push_back(Tile(70, true, sf::Vector2u(x, 24)));
+	//}
+	//
+	//tiles.push_back(Tile(71, true, sf::Vector2u(40, 24)));
+	//
+	//for (int y = 2; y < 24; y++)
+	//{
+	//	tiles.push_back(Tile(48, true, sf::Vector2u(40, y)));
+	//}
+	//
+	//for (int x = 1; x < 30; x++)
+	//{
+	//	for (int y = 2; y < 24; y++)
+	//	{
+	//		tiles.push_back(Tile(47, true, sf::Vector2u(x, y)));
+	//	}
+	//}
+	//
+	//for (int x = 30; x < 40; x++)
+	//{
+	//	for (int y = 2; y < 24; y++)
+	//	{
+	//		tiles.push_back(Tile(73, false, sf::Vector2u(x, y)));
+	//	}
+	//}
 	
-	for (int x = 1; x < 40; x++)
-	{
-		tiles.push_back(Tile(70, true, sf::Vector2u(x, 24)));
-	}
-
-	tiles.push_back(Tile(71, true, sf::Vector2u(40, 24)));
-
-	for (int y = 2; y < 24; y++)
-	{
-		tiles.push_back(Tile(48, true, sf::Vector2u(40, y)));
-	}
-
-	for (int x = 1; x < 30; x++)
-	{
-		for (int y = 2; y < 24; y++)
-		{
-			tiles.push_back(Tile(47, true, sf::Vector2u(x, y)));
-		}
-	}
-
-	for (int x = 30; x < 40; x++)
-	{
-		for (int y = 2; y < 24; y++)
-		{
-			tiles.push_back(Tile(73, false, sf::Vector2u(x, y)));
-		}
-	}
-	
-	mTileMap.load(tiles, sf::Vector2u(32,32), mTextures.get(Textures::TestTile));
+	//mTileMap.load(tiles, sf::Vector2u(32,32), mTextures.get(Textures::TestTile));
 }
 
 void WorldMap::draw()

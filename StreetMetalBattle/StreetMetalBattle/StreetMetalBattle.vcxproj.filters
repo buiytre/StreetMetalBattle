@@ -126,6 +126,9 @@
     <ClCompile Include="Source Files\World\Scenario\TileMap.cpp">
       <Filter>StreetMetalBattle\Source Files\World\Scenario</Filter>
     </ClCompile>
+    <ClCompile Include="Source Files\World\Scenario\TileMapLoader.cpp">
+      <Filter>StreetMetalBattle\Source Files\World\Scenario</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -202,6 +205,9 @@
     </ClInclude>
     <ClInclude Include="resource.h">
       <Filter>StreetMetalBattle\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Header Files\World\Scenario\TileMapLoader.h">
+      <Filter>StreetMetalBattle\Header Files\World\Scenario</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

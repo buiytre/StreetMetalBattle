@@ -91,6 +91,7 @@
     <ClCompile Include="Source Files\Main.cpp" />
     <ClCompile Include="Source Files\World\Scenario\Tile.cpp" />
     <ClCompile Include="Source Files\World\Scenario\TileMap.cpp" />
+    <ClCompile Include="Source Files\World\Scenario\TileMapLoader.cpp" />
     <ClCompile Include="Source Files\World\WorldMap.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -119,6 +120,7 @@
     <ClInclude Include="Header Files\Identifiers\TileType.h" />
     <ClInclude Include="Header Files\World\Scenario\Tile.h" />
     <ClInclude Include="Header Files\World\Scenario\TileMap.h" />
+    <ClInclude Include="Header Files\World\Scenario\TileMapLoader.h" />
     <ClInclude Include="Header Files\World\WorldMap.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
