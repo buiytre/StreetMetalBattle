@@ -3,7 +3,7 @@
 #include <fstream>
 #include <iostream>
 
-std::vector<Tile> TileMapLoader::LoadFile(std::string file)
+std::vector<Tile> TileMapLoader::LoadFile(std::string file, std::vector<TileMapInfo>& tileMapInfo)
 {
 	std::ifstream csvFileMap;
 	csvFileMap.open(file, std::ios::in);
@@ -22,7 +22,13 @@ std::vector<Tile> TileMapLoader::LoadFile(std::string file)
 				int typeTile = std::atoi(tile.c_str());
 				if (typeTile != -1) 
 				{
-					Tile tile(typeTile, true, sf::Vector2u(x, y));
+					TileMapInfo tileInfo = tileMapInfo[typeTile];
+					Tile tile(typeTile, tileInfo.walkArea, sf::Vector2u(x, y));
+					vTile.push_back(tile);
+				}
+				else
+				{
+					Tile tile(typeTile, false, sf::Vector2u(x, y));
 					vTile.push_back(tile);
 				}
 				x++;

@@ -8,6 +8,7 @@ class TileMap : public SceneNode
 	public:
 		void load(std::vector<Tile> tiles, sf::Vector2u tileSize, sf::Texture texture);
 		bool canWalk(sf::Vector2f position);
+		sf::FloatRect getWorldBounds();
 	
 	private:
 		virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
@@ -17,4 +18,5 @@ class TileMap : public SceneNode
 		sf::VertexArray m_vertices;
 		sf::Texture mTexture;
 		sf::Vector2u mTileSize;
+		sf::FloatRect mWorldBounds;
 };

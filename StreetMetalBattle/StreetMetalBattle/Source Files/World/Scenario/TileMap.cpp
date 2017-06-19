@@ -3,6 +3,8 @@
 
 void TileMap::load(std::vector<Tile> tiles, sf::Vector2u tileSize, sf::Texture texture)
 {
+	mWorldBounds.left = 0;
+	mWorldBounds.top = 0;
 	mTileSize = tileSize;
 	mTiles = tiles;
 	mTexture = texture;
@@ -21,11 +23,18 @@ void TileMap::load(std::vector<Tile> tiles, sf::Vector2u tileSize, sf::Texture t
 			maxY = position.y;
 		}
 	}
-
+	mWorldBounds.height = (maxY+1) * tileSize.y;
+	mWorldBounds.width = (maxX+1) * tileSize.x;
 	m_vertices.resize((maxX + 1)* (maxY + 1) * 4);
 
 	for (Tile t : mTiles)
 	{
+		if (t.getTileNumber() == -1)
+		{
+			// not print
+			continue;
+		}
+
 		sf::Vector2u position = t.getPosition();
 		int tileNumber = t.getTileNumber();
 		int tu = tileNumber % (mTexture.getSize().x / tileSize.x);
@@ -60,6 +69,11 @@ bool TileMap::canWalk(sf::Vector2f position)
 		}
 	}
 	return false;
+}
+
+sf::FloatRect TileMap::getWorldBounds()
+{
+	return mWorldBounds;
 }
 
 void TileMap::draw(sf::RenderTarget & target, sf::RenderStates states) const

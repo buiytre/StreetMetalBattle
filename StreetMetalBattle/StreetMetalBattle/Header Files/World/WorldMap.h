@@ -6,6 +6,8 @@
 #include "CommandQueue.h"
 #include "Entities/Fighter.h"
 #include  "Scenario/TileMap.h"
+#include "Data/TileMapInfo.h"
+
 class WorldMap : private sf::NonCopyable
 {
 	public:
@@ -51,4 +53,5 @@ class WorldMap : private sf::NonCopyable
 
 		TileMap mTileMap;
 		std::vector<FighterInfo> mFighterInfo;
+		std::vector<TileMapInfo> mTileMapInfo;
 };
