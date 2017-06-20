@@ -84,6 +84,11 @@ void Fighter::getHit(CommandQueue & commands, sf::Int16 damage)
 	commands.push(mGetHitCommand);
 }
 
+void Fighter::jump()
+{
+	handleInput(Inputs::Jump);
+}
+
 void Fighter::updateCurrent(sf::Time dt, CommandQueue & commands)
 {
 	mState->update(*this, dt, commands);
@@ -91,6 +96,7 @@ void Fighter::updateCurrent(sf::Time dt, CommandQueue & commands)
 
 void Fighter::drawCurrent(sf::RenderTarget & target, sf::RenderStates states) const
 {
+	states.transform.translate(sf::Vector2f(0, -mHeight));
 	mState->drawCurrent(target, states);
 	drawBoundingPunch(target, states);
 }
@@ -141,6 +147,16 @@ void Fighter::setIdentifier(sf::Int32 identifier)
 	mFighterId = identifier;
 }
 
+float Fighter::getHeight()
+{
+	return mHeight;
+}
+
+void Fighter::setHeight(float height)
+{
+	mHeight = height;
+}
+
 bool Fighter::isDestroyed() const
 {
 	return mHitPoints <= 0;
@@ -153,12 +169,12 @@ bool Fighter::isMarkedForRemoval() const
 
 sf::FloatRect Fighter::getBoundingRect() const
 {
-	return getWorldTransform().transformRect(mState->getBoundingRect());
+	return getWorldTransform().translate(sf::Vector2f(0, -mHeight)).transformRect(mState->getBoundingRect());
 }
 
 sf::FloatRect Fighter::getPunchBoundingRect() const
 {
-	return getWorldTransform().transformRect(mState->getPunchBoundingRect());
+	return getWorldTransform().translate(sf::Vector2f(0, -mHeight)).transformRect(mState->getPunchBoundingRect());
 }
 
 void Fighter::drawBoundingPunch(sf::RenderTarget & target, sf::RenderStates states) const

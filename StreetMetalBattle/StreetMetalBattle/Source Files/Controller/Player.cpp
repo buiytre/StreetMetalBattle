@@ -10,6 +10,7 @@ Player::Player()
 	mKeyBinding[sf::Keyboard::Up] = MoveUp;
 	mKeyBinding[sf::Keyboard::Down] = MoveDown;
 	mKeyBinding[sf::Keyboard::Space] = Punch;
+	mKeyBinding[sf::Keyboard::LControl] = Jump;
 
 	mActionBinding[MoveLeft].action = derivedAction<Fighter>([](Fighter& f, sf::Time) 
 	{
@@ -42,6 +43,11 @@ Player::Player()
 	});
 	mActionBinding[Punch].category = Category::PlayerFighter;
 
+	mActionBinding[Jump].action = derivedAction<Fighter>([](Fighter& f, sf::Time)
+	{
+		f.jump();
+	});
+	mActionBinding[Jump].category = Category::PlayerFighter;
 }
 
 void Player::handleEvent(const sf::Event & event, CommandQueue & commands)
@@ -107,6 +113,7 @@ bool Player::isRealtimeAction(Action action)
 	case Player::MoveRight:
 		return true;
 	case Player::Punch:
+	case Player::Jump:
 		return false;
 	default:
 		return false;

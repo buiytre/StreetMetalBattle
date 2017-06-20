@@ -135,6 +135,9 @@
     <ClCompile Include="Source Files\Data\TileMapInfo.cpp">
       <Filter>StreetMetalBattle\Source Files\Data</Filter>
     </ClCompile>
+    <ClCompile Include="Source Files\Entities\FighterStates\FighterStateJump.cpp">
+      <Filter>StreetMetalBattle\Source Files\Entities\FighterStates</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -220,6 +223,9 @@
     </ClInclude>
     <ClInclude Include="Header Files\Data\TileMapInfo.h">
       <Filter>StreetMetalBattle\Header Files\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Header Files\Entities\FighterStates\FighterStateJump.h">
+      <Filter>StreetMetalBattle\Header Files\Entities\FighterStates</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

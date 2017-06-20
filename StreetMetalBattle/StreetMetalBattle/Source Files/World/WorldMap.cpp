@@ -3,7 +3,6 @@
 #include "SpriteNode.h"
 #include "Identifiers/Category.h"
 #include <algorithm>
-#include <iostream>
 #include "Utility.h"
 #include "World/Scenario/TileMapLoader.h"
 
@@ -52,11 +51,9 @@ void WorldMap::CheckFightersInsideZone()
 	{
 		sf::Vector2f actualPosition = f->getPosition();
 		sf::Vector2f wantToWalkTo = f->getWantToWalkPosition();
-		std::cout << "Fighter " << f->getIdentifier() << " is on position (" << actualPosition.x << "," << actualPosition.y << ") and wants to walk to (" << wantToWalkTo.x << "," << wantToWalkTo.y << ")" << std::endl;
-
+		
 		if (mTileMap.canWalk(wantToWalkTo))
 		{
-			std::cout << "Fighter " << f->getIdentifier() << " can walk to position " << std::endl;
 			(*f).setPosition(wantToWalkTo);
 			continue;
 		}
@@ -64,7 +61,6 @@ void WorldMap::CheckFightersInsideZone()
 		sf::Vector2f positionX = sf::Vector2f(wantToWalkTo.x, actualPosition.y);
 		if (mTileMap.canWalk(positionX))
 		{
-			std::cout << "Fighter " << f->getIdentifier() << " just move x" << std::endl;
 			(*f).setPosition(positionX);
 			continue;
 		}
@@ -72,11 +68,9 @@ void WorldMap::CheckFightersInsideZone()
 		sf::Vector2f positionY = sf::Vector2f(actualPosition.x, wantToWalkTo.y);
 		if (mTileMap.canWalk(positionY)) 
 		{
-			std::cout << "Fighter " << f->getIdentifier() << " just move y" << std::endl;
 			(*f).setPosition(positionY);
 			continue;
 		}	
-		std::cout << "Fighter " << f->getIdentifier() << " can not walk to position" << std::endl;
 	}
 }
 

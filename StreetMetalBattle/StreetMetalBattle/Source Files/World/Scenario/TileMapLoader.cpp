@@ -1,7 +1,6 @@
 #include "World/Scenario/TileMapLoader.h"
 #include <sstream>
 #include <fstream>
-#include <iostream>
 
 std::vector<Tile> TileMapLoader::LoadFile(std::string file, std::vector<TileMapInfo>& tileMapInfo)
 {

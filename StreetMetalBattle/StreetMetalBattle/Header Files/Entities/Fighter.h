@@ -33,6 +33,7 @@ class Fighter : public SceneNode
 		void moveDown();
 		void punch();
 		void getHit(CommandQueue & commands, sf::Int16 damage);
+		void jump();
 
 		virtual bool isMarkedForRemoval() const;
 
@@ -43,6 +44,9 @@ class Fighter : public SceneNode
 
 		sf::Int32 getIdentifier();
 		void setIdentifier(sf::Int32 identifier);
+
+		float getHeight();
+		void setHeight(float height);
 
 	private:
 		virtual void updateCurrent(sf::Time dt, CommandQueue& commands);
@@ -61,6 +65,7 @@ class Fighter : public SceneNode
 		Command mGetHitCommand;
 
 		sf::Vector2f mPosition;
+		float mHeight;
 		sf::Vector2f mWantToWalk;
 		sf::Int32 mHitPoints;
 		const TextureHolder& mTextures;

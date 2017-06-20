@@ -15,7 +15,7 @@ struct FighterRandomMover
 		srand(time(NULL) * fighterID);
 		if (fighter.getIdentifier() == fighterID)
 		{
-			int i = rand() % 6;
+			int i = rand() % 7;
 			switch (i)
 			{
 				case 1:
@@ -41,6 +41,11 @@ struct FighterRandomMover
 				case 5:
 				{
 					fighter.punch();
+					break;
+				}
+				case 6:
+				{
+					fighter.jump();
 					break;
 				}
 				default:

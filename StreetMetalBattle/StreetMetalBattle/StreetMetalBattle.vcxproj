@@ -83,6 +83,7 @@
     <ClCompile Include="Source Files\Entities\FighterStates\FighterState.cpp" />
     <ClCompile Include="Source Files\Entities\FighterStates\FighterStateDying.cpp" />
     <ClCompile Include="Source Files\Entities\FighterStates\FighterStateGetPunched.cpp" />
+    <ClCompile Include="Source Files\Entities\FighterStates\FighterStateJump.cpp" />
     <ClCompile Include="Source Files\Entities\FighterStates\FighterStatePunching.cpp" />
     <ClCompile Include="Source Files\Entities\FighterStates\FighterStateStandBy.cpp" />
     <ClCompile Include="Source Files\Entities\FighterStates\FighterStateWalking.cpp" />
@@ -108,6 +109,7 @@
     <ClInclude Include="Header Files\Entities\FighterStates\FighterState.h" />
     <ClInclude Include="Header Files\Entities\FighterStates\FighterStateDying.h" />
     <ClInclude Include="Header Files\Entities\FighterStates\FighterStateGetPunched.h" />
+    <ClInclude Include="Header Files\Entities\FighterStates\FighterStateJump.h" />
     <ClInclude Include="Header Files\Entities\FighterStates\FighterStatePunching.h" />
     <ClInclude Include="Header Files\Entities\FighterStates\FighterStateStandBy.h" />
     <ClInclude Include="Header Files\Entities\FighterStates\FighterStateWalking.h" />

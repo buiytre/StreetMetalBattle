@@ -1,5 +1,4 @@
 #include "World/Scenario/TileMap.h"
-#include <iostream>
 
 void TileMap::load(std::vector<Tile> tiles, sf::Vector2u tileSize, sf::Texture texture)
 {

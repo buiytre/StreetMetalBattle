@@ -3,6 +3,7 @@
 #include "Entities/FighterStates/FighterStateStandBy.h"
 #include "Entities/FighterStates/FighterStateGetPunched.h"
 #include "Entities/FighterStates/FighterStateDying.h"
+#include "Entities/FighterStates/FighterStateJump.h"
 #include "Identifiers/Orientation.h"
 #include "Entities/Fighter.h"
 #include "Identifiers/Inputs.h"
@@ -72,6 +73,15 @@ FighterState * FighterStateWalking::handleInput(Fighter & fighter, int input)
 		break;
 	case Inputs::MoveDown:
 		mVelocity.y += mInfo.speed;
+		break;
+	case Inputs::Jump:
+		float xAccel = 100.f;
+		if (mOrientation == Orientation::LEFT)
+		{
+			xAccel = xAccel * -1;
+		}
+
+		return new FighterStateJump(mTextures, mInfo, mOrientation, sf::Vector2f(xAccel, 30.f));
 		break;
 	}
 	return nullptr;

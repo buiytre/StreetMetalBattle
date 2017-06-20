@@ -11,4 +11,5 @@ class Inputs
 		static const int GetPunched = 6;
 		static const int Die = 7;
 		static const int GoToStandBy = 8;
+		static const int Jump = 9;
 };
