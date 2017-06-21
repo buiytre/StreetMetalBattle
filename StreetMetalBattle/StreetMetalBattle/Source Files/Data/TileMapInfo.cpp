@@ -3,18 +3,12 @@
 std::vector<TileMapInfo> initializeTileMapInfo()
 {
 	std::vector<TileMapInfo> tileMapInfo;
+	std::vector<int> walkablesTiles{23, 24, 25, 46, 47, 48, 69, 70, 71, 118, 119, 120, 141, 142, 143, 149, 150, 164, 165, 166, 172, 173, 218, 219, 241, 242 };
 	for (int i = 0; i <= 667; i++) 
 	{
 		TileMapInfo info;
 		info.numTile = i;
-		if (info.numTile == 23 || info.numTile == 24 || info.numTile == 25 
-			|| info.numTile == 46 || info.numTile == 47 || info.numTile == 48 
-			|| info.numTile == 69 || info.numTile == 70 || info.numTile == 71 
-			|| info.numTile == 149 || info.numTile == 150 
-			|| info.numTile == 218 || info.numTile == 219
-			|| info.numTile == 118 || info.numTile == 119 || info.numTile == 120
-			|| info.numTile == 141 || info.numTile == 142 || info.numTile == 143
-			|| info.numTile == 164 || info.numTile == 165 || info.numTile == 166)
+		if (std::find(walkablesTiles.begin(), walkablesTiles.end(), i) != walkablesTiles.end())
 		{
 			info.walkArea = true;
 		}
