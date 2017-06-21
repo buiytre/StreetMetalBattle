@@ -19,9 +19,9 @@ WorldMap::WorldMap(sf::RenderWindow & window, FontHolder& fonts)
 		mWorldView.getSize().x, //width
 		mWorldView.getSize().y) //height
 	, mCommandQueue()
-	, mSpawnPosition(
-		960, // x
-		1792) //y
+	, mCameraPosition(
+		512, // x
+		384) //y
 	, mTileMap()
 {
 	loadTextures();
@@ -42,7 +42,7 @@ void WorldMap::update(sf::Time dt)
 	handleCollisions();
 	CheckDeathFighters();
 	//mWorldView.setCenter(mPlayer->getWorldPosition());
-	mWorldView.setCenter(mSpawnPosition);
+	mWorldView.setCenter(mCameraPosition);
 	CheckFightersInsideZone();
 }
 
@@ -183,9 +183,10 @@ void WorldMap::buildScene()
 	mSceneLayers[Floor]->attachChild(std::move(&mTileMap));
 
 	mFighterInfo = initializeFighterData();
-	Fighter* fighter = new Fighter(Fighter::Type::Warrior, mTextures, 0, mSpawnPosition, 100, mFighterInfo);
+	sf::Vector2f spawnPosition(10, 608);
+	Fighter* fighter = new Fighter(Fighter::Type::Warrior, mTextures, 0, spawnPosition, 100, mFighterInfo);
 	mPlayer = fighter;
-	mPlayer->setPosition(mSpawnPosition);
+	mPlayer->setPosition(spawnPosition);
 	mSceneLayers[ActionLayer]->attachChild(std::move(fighter));
 	mFighters.push_back(fighter);
 

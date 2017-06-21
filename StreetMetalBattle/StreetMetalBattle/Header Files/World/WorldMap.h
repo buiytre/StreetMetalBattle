@@ -48,7 +48,7 @@ class WorldMap : private sf::NonCopyable
 
 
 		sf::FloatRect mWorldBounds;
-		sf::Vector2f mSpawnPosition;
+		sf::Vector2f mCameraPosition;
 		CommandQueue mCommandQueue;
 
 		TileMap mTileMap;
