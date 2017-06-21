@@ -138,6 +138,9 @@
     <ClCompile Include="Source Files\Entities\FighterStates\FighterStateJump.cpp">
       <Filter>StreetMetalBattle\Source Files\Entities\FighterStates</Filter>
     </ClCompile>
+    <ClCompile Include="Source Files\Entities\FighterStates\FighterStateFalling.cpp">
+      <Filter>StreetMetalBattle\Source Files\Entities\FighterStates</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -225,6 +228,9 @@
       <Filter>StreetMetalBattle\Header Files\Data</Filter>
     </ClInclude>
     <ClInclude Include="Header Files\Entities\FighterStates\FighterStateJump.h">
+      <Filter>StreetMetalBattle\Header Files\Entities\FighterStates</Filter>
+    </ClInclude>
+    <ClInclude Include="Header Files\Entities\FighterStates\FighterStateFalling.h">
       <Filter>StreetMetalBattle\Header Files\Entities\FighterStates</Filter>
     </ClInclude>
   </ItemGroup>

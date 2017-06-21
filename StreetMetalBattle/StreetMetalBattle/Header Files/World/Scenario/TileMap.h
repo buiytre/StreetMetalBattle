@@ -8,6 +8,7 @@ class TileMap : public SceneNode
 	public:
 		void load(std::vector<Tile> tiles, sf::Vector2u tileSize, sf::Texture texture);
 		bool canWalk(sf::Vector2f position);
+		sf::Vector3f canFall(sf::Vector2f fromPosition, sf::Vector2f toPosition);
 		sf::FloatRect getWorldBounds();
 	
 	private:

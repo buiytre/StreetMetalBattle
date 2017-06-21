@@ -41,7 +41,8 @@ void WorldMap::update(sf::Time dt)
 
 	handleCollisions();
 	CheckDeathFighters();
-	mWorldView.setCenter(mPlayer->getWorldPosition());
+	//mWorldView.setCenter(mPlayer->getWorldPosition());
+	mWorldView.setCenter(mSpawnPosition);
 	CheckFightersInsideZone();
 }
 
@@ -51,13 +52,29 @@ void WorldMap::CheckFightersInsideZone()
 	{
 		sf::Vector2f actualPosition = f->getPosition();
 		sf::Vector2f wantToWalkTo = f->getWantToWalkPosition();
-		
+		if (actualPosition.x == wantToWalkTo.x && actualPosition.y == wantToWalkTo.y)
+		{
+			continue;
+		}
+
 		if (mTileMap.canWalk(wantToWalkTo))
 		{
 			(*f).setPosition(wantToWalkTo);
 			continue;
 		}
-			
+
+		if (actualPosition.y - wantToWalkTo.y < 0)
+		{
+			sf::Vector3f fallingPosition = mTileMap.canFall(actualPosition, wantToWalkTo);
+			if (!(fallingPosition.x == 0.f && fallingPosition.y == 0.f && fallingPosition.z == 0.f))
+			{
+				(*f).Falling();
+				(*f).setHeight(fallingPosition.z);
+				(*f).setPosition(sf::Vector2f(fallingPosition.x, fallingPosition.y));
+				continue;
+			}
+		}
+
 		sf::Vector2f positionX = sf::Vector2f(wantToWalkTo.x, actualPosition.y);
 		if (mTileMap.canWalk(positionX))
 		{

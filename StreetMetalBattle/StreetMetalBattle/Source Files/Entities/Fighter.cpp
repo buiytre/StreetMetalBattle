@@ -89,6 +89,11 @@ void Fighter::jump()
 	handleInput(Inputs::Jump);
 }
 
+void Fighter::Falling()
+{
+	handleInput(Inputs::Falling);
+}
+
 void Fighter::updateCurrent(sf::Time dt, CommandQueue & commands)
 {
 	mState->update(*this, dt, commands);

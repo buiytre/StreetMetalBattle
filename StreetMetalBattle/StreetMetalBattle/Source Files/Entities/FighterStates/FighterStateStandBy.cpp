@@ -4,6 +4,7 @@
 #include "Entities/FighterStates/FighterStateGetPunched.h"
 #include "Entities/FighterStates/FighterStateDying.h"
 #include "Entities/FighterStates/FighterStateJump.h"
+#include "Entities/FighterStates/FighterStateFalling.h"
 #include "Identifiers/Orientation.h"
 #include "Entities/Fighter.h"
 #include "Identifiers/Inputs.h"
@@ -61,6 +62,10 @@ FighterState * FighterStateStandBy::handleInput(Fighter& fighter, int input)
 	if (input == Inputs::Jump)
 	{
 		return new FighterStateJump(mTextures, mInfo, mOrientation, sf::Vector2f(0.f, 30.f));
+	}
+	if (input == Inputs::Falling)
+	{
+		return new FighterStateFalling(mTextures, mInfo, mOrientation, sf::Vector2f(0.f, 0.f));
 	}
 
 	return nullptr;

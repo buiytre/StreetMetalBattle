@@ -82,6 +82,7 @@
     <ClCompile Include="Source Files\Entities\Fighter.cpp" />
     <ClCompile Include="Source Files\Entities\FighterStates\FighterState.cpp" />
     <ClCompile Include="Source Files\Entities\FighterStates\FighterStateDying.cpp" />
+    <ClCompile Include="Source Files\Entities\FighterStates\FighterStateFalling.cpp" />
     <ClCompile Include="Source Files\Entities\FighterStates\FighterStateGetPunched.cpp" />
     <ClCompile Include="Source Files\Entities\FighterStates\FighterStateJump.cpp" />
     <ClCompile Include="Source Files\Entities\FighterStates\FighterStatePunching.cpp" />
@@ -101,6 +102,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Header Files\Entities\FighterStates\FighterStateFalling.h" />
     <ClInclude Include="Header Files\Controller\AiController.h" />
     <ClInclude Include="Header Files\Controller\Player.h" />
     <ClInclude Include="Header Files\Data\FighterData.h" />

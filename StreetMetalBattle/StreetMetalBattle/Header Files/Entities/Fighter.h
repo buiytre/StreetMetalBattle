@@ -34,6 +34,7 @@ class Fighter : public SceneNode
 		void punch();
 		void getHit(CommandQueue & commands, sf::Int16 damage);
 		void jump();
+		void Falling();
 
 		virtual bool isMarkedForRemoval() const;
 

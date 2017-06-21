@@ -12,4 +12,5 @@ class Inputs
 		static const int Die = 7;
 		static const int GoToStandBy = 8;
 		static const int Jump = 9;
+		static const int Falling = 10;
 };

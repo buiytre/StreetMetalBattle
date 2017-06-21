@@ -4,6 +4,7 @@
 #include "Entities/FighterStates/FighterStateGetPunched.h"
 #include "Entities/FighterStates/FighterStateDying.h"
 #include "Entities/FighterStates/FighterStateJump.h"
+#include "Entities/FighterStates/FighterStateFalling.h"
 #include "Identifiers/Orientation.h"
 #include "Entities/Fighter.h"
 #include "Identifiers/Inputs.h"
@@ -43,46 +44,67 @@ FighterState * FighterStateWalking::handleInput(Fighter & fighter, int input)
 {
 	switch (input)
 	{
-	case Inputs::GoToStandBy:
-		return new FighterStateStandBy(mTextures, mInfo, mOrientation);
-	case Inputs::GetPunched:
-		return new FighterStateGetPunched(mTextures, mInfo, mOrientation);
-	case Inputs::Die:
-		return new FighterStateDying(mTextures, mInfo, mOrientation);
-	case Inputs::Punch:
-		return new FighterStatePunching(mTextures, mInfo, mOrientation);
-		break;
-	case Inputs::MoveLeft:
-		if (mOrientation != Orientation::LEFT)
+		case Inputs::GoToStandBy:
+			return new FighterStateStandBy(mTextures, mInfo, mOrientation);
+		case Inputs::GetPunched:
+			return new FighterStateGetPunched(mTextures, mInfo, mOrientation);
+		case Inputs::Die:
+			return new FighterStateDying(mTextures, mInfo, mOrientation);
+		case Inputs::Punch:
+			return new FighterStatePunching(mTextures, mInfo, mOrientation);
+			break;
+		case Inputs::MoveLeft:
 		{
-			mOrientation = Orientation::LEFT;
-			mFighterAnimation.setScale(-1.f, 1.f);
+			if (mOrientation != Orientation::LEFT)
+			{
+				mOrientation = Orientation::LEFT;
+				mFighterAnimation.setScale(-1.f, 1.f);
+			}
+			mVelocity.x -= mInfo.speed;
+			break;
 		}
-		mVelocity.x -= mInfo.speed;
-		break;
-	case Inputs::MoveRight:
-		if (mOrientation != Orientation::RIGHT)
+		case Inputs::MoveRight:
 		{
-			mOrientation = Orientation::RIGHT;
-			mFighterAnimation.setScale(1.f, 1.f);
+			if (mOrientation != Orientation::RIGHT)
+			{
+				mOrientation = Orientation::RIGHT;
+				mFighterAnimation.setScale(1.f, 1.f);
+			}
+			mVelocity.x += mInfo.speed;
+			break;
 		}
-		mVelocity.x += mInfo.speed;
-		break;
-	case Inputs::MoveUp:
-		mVelocity.y -= mInfo.speed;
-		break;
-	case Inputs::MoveDown:
-		mVelocity.y += mInfo.speed;
-		break;
-	case Inputs::Jump:
-		float xAccel = 100.f;
-		if (mOrientation == Orientation::LEFT)
+		case Inputs::MoveUp:
 		{
-			xAccel = xAccel * -1;
+			mVelocity.y -= mInfo.speed;
+			break;
 		}
+		case Inputs::MoveDown:
+		{
+			mVelocity.y += mInfo.speed;
+			break;
+		}
+		case Inputs::Jump:
+		{
+			float xAccelJump = 100.f;
+			if (mOrientation == Orientation::LEFT)
+			{
+				xAccelJump = xAccelJump * -1;
+			}
 
-		return new FighterStateJump(mTextures, mInfo, mOrientation, sf::Vector2f(xAccel, 30.f));
-		break;
+			return new FighterStateJump(mTextures, mInfo, mOrientation, sf::Vector2f(xAccelJump, 30.f));
+			break;
+		}
+		case Inputs::Falling:
+		{
+			float xAccelFall = 100.f;
+			if (mOrientation == Orientation::LEFT)
+			{
+				xAccelFall = xAccelFall * -1;
+			}
+
+			return new FighterStateFalling(mTextures, mInfo, mOrientation, sf::Vector2f(xAccelFall, 0.f));
+			break;
+		}
 	}
 	return nullptr;
 }

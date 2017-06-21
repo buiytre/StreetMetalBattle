@@ -70,6 +70,48 @@ bool TileMap::canWalk(sf::Vector2f position)
 	return false;
 }
 
+sf::Vector3f TileMap::canFall(sf::Vector2f fromPosition, sf::Vector2f toPosition)
+{
+	sf::Vector2f direction = toPosition - fromPosition;
+	if (direction.y < 0)
+	{
+		return sf::Vector3f(0.f, 0.f, 0.f);
+	}
+	else 
+	{
+		std::vector<Tile> candidateTiles;
+		for each (Tile t in mTiles)
+		{
+			sf::Vector2u tilePosition = t.getPosition();
+			if (toPosition.x >= (tilePosition.x * mTileSize.x) && toPosition.x <= ((tilePosition.x + 1) * mTileSize.x))
+			{
+				if (toPosition.y < (tilePosition.y * mTileSize.y))
+				{
+					if (t.canWalk())
+					{
+						candidateTiles.push_back(Tile(t));
+					}
+				}
+			}
+		}
+		if (candidateTiles.size() == 0)
+		{
+			return sf::Vector3f(0.f, 0.f, 0.f);
+		}
+		else
+		{
+			std::sort(candidateTiles.begin(), candidateTiles.end(), [](const Tile a, const Tile b)
+			{
+				return a.getPosition().y < b.getPosition().y;
+			});
+			sf::Vector2u fallTo = candidateTiles.front().getPosition();
+			return sf::Vector3f(toPosition.x, fallTo.y*mTileSize.y, fallTo.y*mTileSize.y - toPosition.y);
+		}
+	}
+
+	return sf::Vector3f(0.f, 0.f, 0.f);
+}
+
 sf::FloatRect TileMap::getWorldBounds()
 {
 	return mWorldBounds;
