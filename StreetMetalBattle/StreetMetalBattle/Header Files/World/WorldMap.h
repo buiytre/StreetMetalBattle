@@ -34,6 +34,9 @@ class WorldMap : private sf::NonCopyable
 		void handleCollisions();
 		void CheckDeathFighters();
 		void buildLevelMap();
+		void CameraMovementToPosition(sf::Vector2f& position);
+		void UpdateMovementCamera(sf::Time dt);
+		void CameraFollowPlayer();
 
 	private:
 		Fighter* mPlayer;
@@ -49,6 +52,7 @@ class WorldMap : private sf::NonCopyable
 
 		sf::FloatRect mWorldBounds;
 		sf::Vector2f mCameraPosition;
+		sf::Vector2f mCameraPositionGoal;
 		CommandQueue mCommandQueue;
 
 		TileMap mTileMap;

@@ -20,10 +20,12 @@ WorldMap::WorldMap(sf::RenderWindow & window, FontHolder& fonts)
 		mWorldView.getSize().y) //height
 	, mCommandQueue()
 	, mCameraPosition(
-		512, // x
+		mWorldView.getSize().x/2, // x
 		384) //y
 	, mTileMap()
 {
+	mCameraPositionGoal.x = mCameraPosition.x;
+	mCameraPositionGoal.y = mCameraPosition.y;
 	loadTextures();
 	buildLevelMap();
 	buildScene();
@@ -41,8 +43,8 @@ void WorldMap::update(sf::Time dt)
 
 	handleCollisions();
 	CheckDeathFighters();
-	//mWorldView.setCenter(mPlayer->getWorldPosition());
-	mWorldView.setCenter(mCameraPosition);
+	CameraFollowPlayer();
+	UpdateMovementCamera(dt);
 	CheckFightersInsideZone();
 }
 
@@ -139,6 +141,65 @@ void WorldMap::buildLevelMap()
 	std::vector<Tile> tileMap = loader.LoadFile("./Media/Maps/map.csv", mTileMapInfo);
 	mTileMap.load(tileMap, sf::Vector2u(32, 32), mTextures.get(Textures::TestTile));
 	mWorldBounds = mTileMap.getWorldBounds();
+}
+
+void WorldMap::CameraMovementToPosition(sf::Vector2f& position)
+{
+	mCameraPositionGoal = position;
+}
+
+void WorldMap::UpdateMovementCamera(sf::Time dt)
+{
+	float cameraVelocity = 64.f * dt.asSeconds();
+	if (mCameraPosition.x != mCameraPositionGoal.x)
+	{
+		if (mCameraPosition.x - mCameraPositionGoal.x > 0 && mCameraPosition.x - cameraVelocity - mCameraPositionGoal.x > 0)
+		{
+			mCameraPosition.x -= cameraVelocity ;
+		}
+		else if (mCameraPosition.x - mCameraPositionGoal.x < 0 && mCameraPosition.x + cameraVelocity - mCameraPositionGoal.x < 0)
+		{
+			mCameraPosition.x += cameraVelocity;
+		}
+		else
+		{
+			mCameraPosition.x = mCameraPositionGoal.x;
+		}
+	}
+
+	if (mCameraPosition.y != mCameraPositionGoal.y)
+	{
+		if (mCameraPosition.y - mCameraPositionGoal.y > 0 && mCameraPosition.y - cameraVelocity - mCameraPositionGoal.y > 0)
+		{
+			mCameraPosition.y -= cameraVelocity;
+		}
+		else if (mCameraPosition.y - mCameraPositionGoal.y < 0 && mCameraPosition.y + cameraVelocity - mCameraPositionGoal.y < 0)
+		{
+			mCameraPosition.y += cameraVelocity;
+		}
+		else
+		{
+			mCameraPosition.y = mCameraPositionGoal.y;
+		}
+	}
+
+	mWorldView.setCenter(mCameraPosition);
+}
+
+void WorldMap::CameraFollowPlayer()
+{
+	if (mPlayer->getPosition().x < mWorldView.getSize().x / 2)
+	{
+		mCameraPositionGoal.x = mWorldView.getSize().x / 2;
+	}
+	else if (mPlayer->getPosition().x > mWorldBounds.width - mWorldView.getSize().x / 2)
+	{
+		mCameraPositionGoal.x = mWorldBounds.width - mWorldView.getSize().x / 2;
+	}
+	else
+	{
+		mCameraPositionGoal.x = mPlayer->getPosition().x;
+	}
 }
 
 void WorldMap::draw()
