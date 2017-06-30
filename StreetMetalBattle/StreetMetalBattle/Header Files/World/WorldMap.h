@@ -37,6 +37,7 @@ class WorldMap : private sf::NonCopyable
 		void CameraMovementToPosition(sf::Vector2f& position);
 		void UpdateMovementCamera(sf::Time dt);
 		void CameraFollowPlayer();
+		void CheckFightersInsideCameraView();
 
 	private:
 		Fighter* mPlayer;

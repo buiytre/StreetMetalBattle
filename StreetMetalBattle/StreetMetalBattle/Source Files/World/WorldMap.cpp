@@ -45,6 +45,7 @@ void WorldMap::update(sf::Time dt)
 	CheckDeathFighters();
 	CameraFollowPlayer();
 	UpdateMovementCamera(dt);
+	CheckFightersInsideCameraView();
 	CheckFightersInsideZone();
 }
 
@@ -131,6 +132,7 @@ void WorldMap::handleCollisions()
 
 void WorldMap::CheckDeathFighters()
 {
+	mFighters.erase(std::remove_if(mFighters.begin(), mFighters.end(), [](Fighter* f) { return f->isMarkedForRemoval(); }), mFighters.end());
 	mSceneGraph.removeWrecks();
 }
 
@@ -188,6 +190,16 @@ void WorldMap::UpdateMovementCamera(sf::Time dt)
 
 void WorldMap::CameraFollowPlayer()
 {
+
+	for (Fighter* f : mFighters)
+	{
+		if (f->getIdentifier() != 0)
+		{
+			// there are enemies in the zone, the camera is stopped
+			return;
+		}
+	}
+
 	if (mPlayer->getPosition().x < mWorldView.getSize().x / 2)
 	{
 		mCameraPositionGoal.x = mWorldView.getSize().x / 2;
@@ -199,6 +211,24 @@ void WorldMap::CameraFollowPlayer()
 	else
 	{
 		mCameraPositionGoal.x = mPlayer->getPosition().x;
+	}
+}
+
+void WorldMap::CheckFightersInsideCameraView()
+{
+	for (Fighter* f : mFighters)
+	{
+		sf::Vector2f actualPosition = f->getPosition();
+		if (actualPosition.x >= mCameraPosition.x - (mWorldView.getSize().x / 2) && actualPosition.x <= mCameraPosition.x + (mWorldView.getSize().x / 2))
+		{
+			// the fighter is already in the camera zone, check that it not wants to go outside the zone
+			sf::Vector2f wantToWalkTo = f->getWantToWalkPosition();
+			if (wantToWalkTo.x < mCameraPosition.x - (mWorldView.getSize().x / 2) || wantToWalkTo.x > mCameraPosition.x + (mWorldView.getSize().x / 2))
+			{
+				// the fighter is trying to go outside the zone
+				f->setWantToWalkPosition(sf::Vector2f(actualPosition.x, actualPosition.y));
+			}
+		}
 	}
 }
 
