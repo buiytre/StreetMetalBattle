@@ -143,7 +143,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
     <None Include="Media\Maps\map.csv">
       <Filter>StreetMetalBattle\Resource Files\Media\Maps</Filter>
     </None>
