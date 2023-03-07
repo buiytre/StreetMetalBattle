@@ -2,6 +2,7 @@
 #include <map>
 #include <memory>
 #include <cassert>
+#include <string>
 
 template<typename Resource, typename Identifier>
 class ResourceHolder

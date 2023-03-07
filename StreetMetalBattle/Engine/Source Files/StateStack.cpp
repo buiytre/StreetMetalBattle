@@ -102,12 +102,3 @@ StateStack::PendingChange::PendingChange(Action action, int stateID) : action(ac
 , stateId(stateID)
 {
 }
-
-template <typename T>
-void StateStack::registerState(int stateID)
-{
-	mFactories[stateID] = [this]()
-	{
-		return State::Ptr(new T(*this, mContext));
-	};
-}

@@ -2,7 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include "State.h"
 
-class TitleState : State
+class TitleState : public State
 {
 public:
 	TitleState(StateStack& stack, Context context);

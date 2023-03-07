@@ -4,7 +4,7 @@
 #include "World/WorldMap.h"
 #include "Controller/AiController.h"
 
-class GameState : State
+class GameState : public State
 {
 	public:
 		GameState(StateStack& stack, Context context);
