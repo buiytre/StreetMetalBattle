@@ -91,7 +91,7 @@ FighterState * FighterStateWalking::handleInput(Fighter & fighter, int input)
 				xAccelJump = xAccelJump * -1;
 			}
 
-			return new FighterStateJump(mTextures, mInfo, mOrientation, sf::Vector2f(xAccelJump, 30.f));
+			return new FighterStateJump(mTextures, mInfo, mOrientation, sf::Vector2f(xAccelJump, 300.f));
 			break;
 		}
 		case Inputs::Falling:

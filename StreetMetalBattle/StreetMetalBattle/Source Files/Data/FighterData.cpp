@@ -1,9 +1,87 @@
 #include "Data/FighterData.h"
 #include "Identifiers/Textures.h"
 #include "Entities/Fighter.h"
+#include <sstream>
+#include <fstream>
+
+AnimationInfo loadAnimation(std::vector<std::string> animationInfo)
+{
+	size_t index = 0;
+	AnimationInfo animation = AnimationInfo();
+	animation.textureId = std::atoi(animationInfo[index++].c_str());
+	int frameSizeX = std::atoi(animationInfo[index++].c_str());
+	int frameSizeY = std::atoi(animationInfo[index++].c_str());
+	animation.frameSize = sf::Vector2i(frameSizeX, frameSizeY);
+	int originalFrameX = std::atoi(animationInfo[index++].c_str());
+	int originalFrameY = std::atoi(animationInfo[index++].c_str());
+	animation.originalFrame = sf::Vector2i(originalFrameX, originalFrameY);
+	animation.numFrames = std::atoi(animationInfo[index++].c_str());
+	animation.numSecondsDuration = std::stof(animationInfo[index++]);
+	animation.frames = std::vector<FrameInfo>(animation.numFrames);
+	
+	for (size_t i = 0; i < animation.numFrames; i++)
+	{
+		animation.frames[i] = FrameInfo();
+		size_t indexFrame = index + i * 10;
+		animation.frames[i].boundingBox = sf::FloatRect(std::stof(animationInfo[indexFrame]), std::stof(animationInfo[indexFrame + 1]), std::stof(animationInfo[indexFrame + 2]), std::stof(animationInfo[indexFrame + 3]));
+		animation.frames[i].boundingPunch = sf::FloatRect(std::stof(animationInfo[indexFrame + 4]), std::stof(animationInfo[indexFrame + 5]), std::stof(animationInfo[indexFrame + 6]), std::stof(animationInfo[indexFrame + 7]));
+		animation.frames[i].offSetXYPosition = sf::Vector2f(std::stof(animationInfo[indexFrame + 8]), std::stof(animationInfo[indexFrame + 9]));
+	}
+
+	return animation;
+}
+
+FighterInfo loadFighterInfoFromParsedCsv(std::vector<std::vector<std::string>> parsedCsv)
+{
+	FighterInfo vFighterInfo = FighterInfo();
+	vFighterInfo.hp = std::atoi(parsedCsv[0][0].c_str());
+	vFighterInfo.speed = std::atoi(parsedCsv[0][1].c_str());
+
+	vFighterInfo.die.animation = loadAnimation(parsedCsv[1]);
+	vFighterInfo.getPunched.animation = loadAnimation(parsedCsv[2]);
+	vFighterInfo.punching.animation = loadAnimation(parsedCsv[3]);
+	vFighterInfo.standBy.animation = loadAnimation(parsedCsv[4]);
+	vFighterInfo.walking.animation = loadAnimation(parsedCsv[5]);
+
+	return vFighterInfo;
+}
+
+std::vector<FighterInfo> loadFighterInfoFromCSV(const std::string& filename)
+{
+	std::ifstream data;
+	data.open(filename, std::ios::in);
+	std::string line;
+	std::vector<std::vector<std::string>> parsedCsv;
+	if (data.is_open())
+	{
+		while (std::getline(data, line))
+		{
+			std::stringstream lineStream(line);
+			std::string cell;
+			std::vector<std::string> parsedRow;
+			while (std::getline(lineStream, cell, ','))
+			{
+				parsedRow.push_back(cell);
+			}
+			parsedCsv.push_back(parsedRow);
+		}
+	}
+	data.close();
+
+	FighterInfo vFighterInfo = loadFighterInfoFromParsedCsv(parsedCsv);
+
+	std::vector<FighterInfo> vFightersInfos;
+	vFightersInfos.push_back(vFighterInfo);
+	return vFightersInfos;
+}
+
+
+
+
 
 std::vector<FighterInfo> initializeFighterData()
 {
+	std::vector<FighterInfo> test = loadFighterInfoFromCSV("./Media/Sprites/test.fighter.csv");
 	std::vector<FighterInfo> data(Fighter::TypeCount);
 
 	// Fighter::Player

@@ -29,7 +29,7 @@ FighterStateJump::FighterStateJump(const TextureHolder & textures, const Fighter
 	centerBottom(mFighterAnimation);
 	mFighterAnimation.restart();
 	mStartToJump = true;
-	mGravity = 9.8f;
+	mGravity = 90.8f;
 	mActualHeight = 0.f;
 }
 

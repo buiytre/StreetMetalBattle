@@ -28,7 +28,7 @@ FighterStateFalling::FighterStateFalling(const TextureHolder & textures, const F
 	centerBottom(mFighterAnimation);
 	mFighterAnimation.restart();
 	mStartToJump = true;
-	mGravity = 9.8f;
+	mGravity = 90.8f;
 	mAcceleration = sf::Vector2f(initialAcceleration.x, -mGravity);
 	mActualHeight = 0.f;
 }
